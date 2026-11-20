@@ -1,3 +1,4 @@
+<!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Melhorias prioritárias
 
 ## Implementadas na versão 3.1.0
@@ -23,11 +24,16 @@
 - Atualizador online com verificação de manifesto assinado, canais, reparação e recuperação; sem SDK no PC do jogador.
 - Estrelas realmente conquistadas e recordes de pontuação/tempo por nível e dificuldade, com migração dos saves antigos.
 
+## Implementadas na versão 3.4.0
+
+- Menu com progresso por categoria, quatro temas, ajuda integrada e navegação por teclado.
+- Interface e pistas em três línguas. As salas conservam os nomes e as pistas escolhidos pelo jogador.
+- Ícones próprios do jogo e do atualizador e migração do progresso após a mudança de nome para BrandGame.
+
 ## Próximas prioridades
 
-1. **Evolução do atualizador.** Atualização automática do próprio lançador, interface gráfica de progresso, rotação planeada de chaves e política de retenção de backups.
-2. **Distribuição pública.** Preparar certificado publicamente confiável ou distribuição pela Microsoft Store. A identidade atual continua a ser de desenvolvimento.
-3. **Mais marcas verificadas e dificuldade por marca.** Ampliar sobretudo moda e alimentação com recursos adequados e rever repetições entre níveis próximos. O catálogo original permanece disponível para esta revisão.
-4. **Acessibilidade e localização.** Português de Portugal, textos maiores, foco de teclado completo e testes de escalas 125%/150% do Windows. A janela continua WinForms/WebView2.
-5. **Gestão de progresso.** Exportar/importar saves, permitir corrigir salas antigas e indicar falhas de gravação no navegador.
-6. **Evolução dos módulos.** Dependências explícitas, mantendo o arranque offline e o modo de abertura direta no navegador.
+1. **Facilitar a instalação Windows.** Distribuir com um certificado publicamente reconhecido ou pela Microsoft Store e testar a instalação num PC sem o certificado de desenvolvimento.
+2. **Reduzir as repetições.** A moda tem 13 marcas e a alimentação tem 20. Alargar primeiro essas duas categorias com logótipos verificados e medir quantas marcas se repetem em níveis consecutivos.
+3. **Levar o progresso para outro dispositivo.** Permitir exportar e importar pontos, estrelas, preferências e salas. Antes de substituir uma gravação, mostrar o que será importado e manter uma cópia recuperável.
+4. **Tornar as atualizações mais claras.** Mostrar a versão instalada, a versão disponível e o progresso do download numa janela. Preparar a substituição do próprio lançador quando a versão seguinte a exigir.
+5. **Melhorar a leitura durante as partidas.** Testar as pistas mais compridas com um leitor de ecrã e a escalas de 125% e 150% no Windows. Rever o tamanho do texto, a ordem do foco e o anúncio do resultado da ronda a partir desses testes.

@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');

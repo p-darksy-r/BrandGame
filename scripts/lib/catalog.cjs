@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');

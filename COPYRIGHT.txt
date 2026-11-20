@@ -1,0 +1,21 @@
+BrandGame
+Copyright (c) 2026 p-darksy-r.
+https://github.com/p-darksy-r/BrandGame
+
+This notice identifies the owner of the original project code, documentation,
+tests, build scripts and BrandGame visual identity. It also covers project-owned
+files whose formats do not support comments, including JSON configuration and
+test data. It does not introduce a new licence or change existing licences.
+
+Third-party components retain their original copyright and licence notices:
+- Brand logos, names and trademarks belong to their respective owners.
+  Logo sources and individual guidelines are recorded in
+  src/web/licenses/logo-sources.json.
+- Simple Icons, the Orbitron and Rajdhani fonts, and Tailwind CSS retain the
+  notices included in src/web/licenses/ and their corresponding packages.
+- Other dependencies retain the notices and terms supplied by their authors.
+
+Generated resource files and dependency lockfiles are covered according to
+their source; this notice does not assign third-party content to p-darksy-r.
+The legacy generator in docs/legacy is a historical snapshot. Its embedded
+credits have been preserved as part of that record.

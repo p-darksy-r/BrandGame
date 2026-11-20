@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r.
 const RESULT_DIFFICULTIES = ['easy', 'medium', 'hard'];
 const RESULT_CATEGORIES = ['tech', 'auto', 'food', 'fashion', 'media'];
 

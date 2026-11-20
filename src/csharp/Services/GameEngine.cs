@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 using System.Runtime.InteropServices;
 
 namespace BrandGame.Services;

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 p-darksy-r. BrandGame.
 [CmdletBinding()]
 param([switch]$AllowUnsigned, [ValidateSet('preview', 'stable')][string]$Channel = 'preview')
 $ErrorActionPreference = 'Stop'

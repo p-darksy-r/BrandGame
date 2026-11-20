@@ -1,3 +1,4 @@
+# Copyright (c) 2026 p-darksy-r. BrandGame.
 [CmdletBinding()]
 param()
 
@@ -36,7 +37,7 @@ function Test-Case {
 
 function New-TestWorkspace {
     $path = Join-Path $fixtureRoot ([Guid]::NewGuid().ToString('N'))
-    foreach ($relative in @('src/csharp', 'src/cpp', 'src/web', 'src/updater', 'scripts', 'artifacts/staging')) {
+    foreach ($relative in @('src/csharp', 'src/cpp', 'src/web', 'src/updater', 'src/branding', 'icons', 'scripts', 'artifacts/staging')) {
         [IO.Directory]::CreateDirectory((Join-Path $path $relative)) | Out-Null
     }
     Set-Content -LiteralPath (Join-Path $path 'VERSION') -Value '3.1.0' -Encoding UTF8
@@ -309,6 +310,22 @@ namespace BrandGameUpdaterTest {
         Assert-True ((Get-SourceFingerprint -Root $root) -eq $edited) 'Build output changed the source fingerprint.'
         Remove-Item -LiteralPath $source
         Assert-True ((Get-SourceFingerprint -Root $root) -eq $initial) 'Deleting source did not restore the fingerprint.'
+    }
+
+    Test-Case 'Source fingerprints detect both original and generated branding changes' {
+        $root = New-TestWorkspace
+        $previous = Get-SourceFingerprint -Root $root
+        foreach ($asset in @('src/branding/brandgame.svg', 'icons/BrandGame.ico', 'src/branding/updater.svg', 'icons/update.ico', 'src/branding/manifest.json')) {
+            $assetPath = Join-Path $root $asset
+            Set-Content -LiteralPath $assetPath -Value 'branding fixture' -Encoding UTF8
+            $current = Get-SourceFingerprint -Root $root
+            Assert-True ($current -ne $previous) "Branding asset was omitted from fingerprint: $asset"
+            Add-Content -LiteralPath $assetPath -Value 'changed branding fixture' -Encoding UTF8
+            $edited = Get-SourceFingerprint -Root $root
+            Assert-True ($edited -ne $current) "Branding edit was omitted from fingerprint: $asset"
+            $current = $edited
+            $previous = $current
+        }
     }
 } finally {
     # Resolve and validate immediately before recursive deletion, within this repository only.

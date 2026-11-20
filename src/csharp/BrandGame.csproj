@@ -1,3 +1,4 @@
+<!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -8,7 +9,9 @@
     <Platforms>x64</Platforms>
     <PlatformTarget>x64</PlatformTarget>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <Product>BrandGame V3</Product>
+    <Product>BrandGame</Product>
+    <ApplicationIcon>..\..\icons\BrandGame.ico</ApplicationIcon>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 module.exports = {
     content: ['./src/web/index.html', './src/web/js/**/*.js'],
     // Category colour names are assembled by the card/menu renderers.

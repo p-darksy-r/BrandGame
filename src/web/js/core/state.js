@@ -1,4 +1,11 @@
-/* BrandGame_V3 - https://github.com/p-darksy-r/BrandGame_V3 - Copyright (c) darksy */
+/* BrandGame - https://github.com/p-darksy-r/BrandGame - Copyright (c) 2026 p-darksy-r */
+
+function normalizeLanguage(value) {
+    const language = typeof value === 'string' ? value.trim().toLowerCase().replaceAll('_', '-') : '';
+    if (language === 'en' || language.startsWith('en-')) return 'en';
+    if (language === 'es' || language.startsWith('es-')) return 'es';
+    return 'pt-PT';
+}
 
 // --- GAME STATE SYSTEM ---
 function createDefaultSaveData() {
@@ -18,7 +25,9 @@ function createDefaultSaveData() {
         quality: "high",
         vibration: true,
         brightness: 100,
-        reducedMotion: false
+        reducedMotion: false,
+        language: 'pt-PT',
+        theme: 'midnight'
     };
 }
 
@@ -45,6 +54,8 @@ function normalizeSaveData(value) {
     ) : [];
     result.volume = finite(data.volume, defaults.volume, 0, 1);
     result.brightness = finite(data.brightness, defaults.brightness, 10, 150);
+    result.language = normalizeLanguage(data.language);
+    result.theme = ['midnight', 'light', 'forest', 'amethyst'].includes(data.theme) ? data.theme : defaults.theme;
     for (const [key, choices] of Object.entries({ difficulty: ['easy', 'medium', 'hard'], resolution: ['800x600', '1024x768', '1280x960'], quality: ['low', 'high'] })) {
         result[key] = choices.includes(data[key]) ? data[key] : defaults[key];
     }

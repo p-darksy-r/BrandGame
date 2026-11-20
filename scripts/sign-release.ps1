@@ -1,3 +1,4 @@
+# Copyright (c) 2026 p-darksy-r. BrandGame.
 [CmdletBinding()]
 param([Parameter(Mandatory=$true)][string]$Package, [ValidateSet('preview', 'stable')][string]$Channel = 'preview')
 $ErrorActionPreference = 'Stop'

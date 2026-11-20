@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 namespace BrandGame.Updater;
 
 internal sealed class UpdaterOptions

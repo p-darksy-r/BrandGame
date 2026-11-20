@@ -1,3 +1,4 @@
+# Copyright (c) 2026 p-darksy-r. BrandGame.
 # MSBuild / Visual Studio / .NET outputs
 bin/
 obj/
@@ -12,6 +13,7 @@ obj/
 !.vscode/tasks.json
 
 # WebView2 Runtime Cache Folders
+BrandGame_UserData/
 BrandGame_V3_UserData/
 EBWebView/
 

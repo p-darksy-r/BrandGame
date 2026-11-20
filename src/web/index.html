@@ -1,412 +1,90 @@
-<!-- BrandGame_V3 - https://github.com/p-darksy-r/BrandGame_V3 - Copyright (c) darksy -->
 <!DOCTYPE html>
+<!-- Copyright (c) 2026 p-darksy-r. -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1220">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'">
-    <title>BrandGame_V3</title>
+    <title>BrandGame — Play your recognition</title>
+    <link rel="icon" href="assets/brandgame.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles/tailwind.css">
     <link rel="stylesheet" href="styles/fonts.css">
-    <link rel="stylesheet" href="styles/components.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/screens.css">
+    <link rel="stylesheet" href="styles/themes.css">
 </head>
-<body class="text-gray-100 min-h-screen flex flex-col transition-all duration-150">
-
-    <!-- Header -->
-    <header class="border-b border-gray-800 bg-gray-900 bg-opacity-70 backdrop-blur-md py-4 px-6 flex justify-between items-center z-10">
-        <h1 class="gaming-font text-2xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">
-            Brand Game <span id="header-version-badge" class="text-xs align-super bg-indigo-600 text-white py-0.5 px-1.5 rounded">v3.3.0</span>
-        </h1>
-        <div id="header-stats" class="hidden flex items-center gap-6">
-            <div class="flex items-center gap-1.5 bg-gray-800 px-3 py-1 rounded-full border border-gray-700">
-                <span class="text-yellow-400 text-lg">★</span>
-                <span id="global-stars" class="font-bold">0</span>
-            </div>
-            <div class="flex items-center gap-1.5 bg-gray-800 px-3 py-1 rounded-full border border-gray-700">
-                <span class="text-indigo-400 font-bold">SCORE:</span>
-                <span id="global-score" class="font-bold">0</span>
-            </div>
-        </div>
+<body>
+    <header class="app-header">
+        <div class="brand-lockup"><img src="assets/brandgame.svg" width="44" height="44" alt=""><div><h1 data-i18n-skip>Brand<span>Game</span></h1><span class="brand-caption">THE LOGO CHALLENGE</span></div><span id="header-version-badge" class="version-badge">v3.4.0</span></div>
+        <div id="header-stats" class="header-stats hidden"><div class="stat-pill" title="Stars earned"><span data-icon="star" class="accent-lime"></span><span id="global-stars">0</span><span class="stat-label">stars</span></div><div class="stat-pill" title="Total score"><span data-icon="trophy" class="accent-blue"></span><span id="global-score">0</span><span class="stat-label">points</span></div></div>
     </header>
-
-    <!-- Content Router Area -->
-    <main class="flex-grow flex items-center justify-center p-4">
-
-        <!-- SCREEN 1: MAIN MENU -->
-        <div id="screen-main-menu" class="w-full max-w-4xl grid md:grid-cols-5 gap-6">
-            <div class="md:col-span-3 flex flex-col justify-center space-y-6 bg-gray-900 bg-opacity-60 p-8 rounded-2xl border border-gray-800 cyber-border">
-                <div class="space-y-2">
-                    <h2 class="gaming-font text-4xl font-black text-white leading-tight">CHALLENGE YOUR <br><span class="text-blue-500">BRAND COGNITION</span></h2>
-                    <p class="text-gray-400 text-sm">Identify famous logos across 500 levels of progressive difficulty. Play, adjust controls, and build custom spaces.</p>
-                </div>
-                
-                <div class="flex flex-col gap-3">
-                    <div class="flex gap-3">
-                        <button id="btn-menu-start" class="gaming-font flex-grow py-4 px-6 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition duration-200 transform hover:-translate-y-1 active:translate-y-0 flex items-center justify-center gap-2 uppercase tracking-wider text-sm">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            Enter Arena
-                        </button>
-                        <button id="btn-menu-settings" class="gaming-font py-4 px-6 bg-gray-800 hover:bg-gray-700 text-gray-200 font-bold rounded-xl transition duration-200 flex items-center justify-center gap-2 uppercase border border-gray-700 text-sm">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            Settings
-                        </button>
-                    </div>
-                    <button id="btn-menu-exit" class="gaming-font w-full py-3 bg-red-950 hover:bg-red-900 text-red-200 border border-red-800/40 hover:border-red-600 font-bold rounded-xl transition duration-200 flex items-center justify-center gap-2 uppercase tracking-wider text-xs">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                        ✖ Close Application
-                    </button>
-                </div>
+    <main id="main-content">
+        <section id="screen-main-menu" class="home-layout screen" aria-labelledby="home-title">
+            <div class="hero panel">
+                <div class="eyebrow"><span class="status-dot"></span>YOUR NEXT CHALLENGE STARTS HERE</div>
+                <div class="hero-art" aria-hidden="true"><div class="art-orbit"></div><span class="art-tile tile-tech" data-icon="tech"></span><span class="art-tile tile-food" data-icon="food"></span><div class="art-center"><img src="assets/brandgame.svg" width="100" height="100" alt=""></div><span class="art-tile tile-auto" data-icon="auto"></span><span class="art-tile tile-media" data-icon="media"></span></div>
+                <div class="hero-copy"><h2 id="home-title" tabindex="-1">You know the logo.<br><span>Can you name it?</span></h2><p>Discover familiar faces in a new way. Five categories, 500 levels and a challenge of your own.</p></div>
+                <div class="hero-actions"><button id="btn-menu-start" class="button primary" type="button"><span data-icon="play"></span><span>Let’s play</span></button> <button id="btn-menu-settings" class="button secondary" type="button"><span data-icon="settings"></span><span>Settings</span></button></div>
+                <div class="hero-details"><span><span data-icon="grid"></span>496 brand entries</span><span><span data-icon="shield"></span>Play offline</span></div>
+                <div class="hero-bottom"><button id="btn-menu-help" class="button quiet" type="button"><span data-icon="help"></span><span>How to play</span></button> <button id="btn-menu-exit" class="button quiet" type="button"><span data-icon="exit"></span><span>Exit game</span></button></div>
             </div>
+            <aside class="progress-panel panel"><div class="section-heading"><div><p class="eyebrow">MAKE EVERY GUESS COUNT</p><h2>Your progress</h2></div><span class="icon-tile lime" data-icon="trophy"></span></div><p id="legacy-progress-note" class="notice hidden" role="status">Earlier progress is preserved. Replay completed levels to record their stars and best times.</p><div id="category-summary-list"></div><div class="progress-bottom"><button id="btn-menu-reset" class="button quiet danger" type="button"><span data-icon="trash"></span><span>Reset progress</span></button></div></aside>
+        </section>
 
-            <div class="md:col-span-2 bg-gray-900 bg-opacity-60 p-6 rounded-2xl border border-gray-800 flex flex-col justify-between">
-                <div>
-                    <h3 class="gaming-font font-bold text-lg text-gray-300 border-b border-gray-800 pb-3 mb-4 uppercase tracking-wider">Category Progress</h3>
-                    <p id="legacy-progress-note" class="hidden text-xs text-amber-300 mb-4" role="status">Earlier progress is preserved. Replay completed levels to record their stars and best times.</p>
-                    <div id="category-summary-list" class="space-y-4"></div>
-                </div>
-                <button id="btn-menu-reset" class="mt-6 text-xs text-red-500 hover:text-red-400 transition text-left flex items-center gap-1">
-                    ⚠ Reset All Save Progress
-                </button>
+        <section id="screen-categories" class="screen hidden" aria-labelledby="categories-title">
+            <div class="page-heading"><div><button id="btn-categories-back" class="button quiet" type="button"><span data-icon="back"></span><span>Main menu</span></button><p class="eyebrow">FIND YOUR SPECIALITY</p><h2 id="categories-title" tabindex="-1">Choose your category</h2><p>From everyday favourites to the names you almost remember.</p></div><button id="btn-trigger-creator" class="button secondary" type="button"><span data-icon="plus"></span><span>Create a room</span></button></div>
+            <div id="category-cards-grid" class="category-grid"></div>
+        </section>
+
+        <section id="screen-levels" class="screen hidden" aria-labelledby="level-category-title">
+            <div class="page-heading"><div><button id="btn-levels-back" class="button quiet" type="button"><span data-icon="back"></span><span>Categories</span></button><div id="level-category-badge" class="eyebrow"></div><h2 id="level-category-title" tabindex="-1">Levels</h2><p>Earn stars. Beat your best. Unlock the next challenge.</p></div><div class="page-picker"><label for="select-level-page"><span data-icon="grid"></span>Level range</label><select id="select-level-page"></select></div></div>
+            <div id="level-buttons-grid" class="level-grid"></div>
+        </section>
+
+        <section id="screen-gameplay" class="screen game-panel panel hidden" aria-label="Guess the brand">
+            <div id="gameplay-content">
+                <div class="game-toolbar"><button id="btn-gameplay-quit" class="button quiet" type="button"><span data-icon="back"></span><span>Leave level</span></button><div class="game-round"><span data-icon="grid"></span><span>Brand <strong id="gameplay-brand-index">1 / 3</strong></span></div><button id="btn-pause-round" class="button secondary small" type="button"><span data-icon="pause"></span><span>Pause</span></button></div>
+                <div class="game-status"><div id="gameplay-lives" class="lives" aria-label="3 lives remaining"></div><span class="eyebrow">TRUST YOUR FIRST INSTINCT</span></div>
+                <div class="logo-stage"><div id="logo-container"><img id="logo-image" src="" alt="Brand to identify" class="logo-image-fixed"><div id="logo-placeholder" class="hidden">?</div></div><div data-i18n-skip id="revealed-letters-hud" aria-label="Revealed letters">_ _ _ _ _</div></div>
+                <div class="timer-caption"><span><span data-icon="clock"></span>Time remaining</span><span id="timer-value">15s</span></div><div id="timer-track" role="progressbar" aria-label="Time remaining" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="timer-bar"></div></div>
+                <div class="guess-row"><label for="input-guess" class="sr-only">Brand name</label><input type="text" id="input-guess" maxlength="256" autocomplete="off" placeholder="What’s the brand?"><button id="btn-guess-submit" class="button primary" type="button"><span data-icon="arrow"></span><span>Guess</span></button></div>
+                <div class="clue-actions"><button id="btn-gameplay-hint" class="button quiet" type="button"><span data-icon="bulb"></span><span>Hint · −5 pts</span></button> <button id="btn-gameplay-reveal-char" class="button quiet" type="button"><span data-icon="search"></span><span>Letter · −10 pts</span></button></div><div data-i18n-skip id="clue-text" class="notice hidden"></div>
+                <div id="round-load-status" class="notice" role="status"></div><button id="btn-retry-logo" class="button secondary hidden" type="button"><span data-icon="refresh"></span><span>Try loading again</span></button>
+                <p class="keyboard-tip"><kbd>Enter</kbd> to guess <span>·</span> <kbd>Esc</kbd> to pause</p>
             </div>
-        </div>
+            <div id="pause-overlay" class="game-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="pause-title"><span class="icon-tile large" data-icon="pause"></span><h2 id="pause-title">Take a breather.</h2><p>Your timer is paused. Ready when you are.</p><button id="btn-resume-round" class="button primary" type="button"><span data-icon="play"></span><span>Keep playing</span></button></div>
+            <div id="feedback-overlay" class="game-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="feedback-badge"><span id="feedback-icon" class="icon-tile large" data-icon="check"></span><h2 id="feedback-badge"></h2><div><p class="eyebrow">THE BRAND IS</p><p data-i18n-skip id="feedback-answer"></p></div><div id="feedback-stats-card" class="feedback-stats"><div><span><span data-icon="search"></span>Accuracy</span><strong id="feedback-match">0%</strong></div><div><span><span data-icon="bolt"></span>Points</span><strong id="feedback-score">+0</strong></div></div><button id="btn-feedback-next" class="button primary" type="button"><span data-icon="arrow"></span><span>Continue</span></button></div>
+        </section>
 
-        <!-- SCREEN 2: CATEGORY SELECT -->
-        <div id="screen-categories" class="hidden w-full max-w-5xl space-y-6">
-            <div class="flex justify-between items-end">
-                <div>
-                    <button id="btn-categories-back" class="text-gray-400 hover:text-white mb-2 flex items-center gap-1.5 transition text-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                        Back to Main Menu
-                    </button>
-                    <h2 class="gaming-font text-3xl font-bold">SELECT CATEGORY</h2>
-                </div>
-                <!-- Custom Creator trigger button -->
-                <button id="btn-trigger-creator" class="gaming-font bg-indigo-900/60 hover:bg-indigo-800 border border-indigo-700 text-indigo-200 px-4 py-2.5 rounded-xl text-xs font-bold tracking-widest transition flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-                    BUILD CUSTOM LEVEL
-                </button>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-6 gap-6" id="category-cards-grid"></div>
-        </div>
+        <section id="screen-report" class="screen report-panel panel hidden" aria-label="Level result"><span class="icon-tile large lime" data-icon="trophy"></span><h2 tabindex="-1"></h2><div id="report-stars" class="result-stars">☆☆☆</div><div class="result-details"><div><span><span data-icon="check"></span>Correct answers</span><strong id="report-correct-count">0 / 3</strong></div><div><span><span data-icon="bolt"></span>Level score</span><strong id="report-score">0</strong></div><div><span><span data-icon="trophy"></span>Personal best</span><strong id="report-cat-high">0</strong></div></div><button id="btn-report-continue" class="button primary full-width" type="button"><span data-icon="grid"></span><span>Back to levels</span></button></section>
 
-        <!-- SCREEN 3: LEVEL SELECT -->
-        <div id="screen-levels" class="hidden w-full max-w-4xl space-y-6">
-            <div class="flex justify-between items-end">
-                <div>
-                    <button id="btn-levels-back" class="text-gray-400 hover:text-white mb-2 flex items-center gap-1.5 transition text-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                        Back to Categories
-                    </button>
-                    <div class="flex items-center gap-4">
-                        <span id="level-category-badge" class="px-3 py-1 rounded text-xs uppercase font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30"></span>
-                        <h2 class="gaming-font text-3xl font-bold" id="level-category-title">Levels</h2>
-                    </div>
-                </div>
-                <!-- Paging dropdown -->
-                <div class="flex items-center gap-2 bg-gray-950 p-1.5 rounded-lg border border-gray-800">
-                    <span class="text-[10px] text-gray-500 font-bold uppercase px-2">Jump to Page</span>
-                    <select id="select-level-page" class="bg-gray-900 border border-gray-800 rounded px-2.5 py-1 text-xs font-bold text-white focus:outline-none"></select>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 max-h-[50vh] overflow-y-auto pr-2" id="level-buttons-grid"></div>
-        </div>
+        <section id="screen-settings" class="screen settings-panel hidden" aria-labelledby="settings-title"><div class="page-heading"><div><button id="btn-settings-back" class="button quiet" type="button"><span data-icon="back"></span><span>Main menu</span></button><p class="eyebrow">MAKE IT YOURS</p><h2 id="settings-title" tabindex="-1">Settings</h2><p>Find your pace. Fine-tune your experience.</p></div><span class="icon-tile" data-icon="settings"></span></div><div class="settings-grid"><section class="setting"><h3><span data-icon="language"></span>Language</h3><label for="settings-language" class="sr-only">Language</label><select id="settings-language" data-i18n-skip><option value="pt-PT">Português (Portugal)</option><option value="en">English</option><option value="es">Español</option></select><p class="helper">Choose the language for menus and built-in clues.</p></section><section class="setting"><h3><span data-icon="palette"></span>Appearance</h3><label for="settings-theme" class="sr-only">Colour theme</label><select id="settings-theme"><option value="midnight">Midnight</option><option value="light">Light</option><option value="forest">Forest</option><option value="amethyst">Amethyst</option></select><p class="helper">Your theme is saved on this device.</p></section><section class="setting"><h3><span data-icon="monitor"></span>Window size</h3><div class="segments" data-native-only><button id="btn-win-sm" class="button secondary" type="button"><span data-icon="monitor"></span><span>800 × 600</span></button><button id="btn-win-md" class="button secondary" type="button"><span data-icon="monitor"></span><span>1024 × 768</span></button><button id="btn-win-lg" class="button secondary" type="button"><span data-icon="monitor"></span><span>1280 × 960</span></button></div><p id="browser-window-note" class="helper hidden">Resize your browser window to change the layout.</p><p class="helper">The Windows app can also be resized or maximised.</p></section><section class="setting"><h3><span data-icon="palette"></span>Visual effects</h3><div class="segments"><button id="btn-qual-low" class="button secondary" type="button"><span data-icon="leaf"></span><span>Minimal</span></button><button id="btn-qual-high" class="button secondary" type="button"><span data-icon="bolt"></span><span>Rich</span></button></div><p class="helper">Minimal removes shadows and animation.</p></section><section class="setting"><h3><span data-icon="sun"></span>Interface brightness</h3><label for="settings-brightness" class="sr-only">Interface brightness</label><div class="range-row"><input type="range" id="settings-brightness" min="50" max="150" step="5" value="100"><output id="brightness-label" for="settings-brightness">100%</output></div></section><section class="setting"><h3><span data-icon="volume"></span>Sound volume</h3><label for="settings-volume" class="sr-only">Sound volume</label><div class="range-row"><input type="range" id="settings-volume" min="0" max="1" step="0.1" value="0.5"><output id="volume-label" for="settings-volume">50%</output></div></section><section class="setting"><h3><span data-icon="motion"></span>Motion</h3><label class="check-row" for="settings-reduced-motion"><input type="checkbox" id="settings-reduced-motion">Reduce animations and screen shake</label><p class="helper">Your system motion preference is also respected.</p></section><section class="setting"><h3><span data-icon="motion"></span>Screen shake</h3><button id="btn-vibrate-toggle" class="button secondary" type="button"><span data-icon="check"></span><span>Enabled</span></button><p class="helper">Visual feedback on an incorrect answer.</p></section><section class="setting"><h3><span data-icon="bolt"></span>Difficulty</h3><div class="segments"><button id="diff-easy" class="button secondary" type="button"><span data-icon="leaf"></span><span>Easy</span></button><button id="diff-medium" class="button secondary" type="button"><span data-icon="clock"></span><span>Medium</span></button><button id="diff-hard" class="button secondary" type="button"><span data-icon="bolt"></span><span>Hard</span></button></div><p class="helper">Easy: 30s · Medium: 15s · Hard: 8s per brand.</p></section></div><div class="page-actions"><button id="btn-settings-close" class="button primary" type="button"><span data-icon="save"></span><span>Save & return</span></button></div></section>
 
-        <!-- SCREEN 4: GAMEPLAY PANEL -->
-        <div id="screen-gameplay" class="hidden w-full max-w-3xl bg-gray-900 bg-opacity-60 p-6 md:p-8 rounded-2xl border border-gray-800 cyber-border flex flex-col gap-6 relative">
-            <div class="flex justify-between items-center border-b border-gray-800 pb-4">
-                <button id="btn-gameplay-quit" class="text-gray-400 hover:text-red-400 transition font-bold uppercase tracking-wider text-xs flex items-center gap-1.5">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                    Quit Arena
-                </button>
-                <button id="btn-pause-round" class="text-sm text-blue-300" type="button">Pause (Esc)</button>
-                <div class="flex gap-4 text-sm font-semibold">
-                    <div>Brand: <span id="gameplay-brand-index" class="text-blue-400 font-bold">1 / 4</span></div>
-                    <div>Lives: <span id="gameplay-lives" class="text-red-400 font-bold">❤❤❤</span></div>
-                </div>
-            </div>
-
-            <div class="flex flex-col items-center justify-center py-4 relative">
-                <!-- Adjusted size-constrained box container to stop stretching -->
-                <div id="logo-container" class="w-44 h-44 flex items-center justify-center bg-gray-950 rounded-2xl p-4 border border-gray-800 relative transition-all duration-300">
-                    <img id="logo-image" src="" alt="Brand Logo" class="logo-image-fixed filter grayscale select-none pointer-events-none">
-                    <div id="logo-placeholder" class="hidden flex flex-col items-center justify-center text-center">
-                        <span class="gaming-font font-black text-6xl text-gray-700 tracking-widest">?</span>
-                    </div>
-                </div>
-                
-                <!-- Clue Reveal HUD -->
-                <div id="revealed-letters-hud" class="mt-4 text-xl tracking-[0.4em] font-mono font-bold text-blue-400 text-center select-none">
-                    _ _ _ _ _
-                </div>
-
-                <div class="w-full max-w-md mt-4 bg-gray-950 h-2 rounded-full overflow-hidden border border-gray-800">
-                    <div id="timer-bar" class="bg-gradient-to-r from-blue-500 to-indigo-600 h-full w-full transition-all duration-100 ease-linear"></div>
-                </div>
-            </div>
-
-            <div class="space-y-4">
-                <div class="flex gap-2">
-                    <input type="text" id="input-guess" aria-label="Brand name" maxlength="256" autocomplete="off" placeholder="Type your brand guess..." class="flex-grow bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-lg font-bold text-white focus:outline-none focus:border-blue-500 transition shadow-inner">
-                    <button id="btn-guess-submit" class="gaming-font bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 rounded-xl transition flex items-center gap-1.5 uppercase tracking-wider text-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                        Submit
-                    </button>
-                </div>
-                
-                <div class="flex justify-between items-center bg-gray-950 bg-opacity-40 p-3 rounded-xl border border-gray-800">
-                    <div class="flex flex-col gap-1">
-                        <button id="btn-gameplay-hint" class="text-xs text-yellow-400/90 hover:text-yellow-300 transition text-left">
-                            💡 Clue Info Hint <span class="text-gray-500 font-normal">(-5 points)</span>
-                        </button>
-                        <button id="btn-gameplay-reveal-char" class="text-xs text-indigo-400 hover:text-indigo-300 transition text-left">
-                            🔎 Reveal Letter Clue <span class="text-gray-500 font-normal">(-10 points)</span>
-                        </button>
-                    </div>
-                    <div id="clue-text" class="hidden text-xs text-gray-400 italic text-right max-w-sm"></div>
-                </div>
-            </div>
-
-            <div id="round-load-status" role="status" class="text-sm text-amber-300 text-center"></div>
-            <button id="btn-retry-logo" class="hidden rounded-xl bg-blue-600 py-3 font-bold" type="button">Retry loading logo</button>
-            <div id="pause-overlay" class="hidden absolute inset-0 z-20 bg-gray-950 rounded-2xl flex flex-col items-center justify-center gap-6" role="dialog" aria-modal="true" aria-label="Game paused">
-                <h2 class="gaming-font text-3xl">PAUSED</h2>
-                <button id="btn-resume-round" class="bg-blue-600 rounded-xl px-6 py-3 font-bold">Resume</button>
-            </div>
-            <!-- FEEDBACK PANEL OVERLAY -->
-            <div id="feedback-overlay" class="absolute inset-0 bg-gray-950 bg-opacity-95 rounded-2xl flex flex-col items-center justify-center p-6 space-y-6 hidden transition-all duration-300">
-                <div id="feedback-badge" class="gaming-font text-5xl font-black uppercase text-center tracking-widest"></div>
-                <div class="text-center space-y-1">
-                    <p class="text-gray-400 text-xs">Correct Answer Was:</p>
-                    <p id="feedback-answer" class="text-2xl font-bold tracking-wider text-white"></p>
-                </div>
-                <div id="feedback-stats-card" class="bg-gray-900 border border-gray-800 px-6 py-4 rounded-xl flex gap-10">
-                    <div>
-                        <div class="text-xs text-gray-500 uppercase font-bold">Accuracy</div>
-                        <div id="feedback-match" class="text-xl font-bold text-emerald-400">0%</div>
-                    </div>
-                    <div>
-                        <div class="text-xs text-gray-500 uppercase font-bold">Points</div>
-                        <div id="feedback-score" class="text-xl font-bold text-yellow-400">+0</div>
-                    </div>
-                </div>
-                <button id="btn-feedback-next" class="gaming-font px-10 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition flex items-center gap-2 uppercase tracking-widest text-sm">
-                    Continue
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/></svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- SCREEN 5: LEVEL CLEAR REPORT -->
-        <div id="screen-report" class="hidden w-full max-w-lg bg-gray-900 bg-opacity-60 p-8 rounded-2xl border border-gray-800 cyber-border flex flex-col items-center text-center space-y-6">
-            <h2 class="gaming-font text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500 uppercase tracking-widest"></h2>
-            <div class="text-yellow-400 text-6xl tracking-wider select-none py-2" id="report-stars">☆☆☆</div>
-            <div class="w-full bg-gray-950 border border-gray-800 rounded-xl p-4 divide-y divide-gray-800 space-y-3">
-                <div class="flex justify-between pt-1 text-sm"><span class="text-gray-400">Guessed Correctly:</span><span id="report-correct-count" class="font-bold">0 / 4</span></div>
-                <div class="flex justify-between pt-3 text-sm"><span class="text-gray-400">Level Score Earned:</span><span id="report-score" class="font-bold text-yellow-400">0</span></div>
-                <div class="flex justify-between pt-3 text-sm"><span class="text-gray-400">Level records:</span><span id="report-cat-high" class="font-bold text-blue-400">0</span></div>
-            </div>
-            <button id="btn-report-continue" class="gaming-font w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition flex items-center justify-center gap-2 uppercase tracking-wider text-sm">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                Proceed to Lobby
-            </button>
-        </div>
-
-        <!-- SCREEN 6: ADVANCED SETTINGS -->
-        <div id="screen-settings" class="hidden w-full max-w-2xl bg-gray-900 bg-opacity-60 p-6 md:p-8 rounded-2xl border border-gray-800 cyber-border flex flex-col gap-6 max-h-[85vh] overflow-y-auto">
-            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
-                <h2 class="gaming-font text-2xl font-bold">SYSTEM CONFIGURATION</h2>
-                <button id="btn-settings-back" class="text-gray-400 hover:text-white text-xs uppercase font-bold tracking-widest flex items-center gap-1">
-                    ← Return
-                </button>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Column 1: Display -->
-                <div class="space-y-4">
-                    <!-- Window Resolution -->
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Window size</label>
-                        <div class="grid grid-cols-3 gap-2 bg-gray-950 p-1.5 rounded-xl border border-gray-800">
-                            <button id="btn-win-sm" class="px-3 py-2 text-[10px] font-bold rounded-lg transition hover:text-white">800x600</button>
-                            <button id="btn-win-md" class="px-3 py-2 text-[10px] font-bold rounded-lg transition hover:text-white">1024x768</button>
-                            <button id="btn-win-lg" class="px-3 py-2 text-[10px] font-bold rounded-lg transition hover:text-white">1280x960</button>
-                        </div>
-                    </div>
-
-                    <!-- Graphics Quality -->
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Visual effects</label>
-                        <div class="grid grid-cols-2 gap-2 bg-gray-950 p-1.5 rounded-xl border border-gray-800">
-                            <button id="btn-qual-low" class="px-3 py-2 text-[10px] font-bold rounded-lg transition hover:text-white">LOW (ECO)</button>
-                            <button id="btn-qual-high" class="px-3 py-2 text-[10px] font-bold rounded-lg transition hover:text-white">HIGH (NEON)</button>
-                        </div>
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="flex items-center gap-3 text-sm" for="settings-reduced-motion">
-                            <input type="checkbox" id="settings-reduced-motion" class="w-5 h-5">
-                            Reduce animations and screen shake
-                        </label>
-                        <p class="text-xs text-gray-400">Your system motion preference is also respected.</p>
-                    </div>
-
-                    <!-- Display Brightness Slider -->
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Interface brightness</label>
-                        <div class="flex items-center gap-3 bg-gray-950 p-3 rounded-xl border border-gray-800">
-                            <input type="range" id="settings-brightness" min="50" max="150" step="5" value="100" class="w-full bg-gray-800 rounded-lg appearance-none h-1.5">
-                            <span id="brightness-label" class="text-xs text-gray-400 w-12 text-right">100%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Column 2: System Toggles -->
-                <div class="space-y-4">
-                    <!-- Volume -->
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Sound volume</label>
-                        <div class="flex items-center gap-3 bg-gray-950 p-3 rounded-xl border border-gray-800">
-                            <input type="range" id="settings-volume" min="0" max="1" step="0.1" value="0.5" class="w-full bg-gray-800 rounded-lg appearance-none h-1.5">
-                            <span id="volume-label" class="text-xs text-gray-400 w-8 text-right">50%</span>
-                        </div>
-                    </div>
-
-                    <!-- Vibrations -->
-                    <div class="space-y-2 flex justify-between items-center bg-gray-950 p-3 rounded-xl border border-gray-800">
-                        <div>
-                            <label class="text-xs font-bold uppercase tracking-wider text-gray-300">Screen shake</label>
-                            <p class="text-[10px] text-gray-500">Visual tremors on wrong answers.</p>
-                        </div>
-                        <button id="btn-vibrate-toggle" class="px-4 py-2 text-[10px] font-bold rounded-lg bg-blue-600 text-white uppercase"></button>
-                    </div>
-
-                    <!-- Timing Constraint Settings -->
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Match Time Constraints</label>
-                        <div class="grid grid-cols-3 gap-2 bg-gray-950 p-1.5 rounded-xl border border-gray-800">
-                            <button id="diff-easy" class="px-3 py-2 text-[10px] font-bold rounded-lg transition hover:text-white">EASY</button>
-                            <button id="diff-medium" class="px-3 py-2 text-[10px] font-bold rounded-lg transition hover:text-white">MEDIUM</button>
-                            <button id="diff-hard" class="px-3 py-2 text-[10px] font-bold rounded-lg transition hover:text-white">HARD</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <button id="btn-settings-close" class="gaming-font py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition flex items-center justify-center gap-2 uppercase text-xs tracking-wider">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
-                Save & Apply Configuration
-            </button>
-        </div>
-
-        <!-- SCREEN 7: CUSTOM LEVEL CREATOR -->
-        <div id="screen-creator" class="hidden w-full max-w-3xl bg-gray-900 bg-opacity-60 p-6 md:p-8 rounded-2xl border border-gray-800 cyber-border flex flex-col gap-6 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
-                <div>
-                    <button id="btn-creator-back" class="text-gray-400 hover:text-white mb-1 flex items-center gap-1.5 transition text-xs">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                        Back to Categories
-                    </button>
-                    <h2 class="gaming-font text-2xl font-bold">CUSTOM LEVEL DESIGNER</h2>
-                </div>
-                <span class="text-[10px] uppercase font-bold text-gray-500 bg-gray-950 border border-gray-800 px-3 py-1.5 rounded-lg">Custom Engine Arena</span>
-            </div>
-
-            <!-- Enhanced inputs: Category, Difficulty, Theme & Time -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div class="space-y-1.5">
-                    <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Level Name</label>
-                    <input type="text" id="creator-level-name" placeholder="e.g., Retro Tech Room" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm font-bold text-white focus:outline-none focus:border-blue-500 transition">
-                </div>
-                <div class="space-y-1.5">
-                    <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Game Category</label>
-                    <select id="creator-level-category" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm font-bold text-white focus:outline-none focus:border-blue-500 transition">
-                        <option value="tech">Technology</option>
-                        <option value="auto">Automotive</option>
-                        <option value="food">Food & Beverage</option>
-                        <option value="fashion">Fashion & Luxury</option>
-                        <option value="media">Media & Fun</option>
-                    </select>
-                </div>
-                <div class="space-y-1.5">
-                    <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Fixed Difficulty</label>
-                    <select id="creator-level-difficulty" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm font-bold text-white focus:outline-none focus:border-blue-500 transition">
-                        <option value="easy">Easy (Double Letters Allowed)</option>
-                        <option value="medium" selected>Medium (Standard Timing)</option>
-                        <option value="hard">Hard (Ultra Fast Rush)</option>
-                    </select>
-                </div>
-                <div class="space-y-1.5">
-                    <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Active Timer Limits</label>
-                    <select id="creator-level-timer" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm font-bold text-white focus:outline-none focus:border-blue-500 transition">
-                        <option value="5">Insane (5 Seconds)</option>
-                        <option value="10">Aggressive (10 Seconds)</option>
-                        <option value="15" selected>Standard (15 Seconds)</option>
-                        <option value="20">Casual (20 Seconds)</option>
-                        <option value="30">Unconstrained (30 Seconds)</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="space-y-1.5 col-span-2">
-                    <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Visual Aesthetic Theme</label>
-                    <select id="creator-level-theme" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm font-bold text-white focus:outline-none focus:border-blue-500 transition">
-                        <option value="cyber-neon">Cyberpunk Pink Neon</option>
-                        <option value="retro-amber">Retro Terminal Amber</option>
-                        <option value="matrix-green">Hacker Digital Green</option>
-                        <option value="midnight-blue">Clean Deep Slate Blue</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Target customized brands configuration -->
-            <div class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Brand 1 -->
-                    <div class="bg-gray-950 p-4 rounded-xl border border-gray-800/80 space-y-3">
-                        <h4 class="text-xs font-black text-blue-400 uppercase tracking-widest">Brand 1</h4>
-                        <input type="text" id="c-brand-1-name" placeholder="Brand Name (e.g., Tesla)" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-blue-500 text-white">
-                        <input type="text" id="c-brand-1-slug" placeholder="Icon Slug (e.g., tesla)" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-blue-500 text-gray-300">
-                        <input type="text" id="c-brand-1-hint" placeholder="Visual clue hints" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-blue-500 text-gray-400">
-                    </div>
-                    <!-- Brand 2 -->
-                    <div class="bg-gray-950 p-4 rounded-xl border border-gray-800/80 space-y-3">
-                        <h4 class="text-xs font-black text-blue-400 uppercase tracking-widest">Brand 2</h4>
-                        <input type="text" id="c-brand-2-name" placeholder="Brand Name (e.g., Nintendo)" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-blue-500 text-white">
-                        <input type="text" id="c-brand-2-slug" placeholder="Icon Slug (e.g., nintendo)" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-blue-500 text-gray-300">
-                        <input type="text" id="c-brand-2-hint" placeholder="Visual clue hints" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-blue-500 text-gray-400">
-                    </div>
-                    <!-- Brand 3 -->
-                    <div class="bg-gray-950 p-4 rounded-xl border border-gray-800/80 space-y-3">
-                        <h4 class="text-xs font-black text-blue-400 uppercase tracking-widest">Brand 3</h4>
-                        <input type="text" id="c-brand-3-name" placeholder="Brand Name (e.g., Discord)" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-blue-500 text-white">
-                        <input type="text" id="c-brand-3-slug" placeholder="Icon Slug (e.g., discord)" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-blue-500 text-gray-300">
-                        <input type="text" id="c-brand-3-hint" placeholder="Visual clue hints" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-blue-500 text-gray-400">
-                    </div>
-                    <!-- Brand 4 -->
-                    <div class="bg-gray-950 p-4 rounded-xl border border-gray-800/80 space-y-3">
-                        <h4 class="text-xs font-black text-blue-400 uppercase tracking-widest">Brand 4</h4>
-                        <input type="text" id="c-brand-4-name" placeholder="Brand Name (e.g., Spotify)" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-blue-500 text-white">
-                        <input type="text" id="c-brand-4-slug" placeholder="Icon Slug (e.g., spotify)" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-blue-500 text-gray-300">
-                        <input type="text" id="c-brand-4-hint" placeholder="Visual clue hints" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-blue-500 text-gray-400">
-                    </div>
-                </div>
-            </div>
-
-            <button id="btn-save-custom-level" class="gaming-font w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition flex items-center justify-center gap-2 uppercase text-xs tracking-wider">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                Publish Room to Arena
-            </button>
-        </div>
-
+        <section id="screen-creator" class="screen hidden" aria-labelledby="creator-title"><div class="page-heading"><div><button id="btn-creator-back" class="button quiet" type="button"><span data-icon="back"></span><span>Categories</span></button><p class="eyebrow">YOUR RULES. YOUR CHALLENGE.</p><h2 id="creator-title" tabindex="-1">Create a room</h2><p>Choose up to four brands from the offline collection. Rooms are saved on this device.</p></div><span class="icon-tile lime" data-icon="custom"></span></div>
+            <div class="creator-options panel"><div class="field"><label for="creator-level-name"><span data-icon="custom"></span>Room name</label><input id="creator-level-name" type="text" maxlength="100" placeholder="e.g. The everyday collection"></div><div class="field"><label for="creator-level-category"><span data-icon="grid"></span>Category</label><select id="creator-level-category"><option value="tech">Technology</option><option value="auto">Automotive</option><option value="food">Food & Drink</option><option value="fashion">Fashion</option><option value="media">Media & Fun</option></select></div><div class="field"><label for="creator-level-difficulty"><span data-icon="bolt"></span>Difficulty</label><select id="creator-level-difficulty"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></div><div class="field"><label for="creator-level-timer"><span data-icon="clock"></span>Time per brand</label><select id="creator-level-timer"><option value="5">5 seconds</option><option value="10">10 seconds</option><option value="15" selected>15 seconds</option><option value="20">20 seconds</option><option value="30">30 seconds</option></select></div><div class="field"><label for="creator-level-theme"><span data-icon="palette"></span>Colour theme</label><select id="creator-level-theme"><option value="cyber-neon">Neon pink</option><option value="retro-amber">Warm amber</option><option value="matrix-green">Forest green</option><option value="midnight-blue">Midnight blue</option></select></div></div>
+            <div class="creator-brands"><fieldset class="brand-fieldset"><legend><span data-icon="grid"></span>Brand 1</legend>
+<label for="c-brand-1-name">Brand name</label><input id="c-brand-1-name" type="text" maxlength="100" placeholder="e.g. Apple">
+<label for="c-brand-1-slug">Logo identifier</label><input id="c-brand-1-slug" type="text" placeholder="Choose a local logo" autocomplete="off">
+<label for="c-brand-1-hint">Clue <span class="muted">(optional)</span></label><input id="c-brand-1-hint" type="text" maxlength="300" placeholder="A hint for the player">
+</fieldset><fieldset class="brand-fieldset"><legend><span data-icon="grid"></span>Brand 2</legend>
+<label for="c-brand-2-name">Brand name</label><input id="c-brand-2-name" type="text" maxlength="100" placeholder="e.g. Apple">
+<label for="c-brand-2-slug">Logo identifier</label><input id="c-brand-2-slug" type="text" placeholder="Choose a local logo" autocomplete="off">
+<label for="c-brand-2-hint">Clue <span class="muted">(optional)</span></label><input id="c-brand-2-hint" type="text" maxlength="300" placeholder="A hint for the player">
+</fieldset><fieldset class="brand-fieldset"><legend><span data-icon="grid"></span>Brand 3</legend>
+<label for="c-brand-3-name">Brand name</label><input id="c-brand-3-name" type="text" maxlength="100" placeholder="e.g. Apple">
+<label for="c-brand-3-slug">Logo identifier</label><input id="c-brand-3-slug" type="text" placeholder="Choose a local logo" autocomplete="off">
+<label for="c-brand-3-hint">Clue <span class="muted">(optional)</span></label><input id="c-brand-3-hint" type="text" maxlength="300" placeholder="A hint for the player">
+</fieldset><fieldset class="brand-fieldset"><legend><span data-icon="grid"></span>Brand 4</legend>
+<label for="c-brand-4-name">Brand name</label><input id="c-brand-4-name" type="text" maxlength="100" placeholder="e.g. Apple">
+<label for="c-brand-4-slug">Logo identifier</label><input id="c-brand-4-slug" type="text" placeholder="Choose a local logo" autocomplete="off">
+<label for="c-brand-4-hint">Clue <span class="muted">(optional)</span></label><input id="c-brand-4-hint" type="text" maxlength="300" placeholder="A hint for the player">
+</fieldset></div><div class="page-actions"><button id="btn-save-custom-level" class="button primary" type="button"><span data-icon="check"></span><span>Save room</span></button></div>
+        </section>
     </main>
-
-    <footer class="py-3 px-6 text-center text-[10px] text-gray-700 border-t border-gray-950 flex justify-between items-center bg-gray-950/80">
-        <span>BrandGame Engine Framework. Powered by darksy-ctrl native bindings.</span>
-        <span class="font-bold tracking-widest gaming-font text-indigo-500">VERSION <span id="footer-version-text">3.3.0</span></span>
-    </footer>
-
+    <dialog id="help-dialog" aria-labelledby="help-title"><div class="dialog-heading"><span class="icon-tile lime" data-icon="help"></span><form method="dialog"><button class="button quiet icon-button" aria-label="Close help" autofocus><span data-icon="close"></span></button></form></div><p class="eyebrow">A LITTLE RECOGNITION GOES A LONG WAY</p><h2 id="help-title">How to play</h2><ol class="help-steps"><li><span data-icon="search"></span><div><h3>Name the brand</h3><p>Choose a category and a level. Type the name behind each logo, then press Enter.</p></div></li><li><span data-icon="bulb"></span><div><h3>Need a nudge?</h3><p>A hint costs 5 points; a letter costs 10. You have three lives. Pause anytime with Esc.</p></div></li><li><span data-icon="star"></span><div><h3>Build your collection</h3><p>Complete a level with 75% correct for one star, 90% for two, or a perfect score for three. Replays improve your records.</p></div></li></ol><form method="dialog"><button class="button primary full-width"><span data-icon="play"></span>Let’s play</button></form></dialog>
+    <footer class="app-footer"><span><span data-icon="shield"></span>Made to play offline</span><span>BrandGame <span id="footer-version-text">3.4.0</span><span class="footer-dot">·</span>© 2026 p-darksy-r</span></footer>
     <script src="js/data/offline-catalog.js"></script>
     <script src="js/data/brands.js"></script>
     <script src="js/core/levels.js"></script>
@@ -414,8 +92,16 @@
     <script src="js/core/version.js"></script>
     <script src="js/core/results.js"></script>
     <script src="js/core/state.js"></script>
+    <script src="js/locales/en.js"></script>
+    <script src="js/locales/pt-PT.js"></script>
+    <script src="js/locales/es.js"></script>
+    <script src="js/locales/hints-pt-PT.js"></script>
+    <script src="js/locales/hints-es.js"></script>
+    <script src="js/ui/i18n.js"></script>
     <script src="js/audio.js"></script>
     <script src="js/platform/storage.js"></script>
+    <script src="js/ui/icons.js"></script>
+    <script src="js/ui/presentation.js"></script>
     <script src="js/ui/navigation.js"></script>
     <script src="js/ui/catalog.js"></script>
     <script src="js/ui/creator.js"></script>
@@ -428,6 +114,6 @@
     <script src="js/gameplay/report.js"></script>
     <script src="js/ui/events.js"></script>
     <script src="js/app.js"></script>
+
 </body>
 </html>
-<!-- BrandGame_V3 - https://github.com/p-darksy-r/BrandGame_V3 - Copyright (c) darksy -->

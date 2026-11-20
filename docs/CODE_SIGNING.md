@@ -1,3 +1,4 @@
+<!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Assinatura Windows
 
 A versão 3.1.1 segue a organização de Letters Game Ultimate e Path Forge: scripts dedicados, identidade de desenvolvimento no armazenamento de certificados do Windows, verificação dos binários finais, timestamp e testes de arranque independentes.

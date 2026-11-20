@@ -1,52 +1,31 @@
-/* BrandGame_V3 - https://github.com/p-darksy-r/BrandGame_V3 - Copyright (c) darksy */
-
+// Copyright (c) 2026 p-darksy-r.
 function selectCustomCategory() {
-    GAME_STATE.currentCategory = "custom";
-
-    const catTitle = document.getElementById("level-category-title");
-    if (catTitle) catTitle.textContent = "Custom Arena Rooms";
-    const catBadge = document.getElementById("level-category-badge");
-    if (catBadge) catBadge.textContent = "CUSTOM";
-
-    const parentSel = document.getElementById("select-level-page");
-    if (parentSel && parentSel.parentElement) {
-        parentSel.parentElement.classList.add("hidden");
-    }
-
-    const grid = document.getElementById("level-buttons-grid");
+    GAME_STATE.currentCategory = 'custom';
+    const title = document.getElementById('level-category-title');
+    if (title) title.textContent = t('Custom Arena Rooms');
+    const badge = document.getElementById('level-category-badge');
+    if (badge) badge.textContent = t('Saved on this device');
+    document.getElementById('select-level-page')?.parentElement?.classList.add('hidden');
+    const grid = document.getElementById('level-buttons-grid');
     if (!grid) return;
-    grid.innerHTML = "";
-
-    const list = GAME_STATE.saveData.customLevels || [];
-    if (list.length === 0) {
-        grid.className = "flex flex-col items-center justify-center col-span-5 py-12 text-center text-gray-500";
-        grid.innerHTML = `
-            <div class="text-4xl mb-2">☄</div>
-            <p class="text-sm font-semibold uppercase tracking-wider">No Custom Levels Added</p>
-            <p class="text-[11px] text-gray-600 mt-1 max-w-xs">Tap the '+ BUILD CUSTOM LEVEL' button in the header right corner to publish your first challenge playroom!</p>
-        `;
-        showScreen("screen-levels");
-        return;
+    grid.innerHTML = '';
+    const rooms = GAME_STATE.saveData.customLevels;
+    grid.className = rooms.length ? 'level-grid' : 'empty-state';
+    if (!rooms.length) {
+        grid.innerHTML = `<span class="icon-tile large">${uiIcon('custom')}</span><h3>${t('No rooms yet')}</h3><p>${t('Pick your favourite brands and build a challenge of your own.')}</p><button class="button primary">${uiIcon('plus')}<span>${t('Create a room')}</span></button>`;
+        grid.querySelector('button').addEventListener('click', () => document.getElementById('btn-trigger-creator').click());
     }
-
-    grid.className = "grid grid-cols-5 gap-3 max-h-[360px] overflow-y-auto pr-2 custom-scrollbar";
-    grid.style.maxHeight = "360px";
-    grid.style.overflowY = "auto";
-    grid.style.display = "grid";
-    grid.style.gridTemplateColumns = "repeat(5, minmax(0, 1fr))";
-
-    list.forEach((room, index) => {
-        const btn = document.createElement("button");
-        btn.className = "flex flex-col items-center justify-center p-3 bg-gray-900 hover:bg-emerald-950/40 border border-gray-800 hover:border-emerald-500 rounded-xl transition group text-center aspect-square";
-        btn.innerHTML = `
-            <span class="text-emerald-400 text-base group-hover:scale-110 transition">☄</span>
-            <span class="gaming-font text-[9px] font-black text-white mt-1 line-clamp-2 uppercase"></span>
-        `;
-        btn.querySelector("span:last-child").textContent = room.name;
-        btn.addEventListener("click", () => launchCustomLevel(index));
-        grid.appendChild(btn);
+    rooms.forEach((room, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'level-card';
+        const best = resultSummary(GAME_STATE.saveData.customResults[customResultKey(room, index)]);
+        button.innerHTML = `${uiIcon('custom')}<strong class="room-name" data-i18n-skip></strong><span class="level-stars">${starsMarkup(best.stars)}</span><small>${t('{count} brands', { count: room.brands.length })}</small>`;
+        button.querySelector('.room-name').textContent = room.name;
+        button.addEventListener('click', () => launchCustomLevel(index));
+        grid.appendChild(button);
     });
-    showScreen("screen-levels");
+    showScreen('screen-levels');
 }
 
 function publishCustomLevelRoom() {
@@ -54,7 +33,7 @@ function publishCustomLevelRoom() {
     const levelName = levelNameEl ? levelNameEl.value.trim() : "";
 
     if (!levelName) {
-        alert("Please enter a custom name for your Level Room!");
+        alert(t("Please enter a custom name for your Level Room!"));
         return;
     }
 
@@ -85,24 +64,24 @@ function publishCustomLevelRoom() {
         if (!bName && !bSlug) continue;
 
         if (!bName || !bSlug) {
-            alert(`Brand #${i} requires both a Name and an SVG Slug.`);
+            alert(t('Brand #{number} requires both a Name and an SVG Slug.', { number: i }));
             return;
         }
 
         if (!getLocalLogoPath(bSlug)) {
-            alert(`Brand #${i}: choose one of the suggested offline logo identifiers.`);
+            alert(t('Brand #{number}: choose one of the suggested offline logo identifiers.', { number: i }));
             return;
         }
 
         customBrands.push({
             name: bName,
             slug: bSlug,
-            hint: bHint || "No clues defined."
+            hint: bHint
         });
     }
 
     if (customBrands.length === 0) {
-        alert("Please add at least one valid Brand (Name + Slug)!");
+        alert(t("Please add at least one valid Brand (Name + Slug)!"));
         return;
     }
 
@@ -121,7 +100,7 @@ function publishCustomLevelRoom() {
 
     sendNativeRequest({ Action: "write_save", Data: GAME_STATE.saveData });
     updateGlobalStatsHUD();
-    alert("Level Room Successfully Published!");
+    alert(t("Level Room Successfully Published!"));
 
     renderCategoryCards();
     showScreen("screen-categories");

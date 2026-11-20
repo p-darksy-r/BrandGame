@@ -1,3 +1,4 @@
+# Copyright (c) 2026 p-darksy-r. BrandGame.
 [CmdletBinding()]
 param([string]$CertificateThumbprint = $env:BRANDGAME_SIGNING_THUMBPRINT)
 $ErrorActionPreference = 'Stop'

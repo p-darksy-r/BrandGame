@@ -1,3 +1,4 @@
+# Copyright (c) 2026 p-darksy-r. BrandGame.
 Set-StrictMode -Version Latest
 
 function Get-WorkspacePath {
@@ -23,7 +24,7 @@ function Get-WorkspacePath {
 
 function Get-SourceFingerprint {
     param([string]$Root)
-    $paths = @('src/csharp', 'src/cpp', 'src/web', 'src/updater', 'scripts')
+    $paths = @('src/csharp', 'src/cpp', 'src/web', 'src/updater', 'src/branding', 'icons', 'scripts')
     $files = @(
         foreach ($path in $paths) {
             Get-ChildItem -LiteralPath (Join-Path $Root $path) -Recurse -File |

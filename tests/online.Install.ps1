@@ -1,3 +1,4 @@
+# Copyright (c) 2026 p-darksy-r. BrandGame.
 [CmdletBinding()]
 param([switch]$Online, [ValidatePattern('^[a-fA-F0-9]{64}$')][string]$ExpectedAppSha256)
 $ErrorActionPreference = 'Stop'

@@ -1,6 +1,7 @@
-/* BrandGame_V3 - https://github.com/p-darksy-r/BrandGame_V3 - Copyright (c) darksy */
+/* BrandGame - https://github.com/p-darksy-r/BrandGame - Copyright (c) 2026 p-darksy-r */
 
 function showScreen(screenId) {
+    if (screenId === "screen-main-menu") renderMainMenuProgress();
     const screens = ["screen-main-menu", "screen-categories", "screen-levels", "screen-gameplay", "screen-report", "screen-settings", "screen-creator"];
     screens.forEach(id => {
         const el = document.getElementById(id);
@@ -10,6 +11,12 @@ function showScreen(screenId) {
         }
     });
 
+    const active = document.getElementById(screenId);
+    if (active) {
+        localizePage(active);
+        active.querySelector('h2[tabindex]')?.focus({ preventScroll: true });
+    }
+    document.body.dataset.screen = screenId;
     if (screenId !== "screen-gameplay") {
         clearCustomThemeClasses();
     }
@@ -35,55 +42,21 @@ function updateGlobalStatsHUD() {
 }
 
 function renderMainMenuProgress() {
-    const catList = document.getElementById("category-summary-list");
-    if (!catList) return;
-
-    catList.innerHTML = "";
-    document.getElementById("legacy-progress-note")?.classList.toggle("hidden", !hasLegacyCompletions(GAME_STATE.saveData));
-    const categories = [
-        { id: "tech", label: "Technology" },
-        { id: "auto", label: "Automotive" },
-        { id: "food", label: "Food & Beverage" },
-        { id: "fashion", label: "Fashion & Luxury" },
-        { id: "media", label: "Media & Entertain" }
-    ];
-    categories.forEach(cat => {
-        const score = GAME_STATE.saveData.categoryScores[cat.id] || 0;
-        const unlocked = GAME_STATE.saveData.levelsUnlocked[cat.id] || 1;
-        const percent = Math.min(((unlocked - 1) / 100) * 100, 100);
-
-        const item = document.createElement("div");
-        item.className = "space-y-1";
-        item.innerHTML = `
-            <div class="flex justify-between text-xs font-bold uppercase tracking-wide">
-                <span class="text-gray-300">${cat.label}</span>
-                <span class="text-blue-400">Score: ${score}</span>
-            </div>
-            <div class="w-full bg-gray-950 h-2 rounded-full overflow-hidden border border-gray-800 flex">
-                <div class="bg-blue-600 h-full" style="width: ${percent}%"></div>
-            </div>
-            <div class="flex justify-between text-[10px] text-gray-500">
-                <span>Progress: ${unlocked - 1}/100 Levels</span>
-                <span>Max: Level ${Math.min(unlocked, 100)}</span>
-            </div>
-        `;
-        catList.appendChild(item);
+    const list = document.getElementById('category-summary-list');
+    if (!list) return;
+    list.innerHTML = '';
+    document.getElementById('legacy-progress-note')?.classList.toggle('hidden', !hasLegacyCompletions(GAME_STATE.saveData));
+    UI_CATEGORIES.forEach(category => {
+        const completed = Math.max(0, Math.min(100, (GAME_STATE.saveData.levelsUnlocked[category.id] || 1) - 1));
+        const item = document.createElement('div');
+        item.className = 'progress-item';
+        item.innerHTML = `<span class="progress-icon">${uiIcon(category.id)}</span><div class="progress-label"><span>${t(category.label)}</span><small>${completed} / 100</small></div><div class="progress-track" role="progressbar" aria-label="${t(category.label)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${completed}"><span style="width:${completed}%"></span></div>`;
+        list.appendChild(item);
     });
-
-    const customScore = GAME_STATE.saveData.customScore || 0;
-    const customCount = GAME_STATE.saveData.customLevels.length;
-    const customItem = document.createElement("div");
-    customItem.className = "space-y-1 pt-2 border-t border-gray-800/60";
-    customItem.innerHTML = `
-        <div class="flex justify-between text-xs font-bold uppercase tracking-wide text-emerald-400">
-            <span>Custom Arenas</span>
-            <span>Score: ${customScore}</span>
-        </div>
-        <div class="flex justify-between text-[10px] text-gray-500">
-            <span>Created Level Rooms: ${customCount}</span>
-        </div>
-    `;
-    catList.appendChild(customItem);
+    const custom = document.createElement('div');
+    custom.className = 'progress-item custom-summary';
+    custom.innerHTML = `<span class="progress-icon">${uiIcon('custom')}</span><div class="progress-label"><span>${t('Custom Arena')}</span><small>${t('{count} rooms', { count: GAME_STATE.saveData.customLevels.length })}</small></div><span class="helper">${t('Your rooms, your rules.')}</span>`;
+    list.appendChild(custom);
 }
 
 function populatePageSelectDropdown() {
@@ -93,11 +66,11 @@ function populatePageSelectDropdown() {
     for (let i = 0; i < 10; i++) {
         const opt = document.createElement("option");
         opt.value = i;
-        opt.textContent = `Levels ${i * 10 + 1} - ${i * 10 + 10}`;
+        opt.textContent = t('Levels {first}–{last}', { first: i * 10 + 1, last: i * 10 + 10 });
         sel.appendChild(opt);
     }
-    sel.addEventListener("change", (e) => {
+    sel.onchange = (e) => {
         GAME_STATE.levelSelectPage = parseInt(e.target.value);
         renderLevelButtonsList();
-    });
+    };
 }

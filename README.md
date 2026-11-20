@@ -1,23 +1,35 @@
-# BrandGame V3
+<!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
+# BrandGame
 
-Jogo de adivinhar marcas, com 100 níveis por categoria, salas personalizadas e uma aplicação Windows em C# / WinForms / WebView2. **Versão atual: 3.3.0 — assinatura de desenvolvimento.**
+Reconhece o logótipo e escreve o nome da marca antes de o tempo acabar. Joga offline com 496 marcas em cinco categorias, conquista estrelas e cria salas para desafiar outros jogadores no mesmo dispositivo.
 
-Código-fonte, README e downloads no mesmo repositório público: [p-darksy-r/BrandGame_V3](https://github.com/p-darksy-r/BrandGame_V3). Cada versão recebe uma tag no commit correspondente do `main`; os executáveis e ZIPs ficam nas Releases.
+**Versão 3.4.0 · 20 de novembro de 2026**
 
-## Abrir a aplicação
+![Menu principal do BrandGame em português, com o botão Vamos jogar e o progresso por categoria](docs/images/brandgame.png)
 
-Depois da compilação, abre **`app/BrandGame.exe`**. Os ficheiros HTML, CSS e JavaScript publicados estão em **`app/web/`**. A distribuição inclui o runtime .NET; o computador precisa do [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/).
+## Jogar
 
-`BrandGame.exe` e `update.exe` têm assinatura Authenticode SHA-256 e timestamp RFC 3161. A identidade é **BrandGame Development, O=p-darksy-r**, criada para testes e confiada apenas no perfil Windows do autor. **A assinatura não garante aceitação pelo Windows**: SmartScreen, Smart App Control e políticas empresariais podem bloquear certificados de desenvolvimento. A compilação final do atualizador 3.3.0 foi bloqueada pelo Smart App Control neste PC, apesar de a assinatura ser válida. Consulta a [validação](docs/VALIDATION.md) e as notas da release para os testes realizados. Não desatives as proteções nem instales certificados de desenvolvimento para contornar um bloqueio.
+- **Windows x64.** Extrai o pacote [BrandGame-3.4.0-win-x64.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.4.0/BrandGame-3.4.0-win-x64.zip) e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET vem incluído. A janela usa o [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/).
+- **Navegador.** Extrai o pacote [BrandGame-3.4.0-web.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.4.0/BrandGame-3.4.0-web.zip) e abre `web/index.html`. O progresso fica nesse navegador.
+- **Quem tem a versão 3.3.0.** Fecha o jogo e o atualizador. Substitui o `update.exe` ao lado da tua pasta `app` pelo [lançador 3.4.0](https://github.com/p-darksy-r/BrandGame/releases/download/v3.4.0/update.exe) e abre-o. Esta troca é necessária uma vez porque o lançador antigo só reconhece o endereço anterior dos downloads.
 
-Obtém a [versão 3.3.0](https://github.com/p-darksy-r/BrandGame_V3/releases/tag/v3.3.0), ou usa o pacote web no navegador quando o Windows não permitir o executável. Consulta [como jogar](docs/PLAYTEST.md) e [assinatura Windows](docs/CODE_SIGNING.md).
+O jogo e o atualizador usam o certificado de desenvolvimento **BrandGame Development, O=p-darksy-r**. O Windows pode bloquear estes executáveis. Nesse caso, o pacote web permite jogar com as proteções do computador ativas. Consulta as [instruções para jogar](docs/PLAYTEST.md) e a [validação Windows](docs/VALIDATION.md).
 
-## Novidades da versão 3.3.0
+## Novidades da versão 3.4.0
 
-- Atualização online pelo GitHub, com manifesto RSA/SHA-256 e chave pública fixada no lançador, sem SDK para jogar ou atualizar.
-- Estrelas conquistadas e recordes de pontuação/tempo por nível e dificuldade. As repetições não duplicam estrelas; os pontos acumulados continuam separados dos recordes.
-- Migração preserva pontos, níveis e salas antigas. Os resultados históricos desconhecidos não são inventados: aparece uma indicação para voltar a jogar esses níveis.
-- O jogo mantém todos os recursos offline. A atualização online usa Internet apenas quando executas o atualizador.
+- Interface redesenhada com cartões de progresso, navegação mais clara, logótipo próprio e ícones vetoriais locais nos botões.
+- Menus e 496 pistas em português de Portugal, inglês e espanhol. As salas conservam as pistas escritas pelo jogador.
+- Quatro temas persistentes: Meia-noite, Claro, Floresta e Ametista. O menu, os controlos e os ecrãs de jogo acompanham a escolha.
+- Janela Windows redimensionável e maximizável; layout adaptável, foco de teclado visível e ajuda com regras, pistas e atalhos.
+- Autoria do projeto identificada como **p-darksy-r**, incluindo metadados dos executáveis e avisos das fontes. Os créditos de terceiros são preservados.
+
+Mantém as atualizações online autenticadas, os recursos offline, as estrelas e os recordes por nível/dificuldade. Os saves anteriores conservam pontos, níveis, salas e resultados conhecidos; língua e tema recebem valores predefinidos quando ainda não existiam.
+
+## Mudança de nome
+
+O projeto e o repositório passam a chamar-se **BrandGame**. A aplicação migra o progresso para `%APPDATA%/BrandGame/save.json` e o perfil WebView2 para `%LOCALAPPDATA%/BrandGame/WebView2`, preservando os dados antigos. No navegador, a chave antiga do armazenamento é migrada na mesma origem.
+
+O código e o README ficam no ramo `main` de [p-darksy-r/BrandGame](https://github.com/p-darksy-r/BrandGame). Cada tag `vX.Y.Z` identifica o commit usado para compilar essa versão. O lançador, o pacote Windows com manifesto assinado e o ZIP web ficam nas [Releases](https://github.com/p-darksy-r/BrandGame/releases).
 
 ## Atualizar a app instalada
 
@@ -78,7 +90,7 @@ As compilações locais exigem assinatura e verificam o certificado esperado ant
 ## Organização
 
 ```text
-BrandGame_V3/
+BrandGame/
 ├── app/                      # Gerada: aplicação pronta a usar
 │   ├── BrandGame.exe
 │   ├── build-info.json       # Versão, hash das fontes e data de compilação
@@ -86,8 +98,10 @@ BrandGame_V3/
 ├── src/
 │   ├── csharp/               # Janela Windows, ponte web e serviços
 │   ├── cpp/                  # Motor C++ opcional
+│   ├── branding/             # Originais SVG e manifesto dos ícones
 │   ├── web/                  # Fontes web editáveis, organizadas por responsabilidade
 │   └── updater/              # Código do update.exe
+├── icons/                    # BrandGame.ico e update.ico, em várias resoluções
 ├── scripts/                  # Compilação, publicação, testes e empacotamento
 ├── tests/                    # Testes web, nativos e do atualizador
 ├── docs/                     # Arquitetura, desenvolvimento e melhorias
@@ -96,7 +110,7 @@ BrandGame_V3/
 └── update.exe                # Atualização online; --local para desenvolver
 ```
 
-Edita **`src/web`**, e publica com o atualizador. `app/web` é uma cópia de distribuição e será substituída na atualização seguinte. `app`, `artifacts` e os executáveis ficam fora do histórico Git; os pacotes são publicados nas [releases deste repositório](https://github.com/p-darksy-r/BrandGame_V3/releases).
+Edita **`src/web`**, e publica com o atualizador. `app/web` é uma cópia de distribuição e será substituída na atualização seguinte. `app`, `artifacts` e os executáveis ficam fora do histórico Git; os pacotes são publicados nas [releases deste repositório](https://github.com/p-darksy-r/BrandGame/releases).
 
 ## Testes
 
@@ -108,12 +122,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-signatures.ps
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/smoke-windows.ps1
 ```
 
-Os testes verificam seleção determinística de marcas, regras de pontuação, persistência, comunicação com o anfitrião e atualização com recuperação. O teste Windows joga um nível completo, avalia respostas pela ponte nativa e verifica o save no disco, usando um perfil temporário sem abrir os saves do jogador. Os testes no navegador cobrem jogo offline, imagens em falta, cancelamento durante o carregamento, derrota e definições persistentes. A assinatura e os testes de arranque são verificações separadas. O workflow de GitHub Actions executa os testes de lógica e gera uma build Windows de CI sem assinatura.
+Os testes verificam seleção determinística de marcas, regras de pontuação, persistência, comunicação com o anfitrião e atualização com recuperação. O teste Windows joga um nível completo, avalia respostas pela ponte nativa e verifica o save no disco, usando um perfil temporário sem abrir os saves do jogador. Os testes no navegador cobrem jogo offline, imagens em falta, cancelamento durante o carregamento, derrota e definições persistentes. A validação da 3.4.0 inclui também traduções, temas, ajuda, navegação por teclado e diferentes larguras de janela. Os resultados efetivamente executados são registados em [VALIDATION.md](docs/VALIDATION.md). A assinatura e os testes de arranque são verificações separadas. O workflow de GitHub Actions executa os testes de lógica e gera uma build Windows de CI sem assinatura.
 
 ## Dados e funcionamento web
 
-- Progresso nativo: `%APPDATA%/BrandGame_V3/save_data_v3_custom.json`.
-- Perfil WebView2: `%LOCALAPPDATA%/BrandGame_V3/WebView2`.
+- Progresso nativo: `%APPDATA%/BrandGame/save.json`.
+- Perfil WebView2: `%LOCALAPPDATA%/BrandGame/WebView2`.
 - Modo web: abre `src/web/index.html` no navegador; o progresso usa armazenamento local do navegador.
 - Servidor local opcional: `node scripts/serve-web.mjs`, disponível em `http://127.0.0.1:8765`.
 - **O jogo funciona offline**, com CSS compilado, fontes e logótipos incluídos. A instalação inicial de dependências de desenvolvimento e o timestamp das assinaturas continuam a precisar de Internet.
@@ -122,3 +136,5 @@ Os testes verificam seleção determinística de marcas, regras de pontuação, 
 - O motor C++ é opcional. Sem `BrandEngine.dll`, a aplicação usa as mesmas regras em C#.
 
 Consulta a [arquitetura](docs/ARCHITECTURE.md), o [guia de desenvolvimento](docs/DEVELOPMENT.md), as [melhorias propostas](docs/ROADMAP.md) e o [histórico de versões](docs/CHANGELOG.md).
+
+Copyright (c) 2026 **p-darksy-r**. O aviso de [autoria e componentes de terceiros](COPYRIGHT.txt) identifica o âmbito do código e da identidade visual do projeto, sem alterar as licenças existentes. As marcas e logótipos apresentados no jogo pertencem aos respetivos titulares.

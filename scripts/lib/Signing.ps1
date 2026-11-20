@@ -1,3 +1,4 @@
+# Copyright (c) 2026 p-darksy-r. BrandGame.
 Set-StrictMode -Version Latest
 
 $script:BrandGameCertificateSubject = 'CN=BrandGame Development, O=p-darksy-r'

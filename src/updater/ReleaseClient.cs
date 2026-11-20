@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 using System.Net;
 using System.Text.Json;
 
@@ -7,12 +8,12 @@ internal sealed record ReleaseCandidate(string Version, bool Preview, Uri Packag
 
 internal sealed class ReleaseClient : IDisposable
 {
-    internal const string Repository = "p-darksy-r/BrandGame_V3";
+    internal const string Repository = "p-darksy-r/BrandGame";
     private readonly HttpClient client;
     internal ReleaseClient(HttpMessageHandler? handler = null)
     {
         client = new(handler ?? new HttpClientHandler { AllowAutoRedirect = false }) { Timeout = TimeSpan.FromMinutes(5) };
-        client.DefaultRequestHeaders.UserAgent.ParseAdd("BrandGame-Updater/3.3.0");
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("BrandGame-Updater/3.4.0");
         client.DefaultRequestHeaders.Accept.ParseAdd("application/vnd.github+json");
     }
 

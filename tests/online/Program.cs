@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 using BrandGame.Updater;
 using System.IO.Compression;
 using System.Net;

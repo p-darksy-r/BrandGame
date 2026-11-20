@@ -1,3 +1,4 @@
+<!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Arquitetura
 
 ## Código e distribuição
@@ -14,16 +15,21 @@ Os scripts clássicos são carregados explicitamente por `index.html`, incluindo
 - `js/core`: estado, regras de comparação e seleção determinística de níveis.
 - `js/platform`: comunicação com o anfitrião e persistência no navegador.
 - `js/gameplay`: rondas, carregamento de imagens, relógio monotónico com pausa, pistas, feedback e resultados.
-- `js/ui`: navegação, eventos, catálogo, criação de salas e definições.
+- `js/ui`: navegação, eventos, catálogo, criação de salas, definições, ícones vetoriais e aplicação das traduções.
+- `js/locales`: textos da interface em português de Portugal, inglês e espanhol.
 - `js/audio.js`: sintetizador de efeitos sonoros.
 - `js/app.js`: inicialização.
-- `styles`: estilos globais e componentes.
+- `styles`: tokens de cor, estilos globais, componentes e disposição dos ecrãs.
 
 Os módulos partilham um contexto de scripts clássico e a ordem de carregamento faz parte do contrato. Uma futura migração para módulos ES deve incluir a alteração do servidor/modo web e os respetivos testes. Não reintroduzir um segundo catálogo nem uma segunda função de geração de níveis.
+
+Na 3.4.0, língua e tema fazem parte do save normalizado. A língua predefinida é `pt-PT`; `en` e `es` usam os mesmos identificadores de mensagens. O tema predefinido é `midnight`, com alternativas `light`, `forest` e `amethyst`. Os nomes das marcas e identificadores de catálogo não são traduzidos. As traduções são ficheiros locais e não requerem pedidos de rede. Os ícones da interface são SVGs locais definidos pelo projeto, separados dos logótipos das marcas.
 
 ## Anfitrião Windows
 
 `MainWindow` gere a janela e o WebView2; os serviços separam caminhos, persistência, motor de comparação e mensagens. Só a origem local virtual da aplicação pode enviar comandos ao anfitrião. Dados de gravação são tratados como JSON, não como código JavaScript.
+
+A janela permite redimensionar e maximizar; o frontend reorganiza os seus componentes de acordo com a área disponível. As dimensões predefinidas das definições são comandos do anfitrião Windows; no navegador, o próprio utilizador controla a janela. `src/branding` conserva as fontes da identidade visual e `scripts/build-icons.cjs` gera os ícones da aplicação e do atualizador.
 
 Os saves mantêm o caminho antigo em AppData. O perfil WebView2 fica em LocalAppData e é independente de `app`, para sobreviver às atualizações. As regras de comparação e pontuação devem permanecer equivalentes em JavaScript, C# e C++.
 
@@ -40,6 +46,8 @@ Os backups ficam guardados para recuperação manual e podem ocupar bastante esp
 ## Recursos e distribuição offline
 
 A preparação web usa Tailwind 3, Fontsource e Simple Icons em versões fixadas. `scripts/lib/catalog.cjs` faz a seleção de identidades com logótipos correspondentes; `scripts/build-web.cjs` copia SVGs e fontes, compila CSS e escreve a auditoria e o manifesto SHA-256. O pacote inclui os avisos de licença e as origens dos ícones. Os recursos gerados são versionados e verificados no CI; as fontes originais ficam disponíveis para revisão sem entrarem nas rondas.
+
+`Directory.Build.props` aplica versão, autor e copyright aos projetos .NET. `COPYRIGHT.txt` documenta a autoria do código e da identidade BrandGame; os avisos das dependências, fontes e marcas continuam separados e preservados. Recursos gerados devem ser alterados através da respetiva fonte ou gerador.
 
 A política de conteúdo permite recursos locais e bloqueia ligações de dados externas. O frontend continua compatível com `file://`. O teste Playwright abre esse modo com a rede desligada; o smoke test Windows joga um nível pela ponte nativa e confirma a gravação no perfil isolado.
 

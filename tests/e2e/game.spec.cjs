@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 const { test, expect } = require('@playwright/test');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
@@ -5,6 +6,9 @@ const fileUrl = pathToFileURL(path.resolve(__dirname, '../../src/web/index.html'
 const url = 'http://127.0.0.1:8766/';
 
 async function ready(page, target = url) {
+    await page.addInitScript(() => {
+        if (!localStorage.getItem('brandgame_savedata')) localStorage.setItem('brandgame_savedata', JSON.stringify({ language: 'en' }));
+    });
     await page.goto(target);
     await page.waitForFunction(() => window.__brandGameReady);
 }
@@ -28,7 +32,7 @@ test('file distribution plays a full level with network offline, bundled fonts/l
     await context.setOffline(true);
     await ready(page, fileUrl);
     await page.evaluate(() => document.fonts.ready);
-    expect(await page.evaluate(() => document.fonts.check('700 16px Orbitron') && document.fonts.check('500 16px Rajdhani'))).toBe(true);
+    expect(await page.evaluate(() => document.fonts.check('700 16px Rajdhani') && document.fonts.check('500 16px Rajdhani'))).toBe(true);
     expect(await page.evaluate(async () => {
         const failed = [];
         await Promise.all([...LOCAL_LOGO_SLUGS].map(slug => new Promise(resolve => {
@@ -173,11 +177,10 @@ test('custom rooms require bundled logos and preserve unavailable legacy rooms',
 });
 
 test('old saves keep scores and unlocks while showing unknown historical results honestly', async ({ page }) => {
-    await ready(page);
-    await page.evaluate(() => localStorage.setItem('brandgame_v3_savedata', JSON.stringify({
-        gameVersion: '3.2.0', globalScore: 1250, levelsUnlocked: { tech: 4 }, categoryScores: { tech: 1250 }
+    await page.addInitScript(() => localStorage.setItem('brandgame_v3_savedata', JSON.stringify({
+        gameVersion: '3.2.0', language: 'en', globalScore: 1250, levelsUnlocked: { tech: 4 }, categoryScores: { tech: 1250 }
     })));
-    await page.reload();
+    await page.goto(url);
     await page.waitForFunction(() => window.__brandGameReady);
     await expect(page.locator('#global-score')).toHaveText('1250');
     await expect(page.locator('#global-stars')).toHaveText('0');

@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 using System.Diagnostics;
 using BrandGame.Updater;
 
@@ -95,7 +96,7 @@ internal static class UpdaterProgram
     private const string Help = """
         BrandGame updater
         update.exe [--check] [--channel preview|stable] [--repair] [--launch] [--no-pause]
-        Descarrega e verifica releases assinadas de p-darksy-r/BrandGame_V3.
+        Descarrega e verifica releases assinadas de p-darksy-r/BrandGame.
         O canal predefinido preview inclui versoes de desenvolvimento e estaveis.
         --check     Consulta sem instalar. --repair reinstala a mesma versao; nunca regride.
         --recover   Recupera uma instalacao interrompida, sem rede.

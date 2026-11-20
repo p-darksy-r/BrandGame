@@ -1,5 +1,7 @@
+# Copyright (c) 2026 p-darksy-r. BrandGame.
 * text=auto eol=lf
 *.woff2 binary
 *.png binary
+*.ico binary
 *.zip binary
 *.exe binary

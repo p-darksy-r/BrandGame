@@ -1,4 +1,4 @@
-/* BrandGame_V3 - https://github.com/p-darksy-r/BrandGame_V3 - Copyright (c) darksy */
+/* BrandGame - https://github.com/p-darksy-r/BrandGame - Copyright (c) 2026 p-darksy-r */
 
     /* ========== | Start of Media Brands | ========== */
 const RAW_BRANDS_MEDIA = [

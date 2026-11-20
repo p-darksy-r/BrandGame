@@ -1,4 +1,4 @@
-/* BrandGame_V3 - https://github.com/p-darksy-r/BrandGame_V3 - Copyright (c) darksy */
+/* BrandGame - https://github.com/p-darksy-r/BrandGame - Copyright (c) 2026 p-darksy-r */
 
 function launchLevel(levelNum) {
     GAME_STATE.currentLevel = levelNum;
@@ -21,7 +21,7 @@ function launchCustomLevel(customIndex) {
     const targetRoom = GAME_STATE.saveData.customLevels[customIndex];
     if (!targetRoom || !targetRoom.brands.length) return;
     if (targetRoom.brands.some(brand => !getLocalLogoPath(brand.slug))) {
-        alert("This saved room contains logos unavailable in the offline catalog. Its data is preserved. Create a room using the suggested local logos.");
+        alert(t("This saved room contains logos unavailable in the offline catalog. Its data is preserved. Create a room using the suggested local logos."));
         return;
     }
     GAME_STATE.currentLevel = customIndex;
@@ -63,10 +63,11 @@ function loadNextBrand() {
     const brandIdx = document.getElementById("gameplay-brand-index");
     if (brandIdx) brandIdx.textContent = `${GAME_STATE.currentBrandIndex + 1} / ${GAME_STATE.activeBrands.length}`;
 
-    let hearts = "";
-    for (let i = 0; i < GAME_STATE.lives; i++) hearts += "❤";
-    const livesEl = document.getElementById("gameplay-lives");
-    if (livesEl) livesEl.textContent = hearts;
+    const lives = document.getElementById('gameplay-lives');
+    if (lives) {
+        lives.innerHTML = [0, 1, 2].map(index => uiIcon('heart', index < GAME_STATE.lives ? 'heart-full' : 'heart-lost')).join('');
+        lives.setAttribute('aria-label', t('{count} lives remaining', { count: GAME_STATE.lives }));
+    }
 
     renderRevealedLetters();
 

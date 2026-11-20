@@ -1,4 +1,4 @@
-/* BrandGame_V3 - https://github.com/p-darksy-r/BrandGame_V3 - Copyright (c) darksy */
+/* BrandGame - https://github.com/p-darksy-r/BrandGame - Copyright (c) 2026 p-darksy-r */
 
 function submitUserGuess() {
     if (GAME_STATE.roundStatus !== "playing") return;
@@ -36,13 +36,15 @@ function onMatchResult(result) {
     if (textAns) textAns.textContent = GAME_STATE.currentBrand.name;
 
     const img = document.getElementById("logo-image");
-    if (img) img.style.filter = "invert(1)";
+    if (img) img.style.filter = "var(--logo-filter)";
 
+    const resultIcon = document.getElementById('feedback-icon');
+    if (resultIcon) resultIcon.innerHTML = uiIcon(result.correct ? 'check' : 'close');
     if (result.correct) {
         sfx.playCoin();
         if (badge) {
-            badge.textContent = "CORRECT!";
-            badge.className = "gaming-font text-5xl font-black uppercase text-center tracking-widest text-emerald-400";
+            badge.textContent = t("CORRECT!");
+            badge.className = "feedback-success";
         }
         const matchEl = document.getElementById("feedback-match");
         if (matchEl) matchEl.textContent = `${Math.round(result.match)}%`;
@@ -58,8 +60,8 @@ function onMatchResult(result) {
         sfx.playWrong();
         triggerVibration();
         if (badge) {
-            badge.textContent = "INCORRECT";
-            badge.className = "gaming-font text-5xl font-black uppercase text-center tracking-widest text-red-500";
+            badge.textContent = t("INCORRECT");
+            badge.className = "feedback-error";
         }
         if (statsCard) statsCard.classList.add("hidden");
         GAME_STATE.lives--;
@@ -92,8 +94,10 @@ function processLossOfLife() {
 
     if (overlay) overlay.classList.remove("hidden");
     if (badge) {
-        badge.textContent = "TIME OUT";
-        badge.className = "gaming-font text-5xl font-black uppercase text-center tracking-widest text-red-500";
+        badge.textContent = t("TIME OUT");
+        const resultIcon = document.getElementById('feedback-icon');
+        if (resultIcon) resultIcon.innerHTML = uiIcon('clock');
+        badge.className = "feedback-error";
     }
     if (textAns) textAns.textContent = GAME_STATE.currentBrand.name;
     if (statsCard) statsCard.classList.add("hidden");

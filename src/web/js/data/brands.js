@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r.
 // Only brands with a verified, bundled logo can be selected for a round.
 const BRAND_DATABASE = Object.freeze(Object.fromEntries(Object.entries(OFFLINE_CATALOG).map(
     ([category, brands]) => [category, Object.freeze(brands.map(brand => Object.freeze(brand)))]

@@ -1,4 +1,4 @@
-/* BrandGame_V3 - https://github.com/p-darksy-r/BrandGame_V3 - Copyright (c) darksy */
+/* BrandGame - https://github.com/p-darksy-r/BrandGame - Copyright (c) 2026 p-darksy-r */
 
 function safeAddEventListener(id, event, callback) {
     const el = document.getElementById(id);
@@ -17,13 +17,17 @@ function setupEventHandlers() {
     });
 
     safeAddEventListener("btn-menu-exit", "click", () => {
-        if (confirm("Are you sure you want to close the game?")) {
+        if (!window.chrome?.webview?.postMessage) {
+            alert(t("Close this browser tab to exit the game."));
+            return;
+        }
+        if (confirm(t("Are you sure you want to close the game?"))) {
             sendNativeRequest({ Action: "exit_app" });
         }
     });
 
     safeAddEventListener("btn-menu-reset", "click", () => {
-        if (confirm("Permanently erase save progress and customized rooms?")) {
+        if (confirm(t("Permanently erase save progress and customized rooms?"))) {
             GAME_STATE.saveData = createDefaultSaveData();
             sendNativeRequest({ Action: "write_save", Data: GAME_STATE.saveData });
             onSaveLoaded(GAME_STATE.saveData);
@@ -61,7 +65,8 @@ function setupEventHandlers() {
         GAME_STATE.hintUsed = true;
         const clueEl = document.getElementById("clue-text");
         if (clueEl) {
-            clueEl.textContent = GAME_STATE.currentBrand.hint || "No clues available.";
+            const hint = GAME_STATE.currentBrand.hint;
+            clueEl.textContent = hint ? (GAME_STATE.currentCategory === 'custom' ? hint : t(hint)) : t('No clues available.');
             clueEl.classList.remove("hidden");
         }
         GAME_STATE.clueCost += 5;

@@ -1,3 +1,4 @@
+<!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Atualizações Windows
 
 Coloca `update.exe` ao lado da pasta `app`. O jogo é offline; o atualizador usa a rede quando é executado. A instalação online não requer código-fonte, SDK .NET, Node.js ou SignTool.
@@ -11,7 +12,7 @@ Coloca `update.exe` ao lado da pasta `app`. O jogo é offline; o atualizador usa
 .\update.exe --recover --no-pause     # Recuperar interrupção, sem rede
 ```
 
-As releases são obtidas do repositório público **p-darksy-r/BrandGame_V3**, que também contém o código e o README no `main`. Cada versão tem uma tag `vX.Y.Z` nesse histórico, com os pacotes anexados à respetiva Release. Não é necessário outro branch nem são usados tokens dos jogadores.
+As releases são obtidas do repositório público **p-darksy-r/BrandGame**, que também contém o código e o README no `main`. Cada versão tem uma tag `vX.Y.Z` nesse histórico, com os pacotes anexados à respetiva Release. Não é necessário outro branch nem são usados tokens dos jogadores.
 
 O canal predefinido `preview` inclui releases estáveis e de desenvolvimento. A seleção usa a maior versão numérica `X.Y.Z`, com tag `vX.Y.Z`, ZIP Windows e ambos os ficheiros de manifesto. Drafts e releases antigas sem manifesto são ignorados. Nunca se instala uma versão inferior à instalada, mesmo com `--repair`. Se não existir uma release elegível no canal, a app instalada permanece.
 
@@ -28,7 +29,11 @@ O lançador em execução não é substituído. Para atualizar o próprio `updat
 Um pacote já descarregado pode ser instalado sem rede, mantendo a verificação:
 
 ```powershell
-.\update.exe --install-package BrandGame-3.3.0-win-x64.zip --manifest release-manifest.json --signature release-manifest.sig --no-pause
+.\update.exe --install-package BrandGame-3.4.0-win-x64.zip --manifest release-manifest.json --signature release-manifest.sig --no-pause
 ```
 
 Não há opção para aceitar um pacote sem assinatura, trocar a chave de confiança pela linha de comandos ou forçar um downgrade.
+
+## Migração do nome na versão 3.4.0
+
+O repositório chama-se agora `p-darksy-r/BrandGame`. Os lançadores 3.3.0 validavam os URLs com o nome anterior, pelo que é necessário substituir o `update.exe` pela versão 3.4.0, com o processo fechado. O novo lançador usa o endereço atual. Os saves são migrados pela aplicação e os originais são preservados.

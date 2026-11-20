@@ -1,6 +1,9 @@
+<!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Progresso e recordes
 
 A versão 3.3.0 introduz `progressSchema: 2`. A normalização conserva os pontos acumulados, níveis desbloqueados, definições e salas de versões anteriores. Os saves antigos não continham estrelas nem resultados individuais: esses resultados ficam desconhecidos até voltares a jogar, com uma indicação no menu e nos níveis.
+
+Na 3.4.0, `language` e `theme` guardam as preferências da interface no mesmo perfil. Saves sem estes campos recebem português de Portugal (`pt-PT`) e Meia-noite (`midnight`), sem reiniciar o progresso. Línguas ou temas desconhecidos são normalizados para estes valores. As alternativas são `en`/`es` e `light`/`forest`/`amethyst`.
 
 `levelResults` guarda por categoria, número do nível e dificuldade: tentativas, conclusões aprovadas, melhores estrelas, melhor pontuação e menor tempo de jogo numa conclusão aprovada. `customResults` guarda o equivalente por identificador de sala; salas antigas sem ID usam um identificador derivado da posição existente. As melhores pontuações e os melhores tempos são métricas independentes e podem vir de partidas diferentes.
 

@@ -1,4 +1,4 @@
-/* BrandGame_V3 - https://github.com/p-darksy-r/BrandGame_V3 - Copyright (c) darksy */
+/* BrandGame - https://github.com/p-darksy-r/BrandGame - Copyright (c) 2026 p-darksy-r */
 
 function triggerLevelEnd(completed) {
     if (GAME_STATE.levelRecorded) return;
@@ -24,15 +24,15 @@ function triggerLevelEnd(completed) {
     if (recorded.stars > 0) {
         sfx.playFanfare();
         if (reportHeader) {
-            reportHeader.textContent = "LEVEL CLEAR!";
-            reportHeader.className = "gaming-font text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-500 uppercase tracking-widest";
+            reportHeader.textContent = t("LEVEL CLEAR!");
+            reportHeader.className = "feedback-success";
         }
 
-        const stars = '★'.repeat(recorded.stars) + '☆'.repeat(3 - recorded.stars);
+        const stars = starsMarkup(recorded.stars);
 
         if (starsEl) {
-            starsEl.textContent = stars;
-            starsEl.className = "text-yellow-400 text-6xl tracking-wider select-none py-2";
+            starsEl.innerHTML = stars;
+            starsEl.className = "result-stars";
         }
 
         if (isCustom) {
@@ -49,16 +49,16 @@ function triggerLevelEnd(completed) {
         sfx.playWrong();
         triggerVibration();
         if (reportHeader) {
-            reportHeader.textContent = "LEVEL FAILED";
-            reportHeader.className = "gaming-font text-3xl font-black text-red-500 uppercase tracking-widest";
+            reportHeader.textContent = t("LEVEL FAILED");
+            reportHeader.className = "feedback-error";
         }
         if (starsEl) {
-            starsEl.textContent = "☆☆☆";
-            starsEl.className = "text-gray-700 text-6xl tracking-wider select-none py-2";
+            starsEl.innerHTML = starsMarkup(0);
+            starsEl.className = "result-stars";
         }
     }
 
-    if (highEl) highEl.textContent = `${recorded.best.bestScore} points · ${formatBestTime(recorded.best.bestTimeMs)}`;
+    if (highEl) highEl.textContent = t('{score} pts · {time}', { score: recorded.best.bestScore, time: formatBestTime(recorded.best.bestTimeMs) });
 
     sendNativeRequest({ Action: "write_save", Data: GAME_STATE.saveData });
     updateGlobalStatsHUD();

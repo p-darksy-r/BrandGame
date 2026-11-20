@@ -1,0 +1,18 @@
+{
+  "sizes": [
+    16,
+    24,
+    32,
+    48,
+    64,
+    128,
+    256
+  ],
+  "generatorSha256": "2c07c453987c98ba55882acef066aa8c549e82c45529779d78ec5f20e367a989",
+  "sha256": {
+    "src/branding/brandgame.svg": "1e87bf166f2f3db4232c38e19e2514f2012c3cff41153bb4bf1741f8cad689d4",
+    "icons/BrandGame.ico": "85f13f65d0e4efcf72d172c718dd4de36cc856db47542916eb52e60af227ba50",
+    "src/branding/updater.svg": "4248b8894cade9a16d3e40f56930e750d81f6cfde4d087bc54de872319a3b9d6",
+    "icons/update.ico": "8a8990747435c9ceb085ea671a13aac8666433e440d589fe9464027f21024120"
+  }
+}

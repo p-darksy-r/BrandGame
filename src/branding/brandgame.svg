@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- Original artwork. Copyright (c) 2026 p-darksy-r. BrandGame. -->
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#20384e"/><stop offset="1" stop-color="#0c1523"/></linearGradient><linearGradient id="mark" x2="0.8" y2="1"><stop stop-color="#a6f8ec"/><stop offset="1" stop-color="#49baf5"/></linearGradient></defs>
+  <rect x="8" y="8" width="240" height="240" rx="58" fill="url(#bg)"/>
+  <rect x="9" y="9" width="238" height="238" rx="57" fill="none" stroke="#416176" stroke-width="2"/>
+  <path fill="url(#mark)" fill-rule="evenodd" d="M67 56h67c43 0 61 45 28 69 38 22 23 75-24 75H67Zm32 29v29h33c21 0 21-29 0-29Zm0 58v29h38c22 0 22-29 0-29Z"/>
+  <circle cx="198" cy="57" r="13" fill="#c5f87a"/>
+</svg>

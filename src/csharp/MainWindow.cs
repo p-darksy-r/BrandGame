@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 using BrandGame.Services;
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
@@ -9,19 +10,26 @@ public sealed class MainWindow : Form
     private readonly WebView2 webView = new() { Dock = DockStyle.Fill };
     private readonly GameEngine engine = new();
     private NativeBridge? bridge;
+    private readonly Icon? applicationIcon;
     private readonly bool smokeTest;
     private readonly System.Windows.Forms.Timer startupTimeout = new() { Interval = 45000 };
 
     public MainWindow(bool smokeTest = false)
     {
         this.smokeTest = smokeTest;
-        Text = "BrandGame V3";
+        Text = "BrandGame";
+        AutoScaleDimensions = new SizeF(96F, 96F);
+        AutoScaleMode = AutoScaleMode.Dpi;
+        MinimumSize = new Size(640, 480);
         Width = 1024;
         Height = 768;
         StartPosition = FormStartPosition.CenterScreen;
-        FormBorderStyle = FormBorderStyle.FixedSingle;
-        MaximizeBox = false;
+        FormBorderStyle = FormBorderStyle.Sizable;
+        MaximizeBox = true;
+        applicationIcon = System.Drawing.Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        Icon = applicationIcon;
         Controls.Add(webView);
+        Shown += (_, _) => ResizeGameWindow(1024, 768);
         Shown += InitializeAsync;
         if (smokeTest)
         {
@@ -91,10 +99,19 @@ public sealed class MainWindow : Form
 
     internal void ResizeGameWindow(int width, int height)
     {
-        var screen = Screen.FromControl(this).WorkingArea;
-        Width = Math.Clamp(width, Math.Min(640, screen.Width), screen.Width);
-        Height = Math.Clamp(height, Math.Min(480, screen.Height), screen.Height);
-        CenterToScreen();
+        // Presets are logical pixels; keep the restored window on its current display.
+        var workingArea = Screen.FromControl(this).WorkingArea;
+        WindowState = FormWindowState.Normal;
+        var minimum = LogicalToDeviceUnits(new Size(640, 480));
+        MinimumSize = new Size(Math.Min(minimum.Width, workingArea.Width), Math.Min(minimum.Height, workingArea.Height));
+        var requested = LogicalToDeviceUnits(new Size(Math.Clamp(width, 640, 7680), Math.Clamp(height, 480, 4320)));
+        var target = new Size(
+            Math.Clamp(requested.Width, MinimumSize.Width, workingArea.Width),
+            Math.Clamp(requested.Height, MinimumSize.Height, workingArea.Height));
+        Bounds = new Rectangle(
+            workingArea.Left + (workingArea.Width - target.Width) / 2,
+            workingArea.Top + (workingArea.Height - target.Height) / 2,
+            target.Width, target.Height);
     }
 
     protected override void Dispose(bool disposing)
@@ -108,5 +125,6 @@ public sealed class MainWindow : Form
             engine.Dispose();
         }
         base.Dispose(disposing);
+        if (disposing) applicationIcon?.Dispose();
     }
 }

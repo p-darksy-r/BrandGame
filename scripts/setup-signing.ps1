@@ -1,3 +1,4 @@
+# Copyright (c) 2026 p-darksy-r. BrandGame.
 # One-time, explicitly requested development identity setup. Never run during a build.
 [CmdletBinding()]
 param()

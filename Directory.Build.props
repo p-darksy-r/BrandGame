@@ -1,8 +1,11 @@
+<!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 <Project>
   <PropertyGroup>
     <Version>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)VERSION').Trim())</Version>
-    <Authors>BrandGame</Authors>
-    <RepositoryUrl>https://github.com/p-darksy-r/BrandGame_V3</RepositoryUrl>
+    <Authors>p-darksy-r</Authors>
+    <Company>p-darksy-r</Company>
+    <Copyright>Copyright (c) 2026 p-darksy-r</Copyright>
+    <RepositoryUrl>https://github.com/p-darksy-r/BrandGame</RepositoryUrl>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 </Project>

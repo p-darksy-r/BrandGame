@@ -1,16 +1,19 @@
-# Jogar BrandGame 3.3.0
+<!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
+# Jogar BrandGame 3.4.0
 
 ## Windows
 
-Extrai `BrandGame-3.3.0-win-x64.zip` e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET está incluído; é necessário o Microsoft Edge WebView2 Runtime. O jogo inclui interface, fontes e logótipos locais e funciona sem Internet depois de instalado o WebView2.
+Extrai `BrandGame-3.4.0-win-x64.zip` e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET está incluído; é necessário o Microsoft Edge WebView2 Runtime. O jogo inclui interface, fontes e logótipos locais e funciona sem Internet depois de instalado o WebView2. Podes redimensionar ou maximizar a janela.
 
 Os executáveis usam uma assinatura de desenvolvimento autoassinada. A assinatura identifica esta build, mas não garante aceitação pelo Windows noutros computadores. Se SmartScreen, Smart App Control ou uma política empresarial bloquearem a execução, mantém a proteção e usa o pacote web. Não é pedido aos jogadores que instalem certificados.
 
 ## Navegador
 
-Extrai `BrandGame-3.3.0-web.zip` e abre `web/index.html` no navegador. Não é necessário executar um EXE, instalar certificados ou ter o SDK .NET. Este modo usa o armazenamento local do navegador e tem progresso separado da aplicação Windows. Os recursos estão incluídos; podes jogar sem Internet. Mantém a pasta no mesmo local para continuar a usar o mesmo armazenamento do navegador.
+Extrai `BrandGame-3.4.0-web.zip` e abre `web/index.html` no navegador. Não é necessário executar um EXE, instalar certificados ou ter o SDK .NET. Este modo usa o armazenamento local do navegador e tem progresso separado da aplicação Windows. Os recursos estão incluídos; podes jogar sem Internet. Mantém a pasta no mesmo local para continuar a usar o mesmo armazenamento do navegador.
 
 ## Atualizador
+
+Se vens da versão 3.3.0, fecha o lançador antigo e substitui-o pelo `update.exe` desta versão uma vez. O lançador 3.3.0 só reconhece o endereço anterior dos downloads.
 
 O pacote Windows inclui `update.exe` junto de `app`. Fecha o jogo e abre o atualizador para procurar e instalar a última release autenticada. Não exige SDK, Node ou SignTool. O canal predefinido inclui versões de desenvolvimento; para aceitar apenas estáveis, usa `update.exe --channel stable`. `--check` apenas consulta; `--launch` abre o jogo após a verificação/atualização.
 
@@ -18,9 +21,11 @@ As releases anteriores à 3.3.0 não têm manifesto de atualização e são igno
 
 ## Partidas e catálogo
 
-O cronómetro começa quando o logótipo termina de carregar. Usa **Pause** ou **Esc** para pausar e **Resume** para continuar. Ao mudar de separador, a partida pausa automaticamente. Se faltar uma imagem, não perdes tempo nem vidas: podes tentar novamente ou sair do nível.
+O cronómetro começa quando o logótipo termina de carregar. Usa o botão de pausa ou **Esc** para pausar e o botão de continuar para retomar. **Enter** submete a resposta. Ao mudar de separador, a partida pausa automaticamente. Se faltar uma imagem, não perdes tempo nem vidas: podes tentar novamente ou sair do nível. A ajuda do menu reúne regras, custos das pistas e atalhos.
 
-Em **Settings**, a opção de movimento reduzido desativa animações e tremores. A preferência de movimento reduzido do sistema também é respeitada. As antigas opções de FPS e VSync foram removidas porque não controlavam a apresentação do WebView2.
+Em **Definições**, escolhe português de Portugal, inglês ou espanhol e um dos quatro temas: Meia-noite, Claro, Floresta ou Ametista. As escolhas são guardadas no perfil e recuperadas ao reabrir o jogo. A língua altera os menus e as pistas do catálogo. Os nomes das marcas e o texto que escreveste nas salas permanecem iguais.
+
+A opção de movimento reduzido desativa animações e tremores. A preferência de movimento reduzido do sistema também é respeitada. Usa **Tab** e **Shift+Tab** para percorrer os controlos com foco visível. As antigas opções de FPS e VSync foram removidas porque não controlavam a apresentação do WebView2.
 
 São 496 entradas distribuídas por cinco categorias e 100 níveis em cada categoria; os níveis reutilizam marcas. Salas antigas com identificadores indisponíveis mantêm os dados e mostram um aviso antes de começar. O criador de salas apresenta os identificadores locais disponíveis.
 

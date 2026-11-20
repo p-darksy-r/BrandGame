@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 using System.Text.Json;
 using Microsoft.Web.WebView2.Core;
 
@@ -31,7 +32,7 @@ internal static class SmokeScenario
                     document.getElementById('input-guess').value = GAME_STATE.currentBrand.name;
                     click('btn-guess-submit');
                     await wait(() => GAME_STATE.roundStatus === 'feedback');
-                    if (document.getElementById('feedback-badge').textContent !== 'CORRECT!')
+                    if (document.getElementById('feedback-badge').textContent !== t('CORRECT!'))
                         throw new Error('Native answer evaluation failed');
                     click('btn-feedback-next');
                 }

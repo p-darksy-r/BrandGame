@@ -1,4 +1,4 @@
-/* BrandGame_V3 - Copyright (c) darksy */
+/* BrandGame - Copyright (c) 2026 p-darksy-r */
 
 function hashString(value) {
     let hash = 0;

@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 using System.Text;
 using System.Text.Json;
 
@@ -13,7 +14,7 @@ internal sealed class SaveStore(string path)
         await writeLock.WaitAsync();
         try
         {
-            if (!File.Exists(path)) return "null";
+            if (!File.Exists(path)) return File.Exists(path + ".bak") ? await ReadValidatedAsync(path + ".bak") : "null";
             try { return await ReadValidatedAsync(path); }
             catch (Exception ex) when (ex is JsonException or InvalidDataException)
             {

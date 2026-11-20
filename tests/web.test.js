@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -7,7 +8,7 @@ const root = path.resolve(__dirname, '../src/web');
 
 function context(files, additions = {}) {
     const sandbox = vm.createContext({ window: {}, console, ...additions });
-    for (const file of [...new Set(["js/core/version.js", "js/core/results.js", ...files])]) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), sandbox, { filename: file });
+    for (const file of [...new Set(["js/core/version.js", "js/core/results.js", "js/ui/icons.js", ...files])]) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), sandbox, { filename: file });
     return sandbox;
 }
 const dataFiles = ['js/data/offline-catalog.js', 'js/data/brands.js'];
@@ -84,11 +85,29 @@ test('each round accepts one submission and deducts each letter clue once', () =
 test('storage-denied browsers can still load a session and cannot crash on save', () => {
     const ctx = context(['js/core/state.js', 'js/platform/storage.js'], {
         window: { localStorage: { getItem() { throw Error('denied'); }, setItem() { throw Error('denied'); } } },
-        console: { warn() {} }, sfx: {}, updateGlobalStatsHUD() {}, renderMainMenuProgress() {}, syncSettingsPanel() {}, applyVisualSettings() {}
+        console: { warn() {} }, sfx: {}, applyLanguage() {}, applyAppearanceSettings() {}, updateGlobalStatsHUD() {}, renderMainMenuProgress() {}, syncSettingsPanel() {}, applyVisualSettings() {}
     });
     ctx.sendNativeRequest({ Action: 'load_save' });
     assert.equal(vm.runInContext('GAME_STATE.saveData.globalScore', ctx), 0);
     ctx.sendNativeRequest({ Action: 'write_save', Data: {} });
+});
+
+test('browser rename copies the legacy save and never overwrites current progress', () => {
+    const legacy = JSON.stringify({ globalScore: 123, language: 'es', theme: 'forest' });
+    const entries = new Map([['brandgame_v3_savedata', legacy]]);
+    const ctx = context(['js/core/state.js', 'js/platform/storage.js'], {
+        window: { localStorage: { getItem: key => entries.get(key) ?? null, setItem: (key, value) => entries.set(key, value) } },
+        sfx: {}, applyLanguage() {}, applyAppearanceSettings() {}, updateGlobalStatsHUD() {}, renderMainMenuProgress() {}, syncSettingsPanel() {}, applyVisualSettings() {}
+    });
+    ctx.sendNativeRequest({ Action: 'load_save' });
+    assert.equal(entries.get('brandgame_savedata'), legacy);
+    assert.equal(entries.get('brandgame_v3_savedata'), legacy);
+    assert.equal(vm.runInContext('GAME_STATE.saveData.globalScore', ctx), 123);
+    assert.equal(vm.runInContext('GAME_STATE.saveData.theme', ctx), 'forest');
+    ctx.sendNativeRequest({ Action: 'write_save', Data: { globalScore: 456 } });
+    ctx.sendNativeRequest({ Action: 'load_save' });
+    assert.equal(vm.runInContext('GAME_STATE.saveData.globalScore', ctx), 456);
+    assert.equal(entries.get('brandgame_v3_savedata'), legacy);
 });
 
 test('completing level 100 persists all 100 completed levels', () => {

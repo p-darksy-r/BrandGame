@@ -1,85 +1,51 @@
-/* BrandGame_V3 - https://github.com/p-darksy-r/BrandGame_V3 - Copyright (c) darksy */
-
-
-body {
-    font-family: 'Rajdhani', sans-serif;
-    background: radial-gradient(circle at center, #111827 0%, #030712 100%);
-    overflow-x: hidden;
-    overflow-y: auto;
-    user-select: none;
-}
-.gaming-font {
-    font-family: 'Orbitron', sans-serif;
-}
-
-/* High-Quality Glow Effects */
-body:not(.low-quality) .cyber-border {
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-}
-body:not(.low-quality) .neon-glow-green {
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-}
-
-/* CUSTOM THEMES */
-body.theme-cyber-neon {
-    background: radial-gradient(circle at center, #2e0854 0%, #0a0118 100%) !important;
-    color: #f472b6 !important;
-}
-body.theme-retro-amber {
-    background: radial-gradient(circle at center, #2b1d04 0%, #070401 100%) !important;
-    color: #fbbf24 !important;
-}
-body.theme-matrix-green {
-    background: radial-gradient(circle at center, #022c22 0%, #020617 100%) !important;
-    color: #34d399 !important;
-}
-body.theme-midnight-blue {
-    background: radial-gradient(circle at center, #1e3a8a 0%, #030712 100%) !important;
-    color: #60a5fa !important;
-}
-
-/* LOW QUALITY FALLBACKS */
-body.low-quality * {
-    box-shadow: none !important;
-    text-shadow: none !important;
-    backdrop-filter: none !important;
-    transition: none !important;
-}
-
-/* ASPECT RATIO PRESERVATION */
-.logo-image-fixed {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 140px !important;
-    max-height: 140px !important;
-    object-fit: contain !important;
-    aspect-ratio: 1/1 !important;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translate(0, 0); }
-    10%, 30%, 50%, 70%, 90% { transform: translate(-8px, -2px); }
-    20%, 40%, 60%, 80% { transform: translate(8px, 2px); }
-}
-.shake-active {
-    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
-}
-
-/* The setting and the operating system preference both reduce motion. */
-body.reduced-motion *, body.reduced-motion *::before, body.reduced-motion *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-}
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
-    }
-}
-:focus-visible { outline: 2px solid #93c5fd; outline-offset: 3px; }
-input:disabled { opacity: 0.6; }
-#round-load-status:empty { display: none; }
-main { margin-inline: auto; min-width: 0; }
+/* Copyright (c) 2026 p-darksy-r. */
+/* BrandGame foundations: colour, type and application shell. */
+:root { color-scheme: dark; --bg:#0b1220; --surface:#142132; --surface-raised:#1a2a3e; --line:#2a3b50; --text:#eef4fc; --muted:#a1b2c9; --blue:#8ad7f6; --lime:#c5f87a; --danger:#ffa0aa; }
+* { box-sizing:border-box; }
+body { margin:0; min-height:100vh; display:flex; flex-direction:column; background:radial-gradient(ellipse at 12% 0%,var(--ambient) 0,transparent 55%),var(--bg); color:var(--text); font-family:'Rajdhani',system-ui,sans-serif; font-size:17px; line-height:1.45; overflow-x:hidden; }
+h1,h2,h3,p { margin:0; }
+h1,h2,h3 { line-height:1.15; }
+h2 { font-size:clamp(28px,4vw,38px); font-weight:700; letter-spacing:-.025em; }
+h3 { font-size:19px; font-weight:700; }
+button,input,select { font:inherit; }
+button { cursor:pointer; }
+button:disabled { cursor:not-allowed; }
+img,svg { display:block; }
+input,select { min-width:0; }
+.hidden { display:none !important; }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+:focus-visible { outline:3px solid var(--blue); outline-offset:4px; }
+h2:focus { outline:none; }
+::selection { background:#37677a; color:#fff; }
+.muted,.helper { color:var(--muted); }
+.helper { font-size:14px; line-height:1.5; }
+.accent-blue { color:var(--blue); }
+.accent-lime { color:var(--lime); }
+.eyebrow { font-size:12px; font-weight:700; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; }
+.app-header { min-height:86px; padding:18px max(24px,calc((100vw - 1160px)/2)); display:flex; align-items:center; justify-content:space-between; gap:20px; border-bottom:1px solid var(--line); background:var(--header-bg); }
+.brand-lockup { display:flex; gap:12px; align-items:center; }
+.brand-lockup h1 { font-size:26px; font-weight:700; letter-spacing:-.05em; }
+.brand-lockup h1 span { color:var(--blue); }
+.brand-caption { font-size:10px; letter-spacing:.2em; color:var(--muted); }
+.version-badge { color:var(--muted); font-size:12px; align-self:flex-start; margin-top:3px; }
+.header-stats { display:flex; gap:10px; }
+.stat-pill { display:flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:30px; padding:7px 13px; font-weight:700; font-size:18px; }
+.stat-label { color:var(--muted); font-size:14px; font-weight:500; }
+main { width:min(1160px,calc(100% - 48px)); flex:1; margin:0 auto; padding:32px 0; display:flex; align-items:center; }
+.screen { width:100%; min-width:0; }
+.app-footer { display:flex; justify-content:space-between; gap:12px; padding:15px max(24px,calc((100vw - 1160px)/2)); color:var(--muted); font-size:13px; border-top:1px solid var(--line); }
+.app-footer>span { display:flex; align-items:center; gap:8px; }
+.footer-dot { color:#5c748f; }
+.ui-icon { width:20px; height:20px; flex-shrink:0; vertical-align:middle; }
+[data-icon] { display:inline-flex; flex-shrink:0; }
+.gaming-font { font-family:'Rajdhani',system-ui,sans-serif; letter-spacing:0; }
+body.theme-cyber-neon { --blue:#f4a3e2; --lime:#f4a3e2; }
+body.theme-retro-amber { --blue:#ffce83; --lime:#ffce83; }
+body.theme-matrix-green { --blue:#8ce9bc; --lime:#8ce9bc; }
+body.theme-midnight-blue { --blue:#91bfff; --lime:#91bfff; }
+@keyframes shake { 0%,100% { transform:translateX(0); } 25%,75% { transform:translateX(-5px); } 50% { transform:translateX(5px); } }
+.shake-active { animation:shake .3s ease-in-out; }
+body.low-quality * { box-shadow:none!important; backdrop-filter:none!important; animation:none!important; transition:none!important; }
+body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+@media(max-width:600px) { .app-header { padding:14px 18px; flex-wrap:wrap; gap:12px; } main { width:calc(100% - 32px); padding:22px 0; } .app-footer { padding:14px 18px; flex-wrap:wrap; } .brand-lockup h1 { font-size:24px; } .stat-pill { padding:5px 10px; } }

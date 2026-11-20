@@ -1,4 +1,12 @@
+<!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Validação
+
+## Versão 3.4.0
+
+- Passaram 116 verificações locais (19 web, 38 nativas, 36 do atualizador online, 20 do atualizador local e 3 de assinatura). A cobertura inclui as 496 pistas em português e espanhol e a migração de progresso, cópias de segurança e perfis antigos.
+- Os 15 testes de navegador passaram no Microsoft Edge. Incluem uma partida offline, persistência da língua e do tema, navegação por teclado, contraste do botão principal nos quatro temas e layouts de 375, 800 e 1600 px.
+- A verificação dos recursos gerados confirmou 511 ficheiros locais. A captura do menu em português está no [README](../README.md).
+- Os resultados de execução dos dois binários distribuídos, a instalação numa segunda máquina e os hashes dos pacotes acompanham a [release 3.4.0](https://github.com/p-darksy-r/BrandGame/releases/tag/v3.4.0). Os testes de navegador medem o layout em píxeis e não simulam a mudança de DPI entre monitores físicos.
 
 ## Versão 3.3.0
 
@@ -7,8 +15,8 @@
 - O novo atualizador foi testado contra manifesto alterado, chave errada, metadata inválida, redirecionamentos externos, limites de download, ZIP inseguro, downgrade, reparação e falha/interrupção durante a substituição.
 - Antes da mudança do endereço de downloads, a build assinada completou um nível, validou as respostas pela ponte nativa e gravou três estrelas no disco, num perfil isolado.
 - Essa build também passou a instalação real numa pasta sem fontes e com PATH limitado ao Windows: manifesto alterado rejeitado, pacote assinado instalado e partida completa executada na app resultante. Evidência em `artifacts/install-test-*/results.json`; teste reproduzível em `tests/online.Install.ps1`.
-- O proprietário tornou `BrandGame_V3` público; a visibilidade foi confirmada e o atualizador usa as Releases desse mesmo repositório, sem autenticação.
-- Depois de recompilar para usar BrandGame_V3, o `update.exe` final tem assinatura Authenticode válida, mas foi bloqueado neste PC pelo Smart App Control (evento 3077, política VerifiedAndReputableDesktop). O bloqueio persistiu numa segunda tentativa sem alterar o ficheiro. Não foi contornado nem foram alteradas políticas de confiança.
+- O proprietário tornou `BrandGame` público; a visibilidade foi confirmada e o atualizador usa as Releases desse mesmo repositório, sem autenticação.
+- Depois de recompilar para usar BrandGame, o `update.exe` final tem assinatura Authenticode válida, mas foi bloqueado neste PC pelo Smart App Control (evento 3077, política VerifiedAndReputableDesktop). O bloqueio persistiu numa segunda tentativa sem alterar o ficheiro. Não foi contornado nem foram alteradas políticas de confiança.
 - O `app/BrandGame.exe` final foi testado separadamente e passou o nível completo com save nativo num perfil isolado. Evidência em `artifacts/native-final-*/results.json`.
 - O workflow `Published Windows release` testa os binários publicados num runner Windows, com hashes esperados fornecidos pelo publicador, download sem autenticação e perfil isolado. Usa `tests/online.Install.ps1 -Online`; o resultado é registado nas notas da release e não substitui a aceitação pelo Windows deste PC.
 - As assinaturas Authenticode continuam a usar SHA-256 com timestamp; o manifesto do pacote usa RSA/SHA-256 com chave pública fixada.

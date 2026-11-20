@@ -1,3 +1,4 @@
+// Copyright (c) 2026 p-darksy-r. BrandGame.
 #define BRANDENGINE_EXPORTS
 #include "BrandEngine.h"
 #include <string>

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 p-darksy-r. BrandGame.
 [CmdletBinding()]
 param([switch]$Watch, [switch]$Launch, [ValidateSet('Required', 'None')][string]$SigningMode = 'Required',
     [string]$CertificateThumbprint = $env:BRANDGAME_SIGNING_THUMBPRINT,
