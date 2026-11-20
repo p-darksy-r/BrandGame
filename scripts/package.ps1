@@ -10,6 +10,10 @@ $info = Get-Content -LiteralPath (Join-Path $projectRoot 'app/build-info.json') 
 if ($info.sourceHash -ne (Get-SourceFingerprint -Root $projectRoot)) { throw 'A distribuicao esta desatualizada. Execute scripts/build.ps1 primeiro.' }
 if (-not $AllowUnsigned) {
     if (-not $info.signing) { throw 'A distribuicao nao tem manifesto de assinatura.' }
+    if ($env:BRANDGAME_SIGNING_THUMBPRINT -and
+        $info.signing.thumbprint -ne (ConvertTo-SigningThumbprint $env:BRANDGAME_SIGNING_THUMBPRINT)) {
+        throw 'O editor configurado mudou. Execute scripts/build.ps1 para assinar os executaveis com o certificado esperado.'
+    }
     $verified = Assert-SignedBinary -Path (Join-Path $projectRoot 'app/BrandGame.exe') -ExpectedThumbprint $info.signing.thumbprint
     if ($verified.sha256 -ne $info.signing.sha256) { throw 'O executavel mudou depois de criar o manifesto de assinatura.' }
     $null = Assert-SignedBinary -Path (Join-Path $projectRoot 'update.exe') -ExpectedThumbprint $info.signing.thumbprint

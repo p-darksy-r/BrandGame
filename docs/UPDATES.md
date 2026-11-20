@@ -22,6 +22,10 @@ Os ficheiros são preparados em `.brandgame-updates/stage-*`. Antes da troca, o 
 
 O lançador em execução não é substituído. Para atualizar o próprio `update.exe`, extrai a nova cópia da release com o lançador fechado. Isto também será necessário numa futura mudança de protocolo ou chave pública. A autenticação do pacote não instala certificados nem garante que o Windows aceite um executável com assinatura de desenvolvimento.
 
+## Atualizar quando o Windows bloqueia o lançador
+
+Descarrega o ZIP Windows da [release oficial](https://github.com/p-darksy-r/BrandGame/releases). Podes comparar o resultado de `Get-FileHash -Algorithm SHA256` com o ficheiro `.sha256` da mesma versão. Fecha o jogo, extrai o ZIP numa pasta nova e abre `app/BrandGame.exe`. O jogo continua a usar a gravação em `%APPDATA%/BrandGame`. Conserva a instalação anterior até confirmares o resultado. Se o Windows também bloquear o jogo, a release inclui um ZIP web para jogar no navegador.
+
 ## Desenvolvimento e pacote local
 
 `update.exe --local` compila as fontes locais; `--watch` mantém esse modo em observação. Requer o ambiente de desenvolvimento documentado no README. Ambos os modos partilham um bloqueio e recusam avançar sobre uma transação interrompida do outro modo.

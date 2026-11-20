@@ -39,11 +39,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/smoke-windows.ps1
 
 ## Certificado público futuro
 
-O mesmo processo aceita um certificado de assinatura de código instalado em `CurrentUser/My` ou `LocalMachine/My`, com acesso à respetiva chave/token:
+Para distribuir os executáveis com uma identidade reconhecida pelo Smart App Control, o editor pode usar um certificado de assinatura de código emitido por uma entidade do programa de raízes de confiança da Microsoft. O processo de compilação aceita um certificado disponível em `CurrentUser/My` ou `LocalMachine/My`, com acesso à respetiva chave ou token.
 
 ```powershell
 $env:BRANDGAME_SIGNING_THUMBPRINT = 'IMPRESSAO_DIGITAL_DO_CERTIFICADO_PUBLICO'
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package.ps1
 ```
 
 O certificado público não é criado por este projeto: exige emissão e validação por um fornecedor reconhecido. Um certificado público novo pode continuar a mostrar avisos de SmartScreen enquanto ganha reputação. A distribuição MSIX pela Microsoft Store é outra possibilidade, sujeita a conta, preparação e certificação pela Microsoft.
@@ -56,4 +57,6 @@ Referências Microsoft: [assinatura para Smart App Control](https://learn.micros
 
 Além de Authenticode, `scripts/sign-release.ps1` assina os bytes do manifesto de download com RSA/SHA-256 (PKCS#1). Usa a chave não exportável já existente e verifica a assinatura contra `src/updater/release-public-key.xml`; esse ficheiro contém **apenas a chave pública** e é embebido em `update.exe`. O manifest não instala certificados e não altera as decisões de execução do Windows.
 
-Uma mudança de certificado Authenticode pode também mudar a chave RSA. Nesse caso, o empacotamento recusa assinar com uma chave incompatível. A rotação exige planear e distribuir um novo lançador com a chave pública adequada; não editar silenciosamente o pin nem descarregar chaves de confiança da mesma release que se quer verificar.
+O certificado definido em `BRANDGAME_SIGNING_THUMBPRINT` assina os executáveis. Para o manifesto, o empacotador procura um certificado de assinatura com a chave RSA correspondente à que os lançadores já conhecem. Primeiro compara as chaves públicas e depois assina e verifica o manifesto. Opcionalmente, `BRANDGAME_MANIFEST_THUMBPRINT` restringe a procura a um certificado específico. Se o certificado estiver ausente ou a chave for diferente, o empacotamento falha e preserva o manifesto e a assinatura existentes.
+
+Ao passar para um certificado Authenticode público, mantém a chave original do manifesto acessível ao processo de publicação. Os lançadores instalados continuarão a validar os pacotes através da chave pública que já possuem. Uma rotação da própria chave do manifesto exige um plano de distribuição para os lançadores existentes.

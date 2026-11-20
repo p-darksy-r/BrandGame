@@ -1,6 +1,12 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Validação
 
+## Versão 3.5.0
+
+- Passaram 124 verificações locais (21 web, 42 nativas, 36 do atualizador online, 20 do atualizador local e 5 de assinatura) e 15 testes de navegador no Edge. A verificação de recursos confirmou 543 ficheiros gerados e traduções para as 528 entradas.
+- Comparação com a tag 3.4.0 nos 99 pares de níveis consecutivos de cada categoria: moda passou de 88 pares com repetição para zero e alimentação de 83 para zero. Cada marca de moda aparece 30 vezes na campanha. Em alimentação, cada marca aparece 18 ou 19 vezes. Reabrir um nível mantém a sequência.
+- A regressão de assinatura confirmou que mudar o certificado Authenticode mantém a assinatura dos manifestos com a chave esperada pelo lançador e que uma chave incorreta é rejeitada. A identidade usada nesta distribuição continua a ser de desenvolvimento. Os resultados de arranque dos binários assinados e da instalação pública acompanham a [release 3.5.0](https://github.com/p-darksy-r/BrandGame/releases/tag/v3.5.0).
+
 ## Versão 3.4.0
 
 - Passaram 116 verificações locais (19 web, 38 nativas, 36 do atualizador online, 20 do atualizador local e 3 de assinatura). A cobertura inclui as 496 pistas em português e espanhol e a migração de progresso, cópias de segurança e perfis antigos.

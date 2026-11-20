@@ -12,21 +12,33 @@ function ConvertTo-SigningThumbprint {
 }
 
 function Get-BrandGameSigningIdentity {
-    param([string]$Thumbprint = $env:BRANDGAME_SIGNING_THUMBPRINT)
+    param([string]$Thumbprint = $env:BRANDGAME_SIGNING_THUMBPRINT,
+        [Security.Cryptography.RSA]$PinnedManifestKey)
     $null = Get-Command Get-AuthenticodeSignature -ErrorAction Stop
     $requested = if ($Thumbprint) { ConvertTo-SigningThumbprint $Thumbprint } else { $null }
     foreach ($location in @('CurrentUser', 'LocalMachine')) {
         $candidates = @(Get-ChildItem -Path "Cert:\$location\My" -CodeSigningCert -ErrorAction SilentlyContinue | Where-Object {
             if ($requested) { $_.Thumbprint -eq $requested }
+            elseif ($PinnedManifestKey) { $true } # The public key below identifies the manifest signer.
             else { $location -eq 'CurrentUser' -and $_.Subject -eq $script:BrandGameCertificateSubject -and $_.FriendlyName -eq $script:BrandGameCertificateName }
         } | Sort-Object NotAfter -Descending)
         foreach ($certificate in $candidates) {
             if ($certificate.HasPrivateKey -and $certificate.NotBefore -le (Get-Date) -and $certificate.NotAfter -gt (Get-Date).AddDays(1)) {
+                if ($PinnedManifestKey -and -not (Test-ManifestSigningKey -Certificate $certificate -PinnedKey $PinnedManifestKey)) { continue }
                 return [PSCustomObject]@{ Certificate = $certificate; Location = $location }
             }
         }
     }
+    if ($PinnedManifestKey) { throw 'Nao foi encontrado o certificado RSA da chave publica fixada no atualizador. Verifique BRANDGAME_MANIFEST_THUMBPRINT e a disponibilidade da chave original.' }
     throw 'Nao existe um certificado de assinatura valido com chave privada. Execute scripts/setup-signing.ps1 para desenvolvimento, ou configure BRANDGAME_SIGNING_THUMBPRINT com um certificado publico.'
+}
+
+function Test-ManifestSigningKey {
+    param([Security.Cryptography.X509Certificates.X509Certificate2]$Certificate, [Security.Cryptography.RSA]$PinnedKey)
+    $candidate = [Security.Cryptography.X509Certificates.RSACertificateExtensions]::GetRSAPublicKey($Certificate)
+    if ($null -eq $candidate) { return $false }
+    try { return $candidate.ToXmlString($false) -ceq $PinnedKey.ToXmlString($false) }
+    finally { $candidate.Dispose() }
 }
 
 function Find-WindowsSignTool {

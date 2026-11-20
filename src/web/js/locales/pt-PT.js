@@ -14,7 +14,7 @@ globalThis.BRANDGAME_LOCALES['pt-PT'] = {
     'Discover familiar faces in a new way. Five categories, 500 levels and a challenge of your own.': 'Redescobre as marcas que conheces. Cinco categorias, 500 níveis e um desafio à tua medida.',
     'Let’s play': 'Vamos jogar',
     'Settings': 'Definições',
-    '496 brand entries': '496 marcas',
+    '{count} brand entries': '{count} marcas',
     'Play offline': 'Joga sem internet',
     'How to play': 'Como jogar',
     'Exit game': 'Sair do jogo',

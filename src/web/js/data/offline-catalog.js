@@ -1974,6 +1974,106 @@ const OFFLINE_CATALOG = {
       "name": "Amul",
       "slug": "amul",
       "hint": "The taste of India cooperative dairy."
+    },
+    {
+      "name": "Aiqfome",
+      "slug": "aiqfome",
+      "hint": "Brazilian food delivery app with a purple brand colour."
+    },
+    {
+      "name": "Albert Heijn",
+      "slug": "albertheijn",
+      "hint": "Dutch supermarket with a blue lowercase ah monogram."
+    },
+    {
+      "name": "Aldi Süd",
+      "slug": "aldisud",
+      "hint": "Southern branch of a German discount grocer with a striped A."
+    },
+    {
+      "name": "ASDA",
+      "slug": "asda",
+      "hint": "British supermarket whose four-letter name is written in green."
+    },
+    {
+      "name": "Auchan",
+      "slug": "auchan",
+      "hint": "A red bird sits in this French hypermarket's logo."
+    },
+    {
+      "name": "bigbasket",
+      "slug": "bigbasket",
+      "hint": "Indian online grocer with a pair of lowercase b letters."
+    },
+    {
+      "name": "Carrefour",
+      "slug": "carrefour",
+      "hint": "Look between the arrows to find this French retailer's hidden C."
+    },
+    {
+      "name": "Chemex",
+      "slug": "chemex",
+      "hint": "Its hourglass-shaped glass brewer makes pour-over coffee."
+    },
+    {
+      "name": "E.Leclerc",
+      "slug": "edotleclerc",
+      "hint": "An L inside a circle marks this French supermarket chain."
+    },
+    {
+      "name": "Grand Frais",
+      "slug": "grandfrais",
+      "hint": "French food shops laid out like covered fresh markets."
+    },
+    {
+      "name": "HappyCow",
+      "slug": "happycow",
+      "hint": "Travellers use this guide to find vegan and vegetarian restaurants."
+    },
+    {
+      "name": "HelloFresh",
+      "slug": "hellofresh",
+      "hint": "A lime marks its boxes of recipes and portioned ingredients."
+    },
+    {
+      "name": "Hungry Jack's",
+      "slug": "hungryjacks",
+      "hint": "Australian burger chain known for the flame-grilled Whopper."
+    },
+    {
+      "name": "Iceland",
+      "slug": "iceland",
+      "hint": "This British grocery chain specialises in frozen food."
+    },
+    {
+      "name": "Intermarché",
+      "slug": "intermarche",
+      "hint": "Supermarket brand in the French Les Mousquetaires group."
+    },
+    {
+      "name": "Kaufland",
+      "slug": "kaufland",
+      "hint": "A geometric red K marks this German hypermarket chain."
+    },
+    {
+      "name": "Lidl",
+      "slug": "lidl",
+      "hint": "German discount grocer with a yellow circle in a blue square."
+    },
+    {
+      "name": "Picard Surgelés",
+      "slug": "picardsurgeles",
+      "hint": "A blue snowflake marks these French frozen food shops."
+    },
+    {
+      "name": "Tesco",
+      "slug": "tesco",
+      "hint": "British supermarket whose Clubcard earns shoppers points."
+    },
+    {
+      "name": "Żabka",
+      "slug": "zabka",
+      "hint": "This Polish convenience store's name means little frog."
     }
   ],
   "fashion": [
@@ -2041,6 +2141,66 @@ const OFFLINE_CATALOG = {
       "name": "Burton",
       "slug": "burton",
       "hint": "Pioneering snowboarding boards, bindings, and outerwear."
+    },
+    {
+      "name": "Anta",
+      "slug": "anta",
+      "hint": "Chinese sportswear label known for basketball shoes."
+    },
+    {
+      "name": "Bata",
+      "slug": "bata",
+      "hint": "This shoemaker started in the Czech city of Zlín."
+    },
+    {
+      "name": "Jordan",
+      "slug": "jordan",
+      "hint": "The Jumpman silhouette leaps towards the basket."
+    },
+    {
+      "name": "Farfetch",
+      "slug": "farfetch",
+      "hint": "This luxury fashion marketplace connects independent boutiques."
+    },
+    {
+      "name": "Macy's",
+      "slug": "macys",
+      "hint": "The red star belongs to a New York department store."
+    },
+    {
+      "name": "Peak Design",
+      "slug": "peakdesign",
+      "hint": "Its Everyday Backpack has dividers for cameras and lenses."
+    },
+    {
+      "name": "Redbubble",
+      "slug": "redbubble",
+      "hint": "Artists sell their designs on shirts and stickers under this RB monogram."
+    },
+    {
+      "name": "Spreadshirt",
+      "slug": "spreadshirt",
+      "hint": "Heart-shaped mark for made-to-order printed clothing."
+    },
+    {
+      "name": "Supercrease",
+      "slug": "supercrease",
+      "hint": "Its garment treatment helps trousers keep a permanent crease."
+    },
+    {
+      "name": "Teespring",
+      "slug": "teespring",
+      "hint": "Creators launched campaigns to sell printed T-shirts on this platform."
+    },
+    {
+      "name": "Threadless",
+      "slug": "threadless",
+      "hint": "This T-shirt brand grew out of design contests for artists."
+    },
+    {
+      "name": "Zalando",
+      "slug": "zalando",
+      "hint": "Berlin fashion retailer with an orange triangular mark."
     }
   ],
   "media": [

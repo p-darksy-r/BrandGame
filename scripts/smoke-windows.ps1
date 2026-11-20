@@ -8,11 +8,17 @@ $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $profile = Get-WorkspacePath -Root $projectRoot -RelativePath ('artifacts/smoke-' + [Guid]::NewGuid().ToString('N'))
 [IO.Directory]::CreateDirectory($profile) | Out-Null
 $results = @()
+$failed = $false
+$updaterReady = $true
 foreach ($test in @(
     @{ File = 'update.exe'; Arguments = '--help'; Name = 'updater-help' },
     @{ File = 'update.exe'; Arguments = '--local --no-pause'; Name = 'updater-current-source' },
     @{ File = 'app/BrandGame.exe'; Arguments = '--smoke-test'; Name = 'game-complete-level-and-persist-native-save' }
 )) {
+    if ($test.File -eq 'update.exe' -and -not $updaterReady) {
+        $results += @{ test = $test.Name; result = 'skipped'; reason = 'updater-help failed' }
+        continue
+    }
     $start = New-Object Diagnostics.ProcessStartInfo
     $start.FileName = Join-Path $projectRoot $test.File
     $start.Arguments = $test.Arguments
@@ -35,10 +41,15 @@ foreach ($test in @(
         $results += @{ test = $test.Name; result = 'passed'; sha256 = (Get-FileHash -LiteralPath $start.FileName).Hash.ToLowerInvariant() }
         Write-Host "PASS $($test.Name)"
     } catch {
-        $results += @{ test = $test.Name; result = 'failed-or-blocked'; error = $_.Exception.Message }
-        $results | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $profile 'results.json') -Encoding UTF8
-        throw
+        $errorDetail = $_.Exception.GetBaseException()
+        $failure = @{ test = $test.Name; result = 'failed'; error = $errorDetail.Message; sha256 = (Get-FileHash -LiteralPath $start.FileName).Hash.ToLowerInvariant() }
+        if ($errorDetail -is [ComponentModel.Win32Exception]) { $failure.win32Code = $errorDetail.NativeErrorCode }
+        $results += $failure
+        $failed = $true
+        if ($test.File -eq 'update.exe') { $updaterReady = $false }
+        Write-Warning "$($test.Name): $($errorDetail.Message)"
     } finally { $process.Dispose() }
 }
 $results | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $profile 'results.json') -Encoding UTF8
+if ($failed) { throw "Falhou um teste de arranque. Resultados por executavel: $profile/results.json" }
 Write-Host "Testes nativos concluidos com perfil isolado: $profile"

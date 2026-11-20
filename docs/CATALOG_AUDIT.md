@@ -6,11 +6,11 @@ Gerado por `npm run build:web`. Pacote fixado: Simple Icons 9.21.0. As fontes or
 |---|---:|
 | tech | 317 |
 | auto | 57 |
-| food | 20 |
-| fashion | 13 |
+| food | 40 |
+| fashion | 25 |
 | media | 89 |
 
-Total: 496 entradas, 493 ficheiros SVG únicos. Mantêm-se os 100 níveis por categoria, com reutilização de marcas. A validação cobre correspondência e disponibilidade dos ficheiros; não constitui uma nova autorização das marcas.
+Total: 528 entradas, 525 ficheiros SVG únicos. Mantêm-se os 100 níveis por categoria, com reutilização de marcas. A validação cobre correspondência e disponibilidade dos ficheiros; não constitui uma nova autorização das marcas.
 
 ## Correções de identificadores e pistas
 

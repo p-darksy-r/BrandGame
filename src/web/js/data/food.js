@@ -404,6 +404,27 @@ const RAW_BRANDS_FOOD = [
         "Filippo Berio|filippoberio|Classic portrait olive oil bottle.",
         "Colavita|colavita|Fine Italian cold pressed olive oil.",
         "Monini|monini|Green bottle extra virgin olive oil.",
-        "Carapelli|carapelli|Artistic dark glass olive oil bottles."
+        "Carapelli|carapelli|Artistic dark glass olive oil bottles.",
+        // Additional identities verified against the bundled Simple Icons artwork.
+        "Aiqfome|aiqfome|Brazilian food delivery app with a purple brand colour.",
+        "Albert Heijn|albertheijn|Dutch supermarket with a blue lowercase ah monogram.",
+        "Aldi Süd|aldisud|Southern branch of a German discount grocer with a striped A.",
+        "ASDA|asda|British supermarket whose four-letter name is written in green.",
+        "Auchan|auchan|A red bird sits in this French hypermarket's logo.",
+        "bigbasket|bigbasket|Indian online grocer with a pair of lowercase b letters.",
+        "Carrefour|carrefour|Look between the arrows to find this French retailer's hidden C.",
+        "Chemex|chemex|Its hourglass-shaped glass brewer makes pour-over coffee.",
+        "E.Leclerc|edotleclerc|An L inside a circle marks this French supermarket chain.",
+        "Grand Frais|grandfrais|French food shops laid out like covered fresh markets.",
+        "HappyCow|happycow|Travellers use this guide to find vegan and vegetarian restaurants.",
+        "HelloFresh|hellofresh|A lime marks its boxes of recipes and portioned ingredients.",
+        "Hungry Jack's|hungryjacks|Australian burger chain known for the flame-grilled Whopper.",
+        "Iceland|iceland|This British grocery chain specialises in frozen food.",
+        "Intermarché|intermarche|Supermarket brand in the French Les Mousquetaires group.",
+        "Kaufland|kaufland|A geometric red K marks this German hypermarket chain.",
+        "Lidl|lidl|German discount grocer with a yellow circle in a blue square.",
+        "Picard Surgelés|picardsurgeles|A blue snowflake marks these French frozen food shops.",
+        "Tesco|tesco|British supermarket whose Clubcard earns shoppers points.",
+        "Żabka|zabka|This Polish convenience store's name means little frog."
     ];
     /* ========== | End of Food Brands | ========== */

@@ -351,6 +351,19 @@ const RAW_BRANDS_FASHION = [
         "Inesis|inesis|Decathlon gold sport swings and balls.",
         "Geologic|geologic|Decathlon precision archery and dart games.",
         "Wedze|wedze|Decathlon downhill ski and snow sports.",
-        "Simond Chamonix|simond|French structural climbing gear specialist."
+        "Simond Chamonix|simond|French structural climbing gear specialist.",
+        // Additional identities verified against the bundled Simple Icons artwork.
+        "Anta|anta|Chinese sportswear label known for basketball shoes.",
+        "Bata|bata|This shoemaker started in the Czech city of Zlín.",
+        "Jordan|jordan|The Jumpman silhouette leaps towards the basket.",
+        "Farfetch|farfetch|This luxury fashion marketplace connects independent boutiques.",
+        "Macy's|macys|The red star belongs to a New York department store.",
+        "Peak Design|peakdesign|Its Everyday Backpack has dividers for cameras and lenses.",
+        "Redbubble|redbubble|Artists sell their designs on shirts and stickers under this RB monogram.",
+        "Spreadshirt|spreadshirt|Heart-shaped mark for made-to-order printed clothing.",
+        "Supercrease|supercrease|Its garment treatment helps trousers keep a permanent crease.",
+        "Teespring|teespring|Creators launched campaigns to sell printed T-shirts on this platform.",
+        "Threadless|threadless|This T-shirt brand grew out of design contests for artists.",
+        "Zalando|zalando|Berlin fashion retailer with an orange triangular mark."
     ];
     /* ========== | End of Fashion Brands | ========== */

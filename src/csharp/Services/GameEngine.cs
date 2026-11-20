@@ -1,5 +1,6 @@
 // Copyright (c) 2026 p-darksy-r. BrandGame.
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace BrandGame.Services;
 
@@ -55,7 +56,8 @@ internal sealed class GameEngine : IDisposable
     }
 
     internal static string Normalize(string value) =>
-        new(value.ToLowerInvariant().Where(c => c is >= 'a' and <= 'z' or >= '0' and <= '9').ToArray());
+        new(value.Normalize(NormalizationForm.FormD).ToLowerInvariant()
+            .Where(c => c is >= 'a' and <= 'z' or >= '0' and <= '9').ToArray());
 
     internal static int CalculateScore(int seconds) => Math.Max(50 - Math.Clamp(seconds, 0, 86400) * 3, 10);
 

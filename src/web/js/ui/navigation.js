@@ -42,6 +42,11 @@ function updateGlobalStatsHUD() {
 }
 
 function renderMainMenuProgress() {
+    const counter = document.getElementById('catalog-entry-count');
+    if (counter) {
+        const count = Object.values(BRAND_DATABASE).reduce((total, brands) => total + brands.length, 0);
+        counter.textContent = t('{count} brand entries', { count });
+    }
     const list = document.getElementById('category-summary-list');
     if (!list) return;
     list.innerHTML = '';

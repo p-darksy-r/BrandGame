@@ -1,29 +1,25 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # BrandGame
 
-Reconhece o logótipo e escreve o nome da marca antes de o tempo acabar. Joga offline com 496 marcas em cinco categorias, conquista estrelas e cria salas para desafiar outros jogadores no mesmo dispositivo.
+Reconhece o logótipo e escreve o nome da marca antes de o tempo acabar. Joga offline com 528 entradas de marcas em cinco categorias, conquista estrelas e cria salas para desafiar outros jogadores no mesmo dispositivo.
 
-**Versão 3.4.0 · 20 de novembro de 2026**
+**Versão 3.5.0 · 20 de novembro de 2026**
 
 ![Menu principal do BrandGame em português, com o botão Vamos jogar e o progresso por categoria](docs/images/brandgame.png)
 
 ## Jogar
 
-- **Windows x64.** Extrai o pacote [BrandGame-3.4.0-win-x64.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.4.0/BrandGame-3.4.0-win-x64.zip) e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET vem incluído. A janela usa o [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/).
-- **Navegador.** Extrai o pacote [BrandGame-3.4.0-web.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.4.0/BrandGame-3.4.0-web.zip) e abre `web/index.html`. O progresso fica nesse navegador.
-- **Quem tem a versão 3.3.0.** Fecha o jogo e o atualizador. Substitui o `update.exe` ao lado da tua pasta `app` pelo [lançador 3.4.0](https://github.com/p-darksy-r/BrandGame/releases/download/v3.4.0/update.exe) e abre-o. Esta troca é necessária uma vez porque o lançador antigo só reconhece o endereço anterior dos downloads.
+- **Windows x64.** Extrai o pacote [BrandGame-3.5.0-win-x64.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.5.0/BrandGame-3.5.0-win-x64.zip) e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET vem incluído. A janela usa o [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/).
+- **Navegador.** Extrai o pacote [BrandGame-3.5.0-web.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.5.0/BrandGame-3.5.0-web.zip) e abre `web/index.html`. O progresso fica nesse navegador.
+- **Quem tem a versão 3.3.0.** Fecha o jogo e o atualizador. Substitui o `update.exe` ao lado da tua pasta `app` pelo [lançador 3.5.0](https://github.com/p-darksy-r/BrandGame/releases/download/v3.5.0/update.exe) e abre-o. Esta troca é necessária uma vez porque o lançador antigo só reconhece o endereço anterior dos downloads.
 
-O jogo e o atualizador usam o certificado de desenvolvimento **BrandGame Development, O=p-darksy-r**. O Windows pode bloquear estes executáveis. Nesse caso, o pacote web permite jogar com as proteções do computador ativas. Consulta as [instruções para jogar](docs/PLAYTEST.md) e a [validação Windows](docs/VALIDATION.md).
+O jogo e o atualizador usam o certificado de desenvolvimento **BrandGame Development, O=p-darksy-r**. O Windows pode bloquear estes executáveis. Se apenas o lançador for bloqueado, extrai o ZIP Windows numa pasta nova e abre o jogo diretamente. Se o jogo também for bloqueado, podes jogar com o pacote web. Consulta as [instruções para jogar](docs/PLAYTEST.md) e a [validação Windows](docs/VALIDATION.md).
 
-## Novidades da versão 3.4.0
+## Novidades da versão 3.5.0
 
-- Interface redesenhada com cartões de progresso, navegação mais clara, logótipo próprio e ícones vetoriais locais nos botões.
-- Menus e 496 pistas em português de Portugal, inglês e espanhol. As salas conservam as pistas escritas pelo jogador.
-- Quatro temas persistentes: Meia-noite, Claro, Floresta e Ametista. O menu, os controlos e os ecrãs de jogo acompanham a escolha.
-- Janela Windows redimensionável e maximizável; layout adaptável, foco de teclado visível e ajuda com regras, pistas e atalhos.
-- Autoria do projeto identificada como **p-darksy-r**, incluindo metadados dos executáveis e avisos das fontes. Os créditos de terceiros são preservados.
-
-Mantém as atualizações online autenticadas, os recursos offline, as estrelas e os recordes por nível/dificuldade. Os saves anteriores conservam pontos, níveis, salas e resultados conhecidos; língua e tema recebem valores predefinidos quando ainda não existiam.
+- Moda passa de 13 para 25 marcas, incluindo Bata, Farfetch e Zalando. Alimentação passa de 20 para 40, incluindo Auchan, Carrefour, Intermarché e Lidl. Os novos logótipos e pistas nos três idiomas estão incluídos para jogar offline.
+- Em moda e alimentação, dois níveis consecutivos já não partilham marcas. Repetir um nível apresenta o mesmo desafio. Os pontos, estrelas, salas e níveis desbloqueados continuam disponíveis.
+- A compilação pode usar um certificado de confiança pública para os executáveis e conservar a chave que os lançadores existentes usam para verificar os pacotes. Esta distribuição usa a assinatura de desenvolvimento.
 
 ## Mudança de nome
 
@@ -131,7 +127,7 @@ Os testes verificam seleção determinística de marcas, regras de pontuação, 
 - Modo web: abre `src/web/index.html` no navegador; o progresso usa armazenamento local do navegador.
 - Servidor local opcional: `node scripts/serve-web.mjs`, disponível em `http://127.0.0.1:8765`.
 - **O jogo funciona offline**, com CSS compilado, fontes e logótipos incluídos. A instalação inicial de dependências de desenvolvimento e o timestamp das assinaturas continuam a precisar de Internet.
-- O catálogo ativo tem **496 entradas**: tecnologia 317, automóveis 57, alimentação 20, moda 13 e media 89. As 1438 entradas sem correspondência verificada ficam preservadas nas fontes e fora das rondas; consulta a [auditoria](docs/CATALOG_AUDIT.md). Existem 100 níveis por categoria, com reutilização de marcas.
+- O catálogo ativo tem **528 entradas**: tecnologia 317, automóveis 57, alimentação 40, moda 25 e media 89. As 1438 entradas sem correspondência verificada ficam preservadas nas fontes e fora das rondas; consulta a [auditoria](docs/CATALOG_AUDIT.md). Existem 100 níveis por categoria, com reutilização de marcas.
 - As salas antigas são preservadas. Se usarem um logótipo que não está no catálogo offline, o jogo avisa antes de começar; o criador sugere identificadores disponíveis.
 - O motor C++ é opcional. Sem `BrandEngine.dll`, a aplicação usa as mesmas regras em C#.
 

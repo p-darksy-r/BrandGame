@@ -1,4 +1,8 @@
 [
+  { "guess": "Zabka", "answer": "Żabka", "elapsed": 1, "match": 100, "correct": true, "score": 47 },
+  { "guess": "Aldi Sud", "answer": "Aldi Süd", "elapsed": 1, "match": 100, "correct": true, "score": 47 },
+  { "guess": "Intermarche", "answer": "Intermarché", "elapsed": 1, "match": 100, "correct": true, "score": 47 },
+  { "guess": "Picard Surgeles", "answer": "Picard Surgelés", "elapsed": 1, "match": 100, "correct": true, "score": 47 },
   { "guess": "Coca Cola", "answer": "Coca-Cola", "elapsed": 2, "match": 100, "correct": true, "score": 44 },
   { "guess": "adibs", "answer": "adibs", "elapsed": 0, "match": 100, "correct": true, "score": 50 },
   { "guess": "appla", "answer": "apple", "elapsed": 3, "match": 80, "correct": true, "score": 41 },

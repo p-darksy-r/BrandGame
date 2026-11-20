@@ -17,7 +17,7 @@
 </head>
 <body>
     <header class="app-header">
-        <div class="brand-lockup"><img src="assets/brandgame.svg" width="44" height="44" alt=""><div><h1 data-i18n-skip>Brand<span>Game</span></h1><span class="brand-caption">THE LOGO CHALLENGE</span></div><span id="header-version-badge" class="version-badge">v3.4.0</span></div>
+        <div class="brand-lockup"><img src="assets/brandgame.svg" width="44" height="44" alt=""><div><h1 data-i18n-skip>Brand<span>Game</span></h1><span class="brand-caption">THE LOGO CHALLENGE</span></div><span id="header-version-badge" class="version-badge">v3.5.0</span></div>
         <div id="header-stats" class="header-stats hidden"><div class="stat-pill" title="Stars earned"><span data-icon="star" class="accent-lime"></span><span id="global-stars">0</span><span class="stat-label">stars</span></div><div class="stat-pill" title="Total score"><span data-icon="trophy" class="accent-blue"></span><span id="global-score">0</span><span class="stat-label">points</span></div></div>
     </header>
     <main id="main-content">
@@ -27,7 +27,7 @@
                 <div class="hero-art" aria-hidden="true"><div class="art-orbit"></div><span class="art-tile tile-tech" data-icon="tech"></span><span class="art-tile tile-food" data-icon="food"></span><div class="art-center"><img src="assets/brandgame.svg" width="100" height="100" alt=""></div><span class="art-tile tile-auto" data-icon="auto"></span><span class="art-tile tile-media" data-icon="media"></span></div>
                 <div class="hero-copy"><h2 id="home-title" tabindex="-1">You know the logo.<br><span>Can you name it?</span></h2><p>Discover familiar faces in a new way. Five categories, 500 levels and a challenge of your own.</p></div>
                 <div class="hero-actions"><button id="btn-menu-start" class="button primary" type="button"><span data-icon="play"></span><span>Let’s play</span></button> <button id="btn-menu-settings" class="button secondary" type="button"><span data-icon="settings"></span><span>Settings</span></button></div>
-                <div class="hero-details"><span><span data-icon="grid"></span>496 brand entries</span><span><span data-icon="shield"></span>Play offline</span></div>
+                <div class="hero-details"><span><span data-icon="grid"></span><span id="catalog-entry-count" data-i18n-skip></span></span><span><span data-icon="shield"></span>Play offline</span></div>
                 <div class="hero-bottom"><button id="btn-menu-help" class="button quiet" type="button"><span data-icon="help"></span><span>How to play</span></button> <button id="btn-menu-exit" class="button quiet" type="button"><span data-icon="exit"></span><span>Exit game</span></button></div>
             </div>
             <aside class="progress-panel panel"><div class="section-heading"><div><p class="eyebrow">MAKE EVERY GUESS COUNT</p><h2>Your progress</h2></div><span class="icon-tile lime" data-icon="trophy"></span></div><p id="legacy-progress-note" class="notice hidden" role="status">Earlier progress is preserved. Replay completed levels to record their stars and best times.</p><div id="category-summary-list"></div><div class="progress-bottom"><button id="btn-menu-reset" class="button quiet danger" type="button"><span data-icon="trash"></span><span>Reset progress</span></button></div></aside>
@@ -84,7 +84,7 @@
         </section>
     </main>
     <dialog id="help-dialog" aria-labelledby="help-title"><div class="dialog-heading"><span class="icon-tile lime" data-icon="help"></span><form method="dialog"><button class="button quiet icon-button" aria-label="Close help" autofocus><span data-icon="close"></span></button></form></div><p class="eyebrow">A LITTLE RECOGNITION GOES A LONG WAY</p><h2 id="help-title">How to play</h2><ol class="help-steps"><li><span data-icon="search"></span><div><h3>Name the brand</h3><p>Choose a category and a level. Type the name behind each logo, then press Enter.</p></div></li><li><span data-icon="bulb"></span><div><h3>Need a nudge?</h3><p>A hint costs 5 points; a letter costs 10. You have three lives. Pause anytime with Esc.</p></div></li><li><span data-icon="star"></span><div><h3>Build your collection</h3><p>Complete a level with 75% correct for one star, 90% for two, or a perfect score for three. Replays improve your records.</p></div></li></ol><form method="dialog"><button class="button primary full-width"><span data-icon="play"></span>Let’s play</button></form></dialog>
-    <footer class="app-footer"><span><span data-icon="shield"></span>Made to play offline</span><span>BrandGame <span id="footer-version-text">3.4.0</span><span class="footer-dot">·</span>© 2026 p-darksy-r</span></footer>
+    <footer class="app-footer"><span><span data-icon="shield"></span>Made to play offline</span><span>BrandGame <span id="footer-version-text">3.5.0</span><span class="footer-dot">·</span>© 2026 p-darksy-r</span></footer>
     <script src="js/data/offline-catalog.js"></script>
     <script src="js/data/brands.js"></script>
     <script src="js/core/levels.js"></script>

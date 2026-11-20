@@ -22,6 +22,7 @@ try {
     Write-Host 'PASS unsigned files rejected'
     Assert-Rejected { Invoke-BinarySigning -Path $unsigned -Identity $null -TimestampServer 'file:///tmp' }
     Write-Host 'PASS invalid timestamp endpoint rejected'
+    & (Join-Path $PSScriptRoot 'manifest-signing.Tests.ps1') -Fixture $fixture
     if ($Integration) {
         $identity = Get-BrandGameSigningIdentity
         $binary = Join-Path $root 'update.exe'

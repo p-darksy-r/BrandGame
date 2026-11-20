@@ -33,7 +33,7 @@
 ## Próximas prioridades
 
 1. **Facilitar a instalação Windows.** Distribuir com um certificado publicamente reconhecido ou pela Microsoft Store e testar a instalação num PC sem o certificado de desenvolvimento.
-2. **Reduzir as repetições.** A moda tem 13 marcas e a alimentação tem 20. Alargar primeiro essas duas categorias com logótipos verificados e medir quantas marcas se repetem em níveis consecutivos.
+2. **Afinar a dificuldade.** Com a rotação entre níveis implementada para moda e alimentação, recolher feedback sobre a dificuldade de reconhecer as novas marcas.
 3. **Levar o progresso para outro dispositivo.** Permitir exportar e importar pontos, estrelas, preferências e salas. Antes de substituir uma gravação, mostrar o que será importado e manter uma cópia recuperável.
 4. **Tornar as atualizações mais claras.** Mostrar a versão instalada, a versão disponível e o progresso do download numa janela. Preparar a substituição do próprio lançador quando a versão seguinte a exigir.
 5. **Melhorar a leitura durante as partidas.** Testar as pistas mais compridas com um leitor de ecrã e a escalas de 125% e 150% no Windows. Rever o tamanho do texto, a ordem do foco e o anúncio do resultado da ronda a partir desses testes.

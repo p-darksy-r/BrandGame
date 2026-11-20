@@ -2,7 +2,7 @@
 
 // --- WEB COMPATIBLE LEVENSHTEIN SIMILARITY ENGINE ---
 function cleanStringForMatch(str) {
-    return String(str ?? '').toLowerCase().replace(/[^a-z0-9]/g, "");
+    return String(str ?? '').normalize('NFD').toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 
 function calculateGuessResult(guess, answer, elapsedSeconds) {

@@ -1,6 +1,13 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Histórico de versões
 
+## 3.5.0 — 2026-11-20
+
+- Mais 12 marcas de moda e 20 de alimentação, com logótipos offline e pistas em português de Portugal, inglês e espanhol. O menu mostra a contagem do catálogo instalado.
+- Respostas como `Zabka` e `Intermarche` recebem o mesmo crédito que as grafias com acentos. As pistas revelam as letras com a grafia original.
+- Rotação de marcas nos 100 níveis de cada uma destas duas categorias. Os níveis consecutivos têm conjuntos distintos e as repetições do mesmo nível continuam determinísticas.
+- A assinatura dos executáveis e a chave do manifesto podem ser configuradas separadamente. Os lançadores existentes mantêm a verificação do manifesto com a chave original. O teste de arranque regista o resultado de cada executável quando o Windows bloqueia um deles.
+
 ## 3.4.0 — 2026-11-20
 
 - O projeto e o repositório passam a chamar-se **BrandGame**. O novo lançador procura a versão mais recente no endereço atual. Quem vem da versão 3.3.0 precisa de substituir o lançador uma vez. [Instruções de atualização](UPDATES.md).

@@ -2,7 +2,7 @@
 
 function buyLetterClue() {
     if (GAME_STATE.roundStatus !== "playing") return;
-    const name = GAME_STATE.currentBrand.name.replace(/[^a-zA-Z0-9]/g, "");
+    const name = cleanStringForMatch(GAME_STATE.currentBrand.name);
     if (GAME_STATE.revealedIndices.length >= name.length) return;
 
     const possible = [];
@@ -19,16 +19,15 @@ function buyLetterClue() {
 }
 
 function renderRevealedLetters() {
-    const brandName = GAME_STATE.currentBrand.name;
+    const brandName = GAME_STATE.currentBrand.name.normalize('NFC');
     const hud = document.getElementById("revealed-letters-hud");
     if (!hud) return;
 
     let displayStr = "";
     let cleanCharIndex = 0;
 
-    for (let i = 0; i < brandName.length; i++) {
-        const char = brandName[i];
-        if (!/[a-zA-Z0-9]/.test(char)) {
+    for (const char of brandName) {
+        if (!cleanStringForMatch(char)) {
             displayStr += char + " ";
         } else {
             if (GAME_STATE.revealedIndices.includes(cleanCharIndex)) {

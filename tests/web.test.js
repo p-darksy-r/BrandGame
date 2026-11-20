@@ -46,6 +46,25 @@ test('500 category levels are deterministic, unique and follow the 3 to 12 brand
     assert.notDeepEqual(ctx.getBrandsForLevel('tech', 1), ctx.getBrandsForLevel('tech', 2));
 });
 
+test('fashion and food rotations distribute brands evenly and minimize repeats between adjacent levels', () => {
+    const catalogue = context(dataFiles).window.BRAND_DATABASE;
+    // A smaller pool also exercises levels where repeats really are unavoidable.
+    for (const [category, pool] of [['fashion', catalogue.fashion], ['food', catalogue.food], ['fashion', catalogue.fashion.slice(0, 13)]]) {
+        const ctx = context(['js/core/levels.js'], { BRAND_DATABASE: { [category]: pool } });
+        const counts = new Map(pool.map(brand => [brand.slug, 0]));
+        let previous = new Set();
+        for (let level = 1; level <= 100; level++) {
+            const current = ctx.getBrandsForLevel(category, level).map(brand => brand.slug);
+            const repeated = current.filter(slug => previous.has(slug)).length;
+            const unavoidable = Math.max(0, previous.size + current.length - pool.length);
+            assert.equal(repeated, unavoidable, `${category}, level ${level}`);
+            for (const slug of current) counts.set(slug, counts.get(slug) + 1);
+            previous = new Set(current);
+        }
+        assert.ok(Math.max(...counts.values()) - Math.min(...counts.values()) <= 1);
+    }
+});
+
 test('web scoring matches the shared native engine cases', () => {
     const ctx = context(['js/core/matching.js']);
     const cases = JSON.parse(fs.readFileSync(path.join(__dirname, 'matching-cases.json'), 'utf8'));
@@ -68,6 +87,18 @@ test('old and malformed saves recover defaults while preserving progress and com
     assert.equal(save.volume, 1);
     assert.equal(save.brightness, 100);
     assert.equal(save.customLevels.length, 0);
+});
+
+test('clues hide accented letters until bought and reveal their original spelling', () => {
+    const hud = { textContent: '' };
+    const ctx = context(['js/core/state.js', 'js/core/matching.js', 'js/gameplay/clues.js'], {
+        document: { getElementById: () => hud }
+    });
+    vm.runInContext('GAME_STATE.currentBrand = { name: "Żabka" }; GAME_STATE.roundStatus = "playing"; renderRevealedLetters();', ctx);
+    assert.equal(hud.textContent, '_ _ _ _ _');
+    vm.runInContext('for (let i = 0; i < 6; i++) buyLetterClue();', ctx);
+    assert.equal(hud.textContent, 'Ż A B K A');
+    assert.equal(vm.runInContext('GAME_STATE.clueCost', ctx), 50);
 });
 
 test('each round accepts one submission and deducts each letter clue once', () => {

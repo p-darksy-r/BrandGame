@@ -2227,6 +2227,106 @@
     "source": "https://amul.com/classic/products/horeca.php"
   },
   {
+    "title": "Aiqfome",
+    "slug": "aiqfome",
+    "source": "https://aiqfome.com"
+  },
+  {
+    "title": "Albert Heijn",
+    "slug": "albertheijn",
+    "source": "https://www.ah.nl"
+  },
+  {
+    "title": "Aldi Süd",
+    "slug": "aldisud",
+    "source": "https://www.aldi-sued.de"
+  },
+  {
+    "title": "ASDA",
+    "slug": "asda",
+    "source": "https://www.asda.com"
+  },
+  {
+    "title": "Auchan",
+    "slug": "auchan",
+    "source": "https://www.auchan.fr"
+  },
+  {
+    "title": "bigbasket",
+    "slug": "bigbasket",
+    "source": "https://www.bigbasket.com"
+  },
+  {
+    "title": "Carrefour",
+    "slug": "carrefour",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Carrefour_logo.svg"
+  },
+  {
+    "title": "Chemex",
+    "slug": "chemex",
+    "source": "https://vtlogo.com/chemex-coffeemaker-vector-logo-svg/"
+  },
+  {
+    "title": "E.Leclerc",
+    "slug": "edotleclerc",
+    "source": "https://www.e.leclerc/assets/images/sue-logo.svg"
+  },
+  {
+    "title": "Grand Frais",
+    "slug": "grandfrais",
+    "source": "https://www.grandfrais.com"
+  },
+  {
+    "title": "HappyCow",
+    "slug": "happycow",
+    "source": "https://www.happycow.net/press-kits"
+  },
+  {
+    "title": "HelloFresh",
+    "slug": "hellofresh",
+    "source": "https://www.hellofresh.com/landing/student"
+  },
+  {
+    "title": "Hungry Jack's",
+    "slug": "hungryjacks",
+    "source": "https://www.hungryjacks.com.au"
+  },
+  {
+    "title": "Iceland",
+    "slug": "iceland",
+    "source": "https://www.iceland.co.uk"
+  },
+  {
+    "title": "Intermarche",
+    "slug": "intermarche",
+    "source": "https://www.intermarche.com"
+  },
+  {
+    "title": "Kaufland",
+    "slug": "kaufland",
+    "source": "https://www.kaufland.com/etc.clientlibs/kaufland/clientlibs/clientlib-klsite/resources/frontend/img/kl-logo-small-e825b661c5.svg"
+  },
+  {
+    "title": "Lidl",
+    "slug": "lidl",
+    "source": "https://www.lidl.de"
+  },
+  {
+    "title": "Picard Surgelés",
+    "slug": "picardsurgeles",
+    "source": "https://www.picard.fr"
+  },
+  {
+    "title": "Tesco",
+    "slug": "tesco",
+    "source": "https://www.tesco.com"
+  },
+  {
+    "title": "Żabka",
+    "slug": "zabka",
+    "source": "https://www.zabka.pl"
+  },
+  {
     "title": "Nike",
     "slug": "nike",
     "source": "https://www.nike.com"
@@ -2291,6 +2391,66 @@
     "slug": "burton",
     "source": "https://brand.burton.com/logo",
     "guidelines": "https://brand.burton.com/logo"
+  },
+  {
+    "title": "Anta",
+    "slug": "anta",
+    "source": "https://www.anta.com"
+  },
+  {
+    "title": "Bata",
+    "slug": "bata",
+    "source": "https://www.bata.com"
+  },
+  {
+    "title": "Jordan",
+    "slug": "jordan",
+    "source": "https://www.nike.com/jordan"
+  },
+  {
+    "title": "FARFETCH",
+    "slug": "farfetch",
+    "source": "https://www.farfetch.com"
+  },
+  {
+    "title": "Macy's",
+    "slug": "macys",
+    "source": "https://www.macysinc.com/news-media/media-assets"
+  },
+  {
+    "title": "Peak Design",
+    "slug": "peakdesign",
+    "source": "https://www.peakdesign.com"
+  },
+  {
+    "title": "Redbubble",
+    "slug": "redbubble",
+    "source": "https://www.redbubble.com/explore/client/4196122a442ab3f429ec802f71717465.svg"
+  },
+  {
+    "title": "Spreadshirt",
+    "slug": "spreadshirt",
+    "source": "https://www.spreadshirt.ie"
+  },
+  {
+    "title": "Supercrease",
+    "slug": "supercrease",
+    "source": "https://supercrease.com/wp-content/themes/super-crease/assets/svgs/super-crease.svg"
+  },
+  {
+    "title": "Teespring",
+    "slug": "teespring",
+    "source": "https://teespring.com"
+  },
+  {
+    "title": "Threadless",
+    "slug": "threadless",
+    "source": "https://www.threadless.com/about-us"
+  },
+  {
+    "title": "Zalando",
+    "slug": "zalando",
+    "source": "https://www.zalando.co.uk"
   },
   {
     "title": "YouTube",
