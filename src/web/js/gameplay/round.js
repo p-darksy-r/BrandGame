@@ -1,6 +1,7 @@
 /* BrandGame - https://github.com/p-darksy-r/BrandGame - Copyright (c) 2026 p-darksy-r */
 
-function launchLevel(levelNum) {
+function startLevelAttempt(levelNum, brands) {
+    if (!brands.length) return;
     GAME_STATE.currentLevel = levelNum;
     GAME_STATE.currentBrandIndex = 0;
     GAME_STATE.currentLevelCorrectCount = 0;
@@ -8,13 +9,14 @@ function launchLevel(levelNum) {
     GAME_STATE.currentLevelElapsedMs = 0;
     GAME_STATE.levelRecorded = false;
     GAME_STATE.lives = 3;
-
-    // Seeds our brand compiler dynamically
-    GAME_STATE.activeBrands = getBrandsForLevel(GAME_STATE.currentCategory, levelNum);
-
-    if (!GAME_STATE.activeBrands.length) return;
+    GAME_STATE.activeBrands = brands;
+    GAME_STATE.missedBrands = [];
     showScreen("screen-gameplay");
     loadNextBrand();
+}
+
+function launchLevel(levelNum) {
+    startLevelAttempt(levelNum, getBrandsForLevel(GAME_STATE.currentCategory, levelNum));
 }
 
 function launchCustomLevel(customIndex) {
@@ -24,23 +26,12 @@ function launchCustomLevel(customIndex) {
         alert(t("This saved room contains logos unavailable in the offline catalog. Its data is preserved. Create a room using the suggested local logos."));
         return;
     }
-    GAME_STATE.currentLevel = customIndex;
-    GAME_STATE.currentBrandIndex = 0;
-    GAME_STATE.currentLevelCorrectCount = 0;
-    GAME_STATE.currentLevelScore = 0;
-    GAME_STATE.currentLevelElapsedMs = 0;
-    GAME_STATE.levelRecorded = false;
-    GAME_STATE.lives = 3;
-
-    GAME_STATE.activeBrands = targetRoom.brands;
-
     clearCustomThemeClasses();
     if (targetRoom.theme) {
         document.body.classList.add(`theme-${targetRoom.theme}`);
     }
 
-    showScreen("screen-gameplay");
-    loadNextBrand();
+    startLevelAttempt(customIndex, targetRoom.brands);
 }
 
 function loadNextBrand() {

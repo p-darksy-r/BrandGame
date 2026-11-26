@@ -53,6 +53,8 @@ A política de conteúdo permite recursos locais e bloqueia ligações de dados 
 
 A ronda passa por `loading`, `playing`, `paused`, `pending`, `feedback` e `idle`; `asset-error` permite repetir uma imagem sem penalização. Um token de ronda ignora carregamentos tardios depois de sair do nível. O relógio usa `performance.now()` e exclui o tempo de pausa.
 
+O treino parte das marcas efetivamente falhadas na última tentativa, incluindo por tempo esgotado. Mantém uma fila própria em memória. Voltar ao relatório recupera a vista já calculada, sem voltar a registar a conclusão do nível. O treino usa as regras de comparação das respostas e dispensa o relógio e a gravação do progresso.
+
 ## Atualização online e recordes (3.3.0)
 
 O modo predefinido de `update.exe` é um cliente .NET independente. `ReleaseClient` consulta releases públicas e limita downloads HTTPS aos servidores do GitHub; `ReleaseManifest` valida a assinatura RSA e os metadados; `PackageInstaller` valida o ZIP e faz uma troca recuperável de `app`. Os modos online e local partilham o bloqueio `.brandgame-updates/update.lock`. Os seus registos de recuperação são distintos, e cada modo recusa começar se o outro tiver uma transação interrompida.

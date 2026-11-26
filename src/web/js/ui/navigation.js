@@ -2,7 +2,10 @@
 
 function showScreen(screenId) {
     if (screenId === "screen-main-menu") renderMainMenuProgress();
-    const screens = ["screen-main-menu", "screen-categories", "screen-levels", "screen-gameplay", "screen-report", "screen-settings", "screen-creator"];
+    if (screenId === "screen-report") {
+        document.getElementById("practice-missed-btn").classList.toggle("hidden", !GAME_STATE.missedBrands.length);
+    }
+    const screens = ["screen-main-menu", "screen-categories", "screen-levels", "screen-gameplay", "screen-report", "practice-screen", "screen-settings", "screen-creator"];
     screens.forEach(id => {
         const el = document.getElementById(id);
         if (el) {

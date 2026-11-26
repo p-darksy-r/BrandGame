@@ -1,13 +1,15 @@
 /* BrandGame - https://github.com/p-darksy-r/BrandGame - Copyright (c) 2026 p-darksy-r */
 
 // --- WEB COMPATIBLE LEVENSHTEIN SIMILARITY ENGINE ---
+const MINIMUM_MATCH_PERCENTAGE = 80;
+
 function cleanStringForMatch(str) {
     return String(str ?? '').normalize('NFD').toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 
 function calculateGuessResult(guess, answer, elapsedSeconds) {
     const match = calculateMatchPercentage(guess, answer);
-    const correct = match >= 80;
+    const correct = match >= MINIMUM_MATCH_PERCENTAGE;
     const seconds = Number.isFinite(elapsedSeconds) ? Math.max(0, Math.round(elapsedSeconds)) : 0;
     return { match, correct, score: correct ? Math.max(50 - seconds * 3, 10) : 0 };
 }

@@ -23,19 +23,28 @@ internal static class SmokeScenario
                 await wait(() => window.__brandGameReady);
                 click('btn-menu-start');
                 document.querySelector('#category-cards-grid button').click();
-                document.querySelector('#level-buttons-grid button').click();
-                for (let round = 0; round < 3; round++) {
-                    await wait(() => GAME_STATE.roundStatus === 'playing');
-                    const logo = document.getElementById('logo-image');
-                    await wait(() => logo.complete && logo.naturalWidth > 0);
-                    if (round === 0) click('btn-gameplay-hint');
-                    document.getElementById('input-guess').value = GAME_STATE.currentBrand.name;
-                    click('btn-guess-submit');
-                    await wait(() => GAME_STATE.roundStatus === 'feedback');
-                    if (document.getElementById('feedback-badge').textContent !== t('CORRECT!'))
-                        throw new Error('Native answer evaluation failed');
-                    click('btn-feedback-next');
-                }
+                const playFirstLevel = async (missFirst = false) => {
+                    document.querySelector('#level-buttons-grid button').click();
+                    let missed;
+                    for (let round = 0; round < 3; round++) {
+                        await wait(() => GAME_STATE.roundStatus === 'playing');
+                        const logo = document.getElementById('logo-image');
+                        await wait(() => logo.complete && logo.naturalWidth > 0);
+                        if (round === 0) click('btn-gameplay-hint');
+                        const incorrect = missFirst && round === 0;
+                        const name = GAME_STATE.currentBrand.name;
+                        if (incorrect) missed = name;
+                        document.getElementById('input-guess').value = incorrect ? '0000000000' : name;
+                        click('btn-guess-submit');
+                        await wait(() => GAME_STATE.roundStatus === 'feedback');
+                        const expected = t(incorrect ? 'INCORRECT' : 'CORRECT!');
+                        if (document.getElementById('feedback-badge').textContent !== expected)
+                            throw new Error('Native answer evaluation failed');
+                        click('btn-feedback-next');
+                    }
+                    return missed;
+                };
+                await playFirstLevel();
                 if (GAME_STATE.saveData.levelsUnlocked.tech !== 2 || GAME_STATE.saveData.globalScore <= 0 ||
                     GAME_STATE.saveData.levelResults.tech[1].medium.stars !== 3 || totalEarnedStars(GAME_STATE.saveData) !== 3)
                     throw new Error('Level progress was not awarded');
@@ -49,6 +58,20 @@ internal static class SmokeScenario
                     throw new Error('Previous progress did not survive import');
                 await replaceProgressSave(previous);
                 onSaveLoaded(previous);
+                click('btn-report-continue');
+                const missed = await playFirstLevel(true);
+                const progressAtReport = JSON.stringify(GAME_STATE.saveData);
+                click('practice-missed-btn');
+                const practiceInput = document.getElementById('practice-input');
+                await wait(() => practiceInput.offsetWidth > 0 && !practiceInput.disabled);
+                practiceInput.value = missed;
+                click('practice-submit-btn');
+                click('practice-next-btn');
+                await wait(() => document.getElementById('practice-complete').offsetWidth > 0);
+                click('practice-back-btn');
+                if (!document.getElementById('screen-report').offsetWidth ||
+                    JSON.stringify(GAME_STATE.saveData) !== progressAtReport)
+                    throw new Error('Practice changed the original level result or progress');
                 window.__nativeSmoke = 'passed';
             })().catch(error => { window.__nativeSmoke = error.message; });
             """);

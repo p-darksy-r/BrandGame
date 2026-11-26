@@ -76,6 +76,21 @@ test('web scoring matches the shared native engine cases', () => {
     }
 });
 
+test('practice recognizes the shared native matching cases and leaves blank guesses unanswered', () => {
+    const ctx = context(['js/core/matching.js', 'js/gameplay/practice.js']);
+    const cases = JSON.parse(fs.readFileSync(path.join(__dirname, 'matching-cases.json'), 'utf8'));
+    for (const { guess, answer, correct } of cases) {
+        const brand = { name: answer };
+        ctx.GAME_STATE = { missedBrands: [brand] };
+        const session = ctx.createMissedPractice();
+        const result = ctx.submitPracticeGuess(session, guess || '  ');
+        if (!guess) assert.equal(result, null);
+        else assert.equal(result.correct, correct, `${guess} / ${answer}`);
+        assert.equal(session.remaining.length, correct ? 0 : 1);
+        assert.deepEqual(ctx.GAME_STATE.missedBrands, [brand]);
+    }
+});
+
 test('old and malformed saves recover defaults while preserving progress and completed categories', () => {
     const ctx = context(['js/core/state.js']);
     for (const malformed of [null, 'broken json', [], 42]) assert.equal(ctx.normalizeSaveData(malformed).levelsUnlocked.tech, 1);

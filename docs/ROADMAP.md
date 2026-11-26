@@ -34,6 +34,10 @@
 
 - Cópias portáteis do progresso, com pré-visualização e recuperação da gravação anterior.
 
+## Implementadas na versão 3.7.0
+
+- Treino sem cronómetro das marcas falhadas numa partida, com repetição das que ainda precisam de prática. Disponível também nas salas personalizadas.
+
 ## Próximas prioridades
 
 1. **Facilitar a instalação Windows.** Distribuir com um certificado publicamente reconhecido ou pela Microsoft Store e testar a instalação num PC sem o certificado de desenvolvimento.

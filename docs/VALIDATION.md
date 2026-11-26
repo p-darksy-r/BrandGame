@@ -1,6 +1,12 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Validação
 
+## Versão 3.7.0
+
+- Passaram 134 verificações locais e os 21 testes de navegador no Edge. Os casos do treino incluem resposta errada, tempo esgotado, repetição após novo erro, derrota antes da última ronda e nível perfeito.
+- Após dez minutos simulados de treino, a mesma marca continuou à espera de resposta. Ao regressar ao relatório, os valores apresentados e a gravação completa coincidiam com os anteriores ao treino. O jogo não enviou pedidos de gravação durante o exercício.
+- Numa sala personalizada com recorde, o treino aceitou a resposta definida pelo criador e mostrou a sua pista. Tanto a saída a meio como a conclusão conservaram o resultado original. O teste do executável também percorre o treino num perfil WebView2 isolado. [Resultados da distribuição Windows](https://github.com/p-darksy-r/BrandGame/releases/tag/v3.7.0).
+
 ## Versão 3.6.0
 
 - Passaram 133 verificações locais (26 web, 46 nativas, 36 do atualizador online, 20 do atualizador local e 5 de assinatura) e 18 testes de navegador no Edge.

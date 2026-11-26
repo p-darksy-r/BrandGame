@@ -76,6 +76,7 @@ const GAME_STATE = {
     currentLevelElapsedMs: 0,
     levelRecorded: false,
     activeBrands: [],
+    missedBrands: [],
     elapsedTime: 0,
     timerInterval: null,
     currentBrand: null,

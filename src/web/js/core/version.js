@@ -1,2 +1,2 @@
 // Generated from VERSION.
-const GAME_VERSION = "3.6.0";
+const GAME_VERSION = "3.7.0";

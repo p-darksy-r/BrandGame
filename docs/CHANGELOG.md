@@ -1,6 +1,11 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Histórico de versões
 
+## 3.7.0 — 2026-11-26
+
+- Novo modo **Treinar as que falhei** no resultado dos níveis e das salas personalizadas. Permite rever, sem cronómetro, as marcas falhadas por resposta errada ou por tempo esgotado.
+- Cada acerto retira a marca do treino. As restantes voltam a aparecer até serem reconhecidas. O treino preserva a pontuação, as estrelas, os desbloqueios e os recordes da partida.
+
 ## 3.6.0 — 2026-11-26
 
 - Exportação e importação de progresso entre perfis Windows e navegadores, num ficheiro local. A cópia inclui níveis, recordes, pontuação, salas e preferências.

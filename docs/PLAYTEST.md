@@ -1,9 +1,9 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
-# Jogar BrandGame 3.6.0
+# Jogar BrandGame 3.7.0
 
 ## Windows
 
-Extrai `BrandGame-3.6.0-win-x64.zip` e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET está incluído; é necessário o Microsoft Edge WebView2 Runtime. O jogo inclui interface, fontes e logótipos locais e funciona sem Internet depois de instalado o WebView2. Podes redimensionar ou maximizar a janela.
+Extrai `BrandGame-3.7.0-win-x64.zip` e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET está incluído; é necessário o Microsoft Edge WebView2 Runtime. O jogo inclui interface, fontes e logótipos locais e funciona sem Internet depois de instalado o WebView2. Podes redimensionar ou maximizar a janela.
 
 Os executáveis usam uma assinatura de desenvolvimento autoassinada. A assinatura identifica esta build, mas não garante aceitação pelo Windows noutros computadores. Se SmartScreen, Smart App Control ou uma política empresarial bloquearem a execução, mantém a proteção e usa o pacote web. Não é pedido aos jogadores que instalem certificados.
 
@@ -11,7 +11,7 @@ Se apenas o `update.exe` estiver bloqueado, fecha o jogo e extrai o ZIP Windows 
 
 ## Navegador
 
-Extrai `BrandGame-3.6.0-web.zip` e abre `web/index.html` no navegador. Não é necessário executar um EXE, instalar certificados ou ter o SDK .NET. Este modo usa o armazenamento local do navegador e tem progresso separado da aplicação Windows. Os recursos estão incluídos; podes jogar sem Internet. Mantém a pasta no mesmo local para continuar a usar o mesmo armazenamento do navegador.
+Extrai `BrandGame-3.7.0-web.zip` e abre `web/index.html` no navegador. Não é necessário executar um EXE, instalar certificados ou ter o SDK .NET. Este modo usa o armazenamento local do navegador e tem progresso separado da aplicação Windows. Os recursos estão incluídos; podes jogar sem Internet. Mantém a pasta no mesmo local para continuar a usar o mesmo armazenamento do navegador.
 
 ## Atualizador
 
@@ -30,6 +30,12 @@ Em **Definições**, escolhe português de Portugal, inglês ou espanhol e um do
 A opção de movimento reduzido desativa animações e tremores. A preferência de movimento reduzido do sistema também é respeitada. Usa **Tab** e **Shift+Tab** para percorrer os controlos com foco visível. As antigas opções de FPS e VSync foram removidas porque não controlavam a apresentação do WebView2.
 
 São 528 entradas em cinco categorias, com 100 níveis por categoria. Em moda e alimentação, podes jogar dois níveis consecutivos sem encontrar a mesma marca. Salas antigas com identificadores indisponíveis mantêm os dados e mostram um aviso antes de começar. O criador de salas apresenta os identificadores locais disponíveis.
+
+## Treinar depois de um nível
+
+Se falhaste alguma marca, escolhe **Treinar as que falhei** no ecrã de resultado. A lista contém só as marcas dessa tentativa, incluindo as que ficaram sem resposta quando o tempo acabou. Também funciona nas salas personalizadas e quando perdes a última vida.
+
+Olha para o logótipo, escreve o nome e submete a resposta. Podes consultar a pista e demorar o tempo que quiseres. Ao avançar, as marcas acertadas saem da fila e as falhadas voltam a aparecer. Podes voltar ao resultado a meio e recomeçar o treino enquanto estiveres nesse relatório. Os pontos, estrelas e recordes ficam como estavam no fim da partida.
 
 ## Mudar de PC ou de navegador
 

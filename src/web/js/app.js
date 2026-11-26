@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setupPresentation();
     setupProgressBackups();
+    setupMissedPractice();
 
     // Load configurations from either C# Webview Host or Fallback Browser Sandbox
     sendNativeRequest({ Action: "load_save" });

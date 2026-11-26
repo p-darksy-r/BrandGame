@@ -13,7 +13,7 @@ internal sealed class ReleaseClient : IDisposable
     internal ReleaseClient(HttpMessageHandler? handler = null)
     {
         client = new(handler ?? new HttpClientHandler { AllowAutoRedirect = false }) { Timeout = TimeSpan.FromMinutes(5) };
-        client.DefaultRequestHeaders.UserAgent.ParseAdd("BrandGame-Updater/3.6.0");
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("BrandGame-Updater/3.7.0");
         client.DefaultRequestHeaders.Accept.ParseAdd("application/vnd.github+json");
     }
 

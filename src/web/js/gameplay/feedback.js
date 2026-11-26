@@ -64,7 +64,7 @@ function onMatchResult(result) {
             badge.className = "feedback-error";
         }
         if (statsCard) statsCard.classList.add("hidden");
-        GAME_STATE.lives--;
+        loseRoundLife();
     }
 
     const nextBtn = document.getElementById("btn-feedback-next");
@@ -79,13 +79,21 @@ function onMatchResult(result) {
 }
 window.onMatchResult = onMatchResult;
 
+function loseRoundLife() {
+    const brand = GAME_STATE.currentBrand;
+    const alreadyMissed = GAME_STATE.missedBrands.some(missed =>
+        missed.slug === brand.slug && missed.name === brand.name);
+    if (!alreadyMissed) GAME_STATE.missedBrands.push(brand);
+    GAME_STATE.lives--;
+}
+
 function processLossOfLife() {
     if (GAME_STATE.roundStatus !== "playing") return;
     GAME_STATE.roundStatus = "feedback";
     GAME_STATE.currentLevelElapsedMs += Math.round(Math.min(GAME_STATE.elapsedTime, GAME_STATE.timeLimit) * 1000);
     sfx.playWrong();
     triggerVibration();
-    GAME_STATE.lives--;
+    loseRoundLife();
 
     const badge = document.getElementById("feedback-badge");
     const overlay = document.getElementById("feedback-overlay");

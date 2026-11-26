@@ -1,5 +1,5 @@
 {
-  "version": "3.6.0",
+  "version": "3.7.0",
   "sources": {
     "simpleIcons": "9.21.0",
     "fontsource": "5.3.0",
@@ -8,7 +8,7 @@
   "sha256": {
     "assets/brandgame.svg": "1e87bf166f2f3db4232c38e19e2514f2012c3cff41153bb4bf1741f8cad689d4",
     "js/data/offline-catalog.js": "6e3eed58265aabfaf80b5f032c410bb3b146bdd39f9f5cd91274ed1e83b47c7f",
-    "js/core/version.js": "b9e90f75d392523c0d12300f12696fb2b5f6dd003a1a22507f546f4cef648add",
+    "js/core/version.js": "a878088dc12621a0ad3b2c0bfb8bb97fdda97bee119fe48def2c7ce8df2be11d",
     "assets/logos/google.svg": "d8cf9fb2d5e234e03254f1d6400d8cc8160c309b010d031a64f37084b5a21d01",
     "assets/logos/apple.svg": "2a1509dccd25e6d2bc7a11a8e52941077e1a48555e192ce638699b9f083c2a7c",
     "assets/logos/microsoft.svg": "f0fdaef83e59660c4da6e3988ca41fbe907e420cb86b48a94746caefec015bf9",
@@ -546,6 +546,6 @@
     "licenses/tailwindcss-MIT.txt": "60e0b68c0f35c078eef3a5d29419d0b03ff84ec1df9c3f9d6e39a519a5ae7985",
     "licenses/logo-sources.json": "02345d04729c9d24826609ba66f692c8f281c1be4ab768b4565a12e80f83c889",
     "licenses/README.txt": "619b04d832fd292e2d1302b2f359d17c3c0d03339d57b78f44136e0d21371ad4",
-    "styles/tailwind.css": "8bf5cb515c8f1598d5dbf7c114999f19781ad4adcddaf253a8b9c8a501f4498f"
+    "styles/tailwind.css": "bcaf8a8ec9d0a1abefcacadfbd924d1af8d0f8508d43746731d0f7070e5a3bd5"
   }
 }
