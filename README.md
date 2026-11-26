@@ -21,6 +21,8 @@ Em **Definições**, exporta o progresso para um ficheiro JSON. A cópia inclui 
 
 Antes de confirmares, o jogo mostra os pontos, as estrelas e o número de salas que vais importar. A importação substitui a gravação do destino. Podes recuperar o progresso que lá estava pelo mesmo ecrã. [Guia de progresso](docs/PROGRESS.md).
 
+**Se vens do Windows 3.5.0**, também podes importar diretamente o ficheiro `%APPDATA%/BrandGame/save.json` no navegador. Basta selecioná-lo nas definições. Não é preciso abrir o executável anterior, e o ficheiro original permanece no disco.
+
 ## Mudança de nome
 
 O projeto e o repositório passam a chamar-se **BrandGame**. A aplicação migra o progresso para `%APPDATA%/BrandGame/save.json` e o perfil WebView2 para `%LOCALAPPDATA%/BrandGame/WebView2`, preservando os dados antigos. No navegador, a chave antiga do armazenamento é migrada na mesma origem.

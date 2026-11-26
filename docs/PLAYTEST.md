@@ -35,6 +35,8 @@ São 528 entradas em cinco categorias, com 100 níveis por categoria. Em moda e 
 
 Nas definições do jogo de origem, exporta uma cópia do progresso. Transfere o ficheiro JSON para o outro dispositivo. Abre as definições do jogo de destino, escolhe a importação e compara os pontos, estrelas e salas apresentados com o progresso esperado. Confirma para o usar. Se te enganares, recupera a gravação anterior nas definições.
 
+**Se vens do Windows 3.5.0**, também podes importar diretamente o ficheiro `%APPDATA%/BrandGame/save.json` no navegador. Basta selecioná-lo nas definições. Não é preciso abrir o executável anterior, e o ficheiro original permanece no disco.
+
 ## Estrelas e recordes
 
 Cada nível guarda estrelas, melhor pontuação e menor tempo de jogo por dificuldade. O total usa as melhores estrelas de cada nível/sala, sem duplicar por repetição. Criar uma sala não atribui estrelas. Os pontos acumulados anteriores mantêm-se.

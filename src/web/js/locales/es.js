@@ -233,7 +233,7 @@ globalThis.BRANDGAME_LOCALES.es = {
     "Backup file prepared.": "Archivo de copia de seguridad preparado.",
     "Could not export your progress.": "No se ha podido exportar tu progreso.",
     "This file is too large to import.": "El archivo es demasiado grande para importarlo.",
-    "Could not read this backup. Choose a JSON file exported by BrandGame.": "No se ha podido leer esta copia de seguridad. Elige un archivo JSON exportado por BrandGame.",
+    "Could not read this backup. Choose a BrandGame backup or a 3.5.0 save.json file.": "No se ha podido leer esta copia de seguridad. Elige una copia de BrandGame o el archivo save.json de la versión 3.5.0.",
     "There is no previous progress to restore.": "No hay progreso anterior que recuperar.",
     "Could not read the previous progress on this device.": "No se ha podido leer el progreso anterior en este dispositivo.",
     "Could not save the replacement. Your current progress is unchanged.": "No se ha podido guardar el cambio. Conservas tu progreso actual.",

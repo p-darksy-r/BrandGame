@@ -73,6 +73,8 @@ function makeProgressBackup(save) {
 function readProgressBackup(text) {
     requireBackupSize(text, MAX_BACKUP_BYTES);
     const data = JSON.parse(text.replace(/^\uFEFF/, ''));
+    // 3.5.0 already stored this complete schema on disk, before the export UI existed.
+    if (data?.gameVersion === '3.5.0' && !Object.hasOwn(data, 'format')) return validatedBackupSave(data);
     requireBackup(hasBackupFields(data, ['format', 'version', 'save']) && data.format === 'BrandGame' && data.version === 1);
     return validatedBackupSave(data.save);
 }

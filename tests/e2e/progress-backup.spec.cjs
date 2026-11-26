@@ -74,3 +74,20 @@ test('an unrelated JSON file cannot replace the current save', async ({ page }) 
     await settings(page);
     expect(await page.evaluate(() => GAME_STATE.saveData.globalScore)).toBe(42);
 });
+
+test('native 3.5 save.json can recover a campaign directly in the browser', async ({ page }) => {
+    await settings(page);
+    const old = await page.evaluate(() => {
+        const save = createDefaultSaveData();
+        save.gameVersion = '3.5.0';
+        save.globalScore = 199;
+        save.levelsUnlocked.food = 9;
+        return JSON.stringify(save);
+    });
+    await page.locator('#progress-import-file').setInputFiles({ name: 'save.json', mimeType: 'application/json', buffer: Buffer.from(old) });
+    await expect(page.locator('#progress-preview-score')).toHaveText('199');
+    await page.locator('#btn-progress-confirm').click();
+    await expect.poll(() => page.evaluate(() => GAME_STATE.saveData.levelsUnlocked.food)).toBe(9);
+    await settings(page);
+    expect(await page.evaluate(() => GAME_STATE.saveData.globalScore)).toBe(199);
+});

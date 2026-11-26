@@ -89,7 +89,7 @@ function setupProgressBackups() {
             const save = readProgressBackup(await file.text());
             showPreview(save, false);
         } catch {
-            announce('Could not read this backup. Choose a JSON file exported by BrandGame.', true);
+            announce('Could not read this backup. Choose a BrandGame backup or a 3.5.0 save.json file.', true);
         } finally {
             setBusy(false);
             if (dialog.open) cancelButton.focus();
