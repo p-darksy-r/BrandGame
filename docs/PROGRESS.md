@@ -15,3 +15,11 @@ Na 3.4.0, `language` e `theme` guardam as preferências da interface no mesmo pe
 O HUD soma o melhor número de estrelas de cada nível/sala, contando cada um apenas uma vez entre dificuldades. Criar uma sala não atribui estrelas. Uma repetição pior ou uma derrota não apaga um recorde anterior. Os pontos acumulados continuam a somar conclusões aprovadas, como nas versões anteriores; não são apresentados como se fossem o recorde do nível.
 
 O tempo registado soma as rondas e exclui carregamento do logótipo, pausas e espera nos painéis de resposta. A gravação da conclusão é protegida contra chamadas repetidas. Campos inválidos de saves são normalizados e limitados antes de serem usados na interface.
+
+## Cópias portáteis (3.6.0)
+
+O ficheiro exportado nas definições inclui o conteúdo da gravação e identifica o formato e a sua versão. Podes guardá-lo localmente ou transportá-lo para outro dispositivo. Os nomes e pistas que escreveste nas salas fazem parte da cópia.
+
+A importação valida o ficheiro antes de mostrar um resumo. Cancelar deixa a gravação atual como estava. Confirmar substitui o progresso completo, incluindo as preferências de língua e tema. O jogo guarda o progresso anterior para o poderes recuperar no mesmo perfil. Para conservar várias versões, guarda os ficheiros exportados separadamente.
+
+![Pré-visualização de uma cópia antes de confirmar a importação](images/importar-progresso.png)

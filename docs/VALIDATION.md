@@ -1,6 +1,12 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Validação
 
+## Versão 3.6.0
+
+- Passaram 133 verificações locais (26 web, 46 nativas, 36 do atualizador online, 20 do atualizador local e 5 de assinatura) e 17 testes de navegador no Edge.
+- O ensaio entre dois perfis exportou um ficheiro real, verificou a pré-visualização e o cancelamento, importou o progresso e recuperou a gravação anterior após reabrir o jogo. A reposição do perfil removeu a opção de recuperar o progresso anterior. Outros testes verificaram que um ficheiro incompatível ou uma falha de escrita deixam o progresso intacto.
+- O teste nativo usa um perfil isolado para completar um nível, importar uma pontuação diferente e recuperar a original através do WebView2. O resultado nos executáveis distribuídos e a verificação da instalação pelo GitHub constam da [release 3.6.0](https://github.com/p-darksy-r/BrandGame/releases/tag/v3.6.0).
+
 ## Versão 3.5.0
 
 - Passaram 124 verificações locais (21 web, 42 nativas, 36 do atualizador online, 20 do atualizador local e 5 de assinatura) e 15 testes de navegador no Edge. A verificação de recursos confirmou 543 ficheiros gerados e traduções para as 528 entradas.

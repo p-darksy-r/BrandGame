@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (footerVer) footerVer.textContent = GAME_VERSION;
 
     setupPresentation();
+    setupProgressBackups();
 
     // Load configurations from either C# Webview Host or Fallback Browser Sandbox
     sendNativeRequest({ Action: "load_save" });

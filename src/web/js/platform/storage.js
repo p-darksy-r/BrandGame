@@ -3,6 +3,13 @@
 const SAVE_STORAGE_KEY = 'brandgame_savedata';
 const LEGACY_SAVE_STORAGE_KEY = 'brandgame_v3_savedata';
 
+function parseBrowserSaveRecord(raw) {
+    const data = raw ? JSON.parse(raw) : null;
+    const previous = data?._brandGamePrevious ?? null;
+    if (data && typeof data === 'object') delete data._brandGamePrevious;
+    return { save: data, previous };
+}
+
 function sendNativeRequest(payload) {
     if (window.chrome?.webview?.postMessage) {
         window.chrome.webview.postMessage(payload);
@@ -19,9 +26,18 @@ function sendNativeRequest(payload) {
             }
         }
         catch (error) { console.warn('Save storage unavailable; using this session only.', error); }
+        if (saved) {
+            try { saved = parseBrowserSaveRecord(saved).save; } catch { /* normalizeSaveData handles malformed saves. */ }
+        }
         onSaveLoaded(saved);
     } else if (payload.Action === 'write_save') {
-        try { window.localStorage.setItem(SAVE_STORAGE_KEY, JSON.stringify(payload.Data)); }
+        try {
+            const storage = window.localStorage;
+            let previous = null;
+            try { previous = parseBrowserSaveRecord(storage.getItem(SAVE_STORAGE_KEY)).previous; } catch { /* Replace malformed records on save. */ }
+            const record = previous === null ? payload.Data : { ...payload.Data, _brandGamePrevious: previous };
+            storage.setItem(SAVE_STORAGE_KEY, JSON.stringify(record));
+        }
         catch (error) { console.warn('Could not persist this session.', error); }
     } else if (payload.Action === 'exit_app') {
         window.close();

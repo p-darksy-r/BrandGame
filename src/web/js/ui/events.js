@@ -26,12 +26,17 @@ function setupEventHandlers() {
         }
     });
 
-    safeAddEventListener("btn-menu-reset", "click", () => {
-        if (confirm(t("Permanently erase save progress and customized rooms?"))) {
-            GAME_STATE.saveData = createDefaultSaveData();
-            sendNativeRequest({ Action: "write_save", Data: GAME_STATE.saveData });
-            onSaveLoaded(GAME_STATE.saveData);
-        }
+    safeAddEventListener("btn-menu-reset", "click", async () => {
+        if (!window.__brandGameReady || !confirm(t("Reset progress, rooms and in-game recovery on this device?"))) return;
+        const button = document.getElementById('btn-menu-reset');
+        button.disabled = true;
+        try {
+            const fresh = createDefaultSaveData();
+            await resetProgressSave(fresh);
+            onSaveLoaded(fresh);
+        } catch {
+            alert(t("Could not reset your progress."));
+        } finally { button.disabled = false; }
     });
 
     safeAddEventListener("btn-categories-back", "click", () => showScreen("screen-main-menu"));

@@ -1,6 +1,11 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Histórico de versões
 
+## 3.6.0 — 2026-11-26
+
+- Exportação e importação de progresso entre perfis Windows e navegadores, num ficheiro local. A cópia inclui níveis, recordes, pontuação, salas e preferências.
+- Pré-visualização antes de substituir o progresso, com opção de cancelar. Após uma importação, a gravação anterior pode ser recuperada nas definições.
+
 ## 3.5.0 — 2026-11-20
 
 - Mais 12 marcas de moda e 20 de alimentação, com logótipos offline e pistas em português de Portugal, inglês e espanhol. O menu mostra a contagem do catálogo instalado.

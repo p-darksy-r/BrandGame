@@ -12,12 +12,39 @@ internal sealed class NativeBridge(MainWindow window, WebView2 webView, GameEngi
     internal async void OnMessageReceived(object? sender, CoreWebView2WebMessageReceivedEventArgs e)
     {
         if (!AppPaths.IsTrustedPage(e.Source)) return;
+        NativeRequest? request = null;
         try
         {
             string json = e.WebMessageAsJson;
-            if (json.Length > SaveStore.MaximumBytes) throw new InvalidDataException("Mensagem demasiado grande.");
-            NativeRequest? request = JsonSerializer.Deserialize<NativeRequest>(json, JsonOptions);
+            // Import can include two bounded saves, and JSON strings may be escaped during transport.
+            if (json.Length > 6 * SaveStore.MaximumBytes + 4096) throw new InvalidDataException("Mensagem demasiado grande.");
+            request = JsonSerializer.Deserialize<NativeRequest>(json, JsonOptions);
             if (request == null) return;
+            if (request.RequestId is > 0)
+            {
+                object? value;
+                switch (request.Action)
+                {
+                    case "previous_progress":
+                        value = await saves.LoadPreviousAsync();
+                        break;
+                    case "replace_progress" when request.Data.HasValue && request.Current.HasValue:
+                        await saves.ReplaceProgressAsync(request.Data.Value, request.Current.Value);
+                        value = true;
+                        break;
+                    case "reset_progress" when request.Data.HasValue:
+                        await saves.ResetAsync(request.Data.Value);
+                        value = true;
+                        break;
+                    case "export_progress" when request.Text != null:
+                        value = await ExportAsync(request.Text);
+                        break;
+                    default:
+                        throw new InvalidDataException("Operação desconhecida.");
+                }
+                await ProgressReplyAsync(request.RequestId.Value, true, value);
+                return;
+            }
             switch (request.Action)
             {
                 case "exit_app":
@@ -43,10 +70,35 @@ internal sealed class NativeBridge(MainWindow window, WebView2 webView, GameEngi
         }
         catch (Exception ex)
         {
+            if (request?.RequestId is > 0)
+            {
+                await ProgressReplyAsync(request.RequestId.Value, false, null);
+                return;
+            }
             if (!window.IsDisposed)
                 MessageBox.Show(window, ex.Message, "BrandGame — erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
+
+    private async Task<bool> ExportAsync(string text)
+    {
+        if (System.Text.Encoding.UTF8.GetByteCount(text) > SaveStore.MaximumBytes + 4096)
+            throw new InvalidDataException("O ficheiro de progresso excede o limite.");
+        using var dialog = new SaveFileDialog
+        {
+            FileName = $"BrandGame-{DateTime.Today:yyyy-MM-dd}.json", DefaultExt = "json", AddExtension = true,
+            Filter = "BrandGame (*.json)|*.json", OverwritePrompt = true, RestoreDirectory = true
+        };
+        if (dialog.ShowDialog(window) != DialogResult.OK) return false;
+        if (!Path.GetExtension(dialog.FileName).Equals(".json", StringComparison.OrdinalIgnoreCase) ||
+            Path.GetDirectoryName(dialog.FileName)!.Equals(Path.GetDirectoryName(AppPaths.SaveFile), StringComparison.OrdinalIgnoreCase))
+            throw new InvalidDataException("Escolhe outro ficheiro JSON para a cópia de segurança.");
+        await SaveStore.WriteAtomicAsync(dialog.FileName, text);
+        return true;
+    }
+
+    private Task ProgressReplyAsync(int id, bool ok, object? value) =>
+        ReplyAsync("onProgressFileResult", JsonSerializer.Serialize(new { id, ok, value }));
 
     private async Task ReplyAsync(string callback, string json)
     {
@@ -58,6 +110,9 @@ internal sealed class NativeBridge(MainWindow window, WebView2 webView, GameEngi
 
 internal sealed class NativeRequest
 {
+    public int? RequestId { get; set; }
+    public string? Text { get; set; }
+    public JsonElement? Current { get; set; }
     public string? Action { get; set; }
     public JsonElement? Data { get; set; }
     public string? UserGuess { get; set; }

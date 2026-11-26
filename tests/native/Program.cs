@@ -54,6 +54,26 @@ try
     try { await saves.WriteAsync(array.RootElement); } catch (InvalidDataException) { rejected = true; }
     Check(rejected, "non-object saves rejected");
 
+    string importFile = Path.Combine(fixture, "import-profile", "save.json");
+    var imports = new SaveStore(importFile);
+    await imports.ReplaceProgressAsync(second.RootElement, first.RootElement);
+    Check((await imports.LoadPreviousAsync())!["globalScore"]!.GetValue<int>() == 42,
+        "first import retains unsaved session as independent restore point");
+    await imports.WriteAsync(second.RootElement);
+    var reopened = new SaveStore(importFile);
+    Check((await reopened.LoadPreviousAsync())!["globalScore"]!.GetValue<int>() == 42 &&
+        !((await reopened.LoadAsync()).Contains("_brandGameRestoreSlot")), "restore point survives ordinary saves and reopen");
+    bool importFailed = false;
+    using (var locked = File.Open(importFile, FileMode.Open, FileAccess.Read, FileShare.Read))
+    {
+        try { await reopened.ReplaceProgressAsync(first.RootElement, first.RootElement); } catch (IOException) { importFailed = true; }
+    }
+    Check(importFailed && JsonDocument.Parse(await reopened.LoadAsync()).RootElement.GetProperty("globalScore").GetInt32() == 75 &&
+        (await reopened.LoadPreviousAsync())!["globalScore"]!.GetValue<int>() == 42, "failed import leaves active progress and prior restore point intact");
+    await reopened.ResetAsync(second.RootElement);
+    Check(await reopened.LoadPreviousAsync() == null && !Directory.EnumerateFiles(Path.GetDirectoryName(importFile)!, "*.before-import-*.json").Any(),
+        "reset clears the import restore slots");
+
     var roaming = Path.Combine(fixture, "roaming");
     var previousSave = Path.Combine(roaming, "BrandGame_V3", "save_data_v3_custom.json");
     Directory.CreateDirectory(Path.GetDirectoryName(previousSave)!);

@@ -30,10 +30,13 @@
 - Interface e pistas em três línguas. As salas conservam os nomes e as pistas escolhidos pelo jogador.
 - Ícones próprios do jogo e do atualizador e migração do progresso após a mudança de nome para BrandGame.
 
+## Implementadas na versão 3.6.0
+
+- Cópias portáteis do progresso, com pré-visualização e recuperação da gravação anterior.
+
 ## Próximas prioridades
 
 1. **Facilitar a instalação Windows.** Distribuir com um certificado publicamente reconhecido ou pela Microsoft Store e testar a instalação num PC sem o certificado de desenvolvimento.
 2. **Afinar a dificuldade.** Com a rotação entre níveis implementada para moda e alimentação, recolher feedback sobre a dificuldade de reconhecer as novas marcas.
-3. **Levar o progresso para outro dispositivo.** Permitir exportar e importar pontos, estrelas, preferências e salas. Antes de substituir uma gravação, mostrar o que será importado e manter uma cópia recuperável.
-4. **Tornar as atualizações mais claras.** Mostrar a versão instalada, a versão disponível e o progresso do download numa janela. Preparar a substituição do próprio lançador quando a versão seguinte a exigir.
-5. **Melhorar a leitura durante as partidas.** Testar as pistas mais compridas com um leitor de ecrã e a escalas de 125% e 150% no Windows. Rever o tamanho do texto, a ordem do foco e o anúncio do resultado da ronda a partir desses testes.
+3. **Tornar as atualizações mais claras.** Mostrar a versão instalada, a versão disponível e o progresso do download numa janela. Preparar a substituição do próprio lançador quando a versão seguinte a exigir.
+4. **Melhorar a leitura durante as partidas.** Testar as pistas mais compridas com um leitor de ecrã e a escalas de 125% e 150% no Windows. Rever o tamanho do texto, a ordem do foco e o anúncio do resultado da ronda a partir desses testes.

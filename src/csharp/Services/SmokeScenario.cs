@@ -39,6 +39,16 @@ internal static class SmokeScenario
                 if (GAME_STATE.saveData.levelsUnlocked.tech !== 2 || GAME_STATE.saveData.globalScore <= 0 ||
                     GAME_STATE.saveData.levelResults.tech[1].medium.stars !== 3 || totalEarnedStars(GAME_STATE.saveData) !== 3)
                     throw new Error('Level progress was not awarded');
+                // Exercise the real WebView2 bridge and its recovery slot using the isolated profile.
+                const earned = GAME_STATE.saveData.globalScore;
+                const imported = readProgressBackup(makeProgressBackup({ ...GAME_STATE.saveData, globalScore: earned + 100 }));
+                await replaceProgressSave(imported);
+                onSaveLoaded(imported);
+                const previous = await loadPreviousProgress();
+                if (!previous || previous.globalScore !== earned || totalEarnedStars(previous) !== 3)
+                    throw new Error('Previous progress did not survive import');
+                await replaceProgressSave(previous);
+                onSaveLoaded(previous);
                 window.__nativeSmoke = 'passed';
             })().catch(error => { window.__nativeSmoke = error.message; });
             """);

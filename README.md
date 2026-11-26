@@ -3,23 +3,23 @@
 
 Reconhece o logótipo e escreve o nome da marca antes de o tempo acabar. Joga offline com 528 entradas de marcas em cinco categorias, conquista estrelas e cria salas para desafiar outros jogadores no mesmo dispositivo.
 
-**Versão 3.5.0 · 20 de novembro de 2026**
+**Versão 3.6.0 · 26 de novembro de 2026**
 
 ![Menu principal do BrandGame em português, com o botão Vamos jogar e o progresso por categoria](docs/images/brandgame.png)
 
 ## Jogar
 
-- **Windows x64.** Extrai o pacote [BrandGame-3.5.0-win-x64.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.5.0/BrandGame-3.5.0-win-x64.zip) e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET vem incluído. A janela usa o [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/).
-- **Navegador.** Extrai o pacote [BrandGame-3.5.0-web.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.5.0/BrandGame-3.5.0-web.zip) e abre `web/index.html`. O progresso fica nesse navegador.
-- **Quem tem a versão 3.3.0.** Fecha o jogo e o atualizador. Substitui o `update.exe` ao lado da tua pasta `app` pelo [lançador 3.5.0](https://github.com/p-darksy-r/BrandGame/releases/download/v3.5.0/update.exe) e abre-o. Esta troca é necessária uma vez porque o lançador antigo só reconhece o endereço anterior dos downloads.
+- **Windows x64.** Extrai o pacote [BrandGame-3.6.0-win-x64.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.6.0/BrandGame-3.6.0-win-x64.zip) e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET vem incluído. A janela usa o [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/).
+- **Navegador.** Extrai o pacote [BrandGame-3.6.0-web.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.6.0/BrandGame-3.6.0-web.zip) e abre `web/index.html`. O progresso fica nesse navegador.
+- **Quem tem a versão 3.3.0.** Fecha o jogo e o atualizador. Substitui o `update.exe` ao lado da tua pasta `app` pelo [lançador 3.6.0](https://github.com/p-darksy-r/BrandGame/releases/download/v3.6.0/update.exe) e abre-o. Esta troca é necessária uma vez porque o lançador antigo só reconhece o endereço anterior dos downloads.
 
 O jogo e o atualizador usam o certificado de desenvolvimento **BrandGame Development, O=p-darksy-r**. O Windows pode bloquear estes executáveis. Se apenas o lançador for bloqueado, extrai o ZIP Windows numa pasta nova e abre o jogo diretamente. Se o jogo também for bloqueado, podes jogar com o pacote web. Consulta as [instruções para jogar](docs/PLAYTEST.md) e a [validação Windows](docs/VALIDATION.md).
 
-## Novidades da versão 3.5.0
+## Levar o progresso para outro dispositivo
 
-- Moda passa de 13 para 25 marcas, incluindo Bata, Farfetch e Zalando. Alimentação passa de 20 para 40, incluindo Auchan, Carrefour, Intermarché e Lidl. Os novos logótipos e pistas nos três idiomas estão incluídos para jogar offline.
-- Em moda e alimentação, dois níveis consecutivos já não partilham marcas. Repetir um nível apresenta o mesmo desafio. Os pontos, estrelas, salas e níveis desbloqueados continuam disponíveis.
-- A compilação pode usar um certificado de confiança pública para os executáveis e conservar a chave que os lançadores existentes usam para verificar os pacotes. Esta distribuição usa a assinatura de desenvolvimento.
+Em **Definições**, exporta o progresso para um ficheiro JSON. A cópia inclui pontos, estrelas, recordes, salas e preferências. Para mudar de PC ou alternar entre o jogo Windows e o navegador, abre o BrandGame 3.6.0 no destino e importa esse ficheiro.
+
+Antes de confirmares, o jogo mostra os pontos, as estrelas e o número de salas que vais importar. A importação substitui a gravação do destino. Podes recuperar o progresso que lá estava pelo mesmo ecrã. [Guia de progresso](docs/PROGRESS.md).
 
 ## Mudança de nome
 

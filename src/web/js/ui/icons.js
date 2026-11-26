@@ -28,6 +28,8 @@ const UI_ICON_PATHS = {
     volume: '<path d="m11 4-6 5H2v6h3l6 5Zm4 4a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>',
     motion: '<path d="M3 8h5m-7 4h5m-3 4h5"/><rect x="11" y="4" width="10" height="16" rx="3"/>',
     leaf: '<path d="M20 3C9 1 3 7 5 15c2 8 16 6 15-12ZM5 21 16 9"/>',
+    upload: '<path d="M12 16V3m-5 5 5-5 5 5M4 16v5h16v-5"/>',
+    download: '<path d="M12 3v13m-5-5 5 5 5-5M4 16v5h16v-5"/>',
     save: '<path d="M5 3h12l4 4v14H3V3Zm3 0v6h8V3M7 21v-8h10v8"/>',
     shield: '<path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/>',
     tech: '<rect x="6" y="6" width="12" height="12" rx="3"/><rect x="10" y="10" width="4" height="4"/><path d="M9 2v4m6-4v4M9 18v4m6-4v4M2 9h4m-4 6h4m12-6h4m-4 6h4"/>',
