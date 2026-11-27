@@ -43,9 +43,13 @@
 - Pistas com indicação de disponibilidade e anúncio das letras reveladas, incluindo nas salas personalizadas.
 - Recuperação no navegador a partir da gravação Windows de uma partida recente, incluindo perfis com recuperação de uma importação anterior.
 
+## Implementadas na versão 3.9.0
+
+- Consulta manual da versão disponível dentro do jogo Windows, com verificação da assinatura do manifesto e acesso à página de versões nas duas edições.
+
 ## Próximas prioridades
 
 1. **Facilitar a instalação Windows.** Distribuir com um certificado publicamente reconhecido ou pela Microsoft Store e testar a instalação num PC sem o certificado de desenvolvimento.
 2. **Afinar a dificuldade.** Com a rotação entre níveis implementada para moda e alimentação, recolher feedback sobre a dificuldade de reconhecer as novas marcas.
-3. **Tornar as atualizações mais claras.** Mostrar a versão instalada, a versão disponível e o progresso do download numa janela. Preparar a substituição do próprio lançador quando a versão seguinte a exigir.
+3. **Tornar as atualizações mais claras.** Mostrar o progresso do download e da instalação na interface. Preparar a substituição do próprio lançador quando a versão seguinte a exigir.
 4. **Melhorar a leitura durante as partidas.** Testar as pistas mais compridas com um leitor de ecrã e a escalas de 125% e 150% no Windows. Rever o tamanho do texto, a ordem do foco e o anúncio do resultado da ronda a partir desses testes.

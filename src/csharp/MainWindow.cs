@@ -1,4 +1,5 @@
 // Copyright (c) 2026 p-darksy-r. BrandGame.
+using System.Diagnostics;
 using BrandGame.Services;
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
@@ -9,6 +10,7 @@ public sealed class MainWindow : Form
 {
     private readonly WebView2 webView = new() { Dock = DockStyle.Fill };
     private readonly GameEngine engine = new();
+    private readonly UpdateAvailability updates = new();
     private NativeBridge? bridge;
     private readonly Icon? applicationIcon;
     private readonly bool smokeTest;
@@ -53,11 +55,11 @@ public sealed class MainWindow : Form
             if (IsDisposed) return;
             webView.CoreWebView2.SetVirtualHostNameToFolderMapping(
                 AppPaths.WebHost, webDirectory, CoreWebView2HostResourceAccessKind.DenyCors);
-            bridge = new NativeBridge(this, webView, engine, new SaveStore(AppPaths.SaveFile));
+            bridge = new NativeBridge(this, webView, engine, new SaveStore(AppPaths.SaveFile), updates);
             webView.CoreWebView2.WebMessageReceived += bridge.OnMessageReceived;
             webView.CoreWebView2.NavigationStarting += (_, args) =>
                 args.Cancel = !AppPaths.IsTrustedPage(args.Uri);
-            webView.CoreWebView2.NewWindowRequested += (_, args) => args.Handled = true;
+            webView.CoreWebView2.NewWindowRequested += OnNewWindowRequested;
             webView.CoreWebView2.WindowCloseRequested += (_, _) => Close();
             if (smokeTest)
                 webView.CoreWebView2.NavigationCompleted += async (_, args) =>
@@ -97,6 +99,22 @@ public sealed class MainWindow : Form
         }
     }
 
+    private void OnNewWindowRequested(object? sender, CoreWebView2NewWindowRequestedEventArgs args)
+    {
+        args.Handled = true;
+        if (!UpdateAvailability.CanOpenReleasesPage(webView.CoreWebView2.Source, args.Uri, args.IsUserInitiated)) return;
+        try
+        {
+            if (!AppPaths.IsTrustedPage(args.OriginalSourceFrameInfo.Source)) return;
+            // A fixed destination is opened in the user's browser; the game stays on its local origin.
+            using var browser = Process.Start(new ProcessStartInfo(UpdateAvailability.ReleasesPage) { UseShellExecute = true });
+        }
+        catch (Exception ex) when (ex is System.ComponentModel.Win32Exception or InvalidOperationException or NotImplementedException)
+        {
+            webView.CoreWebView2.PostWebMessageAsString("release-link-error");
+        }
+    }
+
     internal void ResizeGameWindow(int width, int height)
     {
         // Presets are logical pixels; keep the restored window on its current display.
@@ -121,6 +139,7 @@ public sealed class MainWindow : Form
             startupTimeout.Dispose();
             if (bridge != null && webView.CoreWebView2 != null)
                 webView.CoreWebView2.WebMessageReceived -= bridge.OnMessageReceived;
+            updates.Dispose();
             webView.Dispose();
             engine.Dispose();
         }

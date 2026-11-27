@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (footerVer) footerVer.textContent = GAME_VERSION;
 
     setupPresentation();
+    setupUpdateSettings();
     setupProgressBackups();
     setupMissedPractice();
 

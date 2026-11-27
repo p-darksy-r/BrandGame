@@ -3,15 +3,15 @@
 
 Reconhece o logótipo e escreve o nome da marca antes de o tempo acabar. Joga offline com 528 entradas de marcas em cinco categorias, conquista estrelas e cria salas para desafiar outros jogadores no mesmo dispositivo.
 
-**Versão 3.8.0 · 27 de novembro de 2026**
+**Versão 3.9.0 · 27 de novembro de 2026**
 
 ![Menu principal do BrandGame em português, com o botão Vamos jogar e o progresso por categoria](docs/images/brandgame.png)
 
 ## Jogar
 
-- **Windows x64.** Extrai o pacote [BrandGame-3.8.0-win-x64.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.8.0/BrandGame-3.8.0-win-x64.zip) e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET vem incluído. A janela usa o [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/).
-- **Navegador.** Extrai o pacote [BrandGame-3.8.0-web.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.8.0/BrandGame-3.8.0-web.zip) e abre `web/index.html`. O progresso fica nesse navegador.
-- **Quem tem a versão 3.3.0.** Fecha o jogo e o atualizador. Substitui o `update.exe` ao lado da tua pasta `app` pelo [lançador 3.8.0](https://github.com/p-darksy-r/BrandGame/releases/download/v3.8.0/update.exe) e abre-o. Esta troca é necessária uma vez porque o lançador antigo só reconhece o endereço anterior dos downloads.
+- **Windows x64.** Extrai o pacote [BrandGame-3.9.0-win-x64.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.9.0/BrandGame-3.9.0-win-x64.zip) e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET vem incluído. A janela usa o [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/).
+- **Navegador.** Extrai o pacote [BrandGame-3.9.0-web.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.9.0/BrandGame-3.9.0-web.zip) e abre `web/index.html`. O progresso fica nesse navegador.
+- **Quem tem a versão 3.3.0.** Fecha o jogo e o atualizador. Substitui o `update.exe` ao lado da tua pasta `app` pelo [lançador incluído na versão 3.9.0](https://github.com/p-darksy-r/BrandGame/releases/download/v3.9.0/update.exe) e abre-o. Esta troca é necessária uma vez porque o lançador antigo só reconhece o endereço anterior dos downloads.
 
 O jogo e o atualizador usam o certificado de desenvolvimento **BrandGame Development, O=p-darksy-r**. O Windows pode bloquear estes executáveis. Se apenas o lançador for bloqueado, extrai o ZIP Windows numa pasta nova e abre o jogo diretamente. Se o Windows bloquear o jogo, abre `app/web/index.html` no navegador. Esta cópia offline já está no ZIP Windows. Consulta as [instruções para jogar](docs/PLAYTEST.md) e a [validação Windows](docs/VALIDATION.md).
 
@@ -23,7 +23,7 @@ No fim de um nível ou de uma sala, escolhe **Treinar as que falhei** para rever
 
 ## Levar o progresso para outro dispositivo
 
-Em **Definições**, exporta o progresso para um ficheiro JSON. A cópia inclui pontos, estrelas, recordes, salas e preferências. Para mudar de PC ou alternar entre o jogo Windows e o navegador, abre o BrandGame 3.8.0 no destino e importa esse ficheiro.
+Em **Definições**, exporta o progresso para um ficheiro JSON. A cópia inclui pontos, estrelas, recordes, salas e preferências. Para mudar de PC ou alternar entre o jogo Windows e o navegador, abre o BrandGame 3.9.0 no destino e importa esse ficheiro.
 
 Antes de confirmares, o jogo mostra os pontos, as estrelas e o número de salas que vais importar. A importação substitui a gravação do destino. Podes recuperar o progresso que lá estava pelo mesmo ecrã. [Guia de progresso](docs/PROGRESS.md).
 
@@ -34,6 +34,14 @@ Para levar uma gravação Windows para o navegador, abre **Definições → Impo
 O projeto e o repositório passam a chamar-se **BrandGame**. A aplicação migra o progresso para `%APPDATA%/BrandGame/save.json` e o perfil WebView2 para `%LOCALAPPDATA%/BrandGame/WebView2`, preservando os dados antigos. No navegador, a chave antiga do armazenamento é migrada na mesma origem.
 
 O código e o README ficam no ramo `main` de [p-darksy-r/BrandGame](https://github.com/p-darksy-r/BrandGame). Cada tag `vX.Y.Z` identifica o commit usado para compilar essa versão. O lançador, o pacote Windows com manifesto assinado e o ZIP web ficam nas [Releases](https://github.com/p-darksy-r/BrandGame/releases).
+
+## Ver se há uma versão nova
+
+Em **Definições → Atualizações**, a edição Windows mostra a versão instalada. Quando pedes uma verificação, a aplicação consulta o GitHub e confirma a assinatura do manifesto antes de apresentar a versão disponível. A partida funciona offline e a consulta não altera a instalação nem o progresso.
+
+Se o Windows bloquear o lançador, podes abrir a página de versões pelo jogo, extrair o ZIP Windows numa nova pasta e abrir `app/BrandGame.exe`. A edição para navegador também dá acesso aos downloads oficiais.
+
+O pacote 3.9.0 inclui o mesmo `update.exe` assinado da versão 3.8.0. Quem já tem esse lançador só precisa de fechar o jogo e executar o atualizador habitual.
 
 ## Atualizar a app instalada
 

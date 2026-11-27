@@ -17,5 +17,6 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Falharam os testes do atualizador.' }
     & powershell -NoProfile -ExecutionPolicy Bypass -File tests/signing.Tests.ps1
     if ($LASTEXITCODE -ne 0) { throw 'Falharam os testes de assinatura.' }
+    & (Join-Path $projectRoot 'tests/diagnose-windows.Tests.ps1')
     Write-Host 'Todos os testes passaram.'
 } finally { Pop-Location }

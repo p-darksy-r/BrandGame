@@ -25,6 +25,8 @@ Check(AppPaths.IsTrustedPage("https://app.brandgame.local/index.html"), "local w
 foreach (var source in new[] { "http://app.brandgame.local/", "https://app.brandgame.local.evil/", "https://evil/", "file:///index.html", "https://app.brandgame.local:444/", "https://user@app.brandgame.local/" })
     Check(!AppPaths.IsTrustedPage(source), "foreign origin rejected: " + source);
 
+await UpdateAvailabilityChecks.RunAsync(Check);
+
 var workspace = Path.GetFullPath(Directory.GetCurrentDirectory());
 var fixture = Path.GetFullPath(Path.Combine(workspace, "artifacts", "native-tests-" + Guid.NewGuid().ToString("N")));
 if (!fixture.StartsWith(workspace + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)) throw new Exception("Invalid test path");

@@ -14,6 +14,8 @@ Coloca `update.exe` ao lado da pasta `app`. O jogo é offline; o atualizador usa
 
 Com `--launch`, o código de saída `2` indica que o atualizador encontrou ou instalou o jogo, mas o Windows não conseguiu abri-lo. A mensagem mostra a causa e o caminho para a cópia web, se estiver disponível.
 
+A partir da 3.9, a secção **Atualizações** das definições Windows também consulta a versão mais recente do canal predefinido. A aplicação verifica o mesmo manifesto assinado que o lançador. Para instalar pelo ZIP, abre as versões oficiais no navegador e extrai o pacote numa nova pasta. Na edição web podes consultar a versão instalada e abrir essa mesma página.
+
 As releases são obtidas do repositório público **p-darksy-r/BrandGame**, que também contém o código e o README no `main`. Cada versão tem uma tag `vX.Y.Z` nesse histórico, com os pacotes anexados à respetiva Release. Não é necessário outro branch nem são usados tokens dos jogadores.
 
 O canal predefinido `preview` inclui releases estáveis e de desenvolvimento. A seleção usa a maior versão numérica `X.Y.Z`, com tag `vX.Y.Z`, ZIP Windows e ambos os ficheiros de manifesto. Drafts e releases antigas sem manifesto são ignorados. Nunca se instala uma versão inferior à instalada, mesmo com `--repair`. Se não existir uma release elegível no canal, a app instalada permanece.
@@ -27,6 +29,8 @@ O lançador em execução não é substituído. Para atualizar o próprio `updat
 ## Atualizar quando o Windows bloqueia o lançador
 
 Descarrega o ZIP Windows da [release oficial](https://github.com/p-darksy-r/BrandGame/releases). Podes comparar o resultado de `Get-FileHash -Algorithm SHA256` com o ficheiro `.sha256` da mesma versão. Fecha o jogo, extrai o ZIP numa pasta nova e abre `app/BrandGame.exe`. O jogo continua a usar a gravação em `%APPDATA%/BrandGame`. Conserva a instalação anterior até confirmares o resultado. Se o Windows bloquear o jogo, abre `app/web/index.html` no navegador a partir da pasta instalada. Podes importar o `save.json` da aplicação nas definições.
+
+O pacote 3.9.0 inclui o mesmo `update.exe` assinado da versão 3.8.0. Quem já tem esse lançador só precisa de fechar o jogo e executar o atualizador habitual.
 
 ## Desenvolvimento e pacote local
 

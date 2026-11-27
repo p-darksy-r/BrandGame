@@ -86,6 +86,8 @@ internal static class SmokeScenario
             string result = await view.ExecuteScriptAsync("window.__nativeSmoke");
             if (result == "\"passed\"")
             {
+                if (Environment.GetEnvironmentVariable("BRANDGAME_SMOKE_CHECK_UPDATES") == "1")
+                    await CheckPublishedVersionAsync(view);
                 // The web message write is asynchronous: wait for the actual persisted save.
                 for (int saveAttempt = 0; saveAttempt < 50; saveAttempt++)
                 {
@@ -104,5 +106,34 @@ internal static class SmokeScenario
             await Task.Delay(100);
         }
         return false;
+    }
+
+    // The published-release job opts into network access after installing the verified ZIP.
+    private static async Task CheckPublishedVersionAsync(CoreWebView2 view)
+    {
+        string started = await view.ExecuteScriptAsync("""
+            (() => {
+                for (const id of ['btn-report-continue', 'btn-levels-back', 'btn-categories-back', 'btn-menu-settings']) {
+                    document.getElementById(id).click();
+                }
+                const button = document.getElementById('btn-update-check');
+                if (!button.offsetWidth || button.disabled || document.getElementById('update-available-version').textContent.trim()) return false;
+                button.click();
+                return true;
+            })()
+            """);
+        if (started != "true") throw new InvalidOperationException("Cannot start the update check from Settings.");
+        for (int attempt = 0; attempt < 120; attempt++)
+        {
+            string finished = await view.ExecuteScriptAsync("!document.getElementById('btn-update-check').disabled");
+            if (finished == "true")
+            {
+                string matches = await view.ExecuteScriptAsync("document.getElementById('update-available-version').textContent.trim() === GAME_VERSION");
+                if (matches == "true") return;
+                throw new InvalidOperationException("Settings did not show the installed release as the available version.");
+            }
+            await Task.Delay(200);
+        }
+        throw new TimeoutException("The published update check did not finish.");
     }
 }

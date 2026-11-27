@@ -11,6 +11,10 @@
     <Compile Include="../../src/csharp/Services/GameEngine.cs" Link="GameEngine.cs" />
     <Compile Include="../../src/csharp/Services/SaveStore.cs" Link="SaveStore.cs" />
     <Compile Include="../../src/csharp/Services/AppPaths.cs" Link="AppPaths.cs" />
+    <Compile Include="../../src/csharp/Services/UpdateAvailability.cs" Link="UpdateAvailability.cs" />
+    <Compile Include="../../src/updater/ReleaseClient.cs" Link="ReleaseClient.cs" />
+    <Compile Include="../../src/updater/ReleaseManifest.cs" Link="ReleaseManifest.cs" />
+    <EmbeddedResource Include="../../src/updater/release-public-key.xml" LogicalName="BrandGame.ReleasePublicKey" />
     <None Include="../matching-cases.json" Link="matching-cases.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

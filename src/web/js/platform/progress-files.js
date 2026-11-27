@@ -1,27 +1,6 @@
 // Copyright (c) 2026 p-darksy-r. BrandGame.
-// Portable file operations run only after the player's explicit export/import action.
-const progressRequests = new Map();
-let nextProgressRequest = 0;
-
-function askProgressHost(action, fields = {}) {
-    return new Promise((resolve, reject) => {
-        const id = ++nextProgressRequest;
-        progressRequests.set(id, { resolve, reject });
-        try { window.chrome.webview.postMessage({ Action: action, RequestId: id, ...fields }); }
-        catch (error) { progressRequests.delete(id); reject(error); }
-    });
-}
-
-window.onProgressFileResult = ({ id, ok, value }) => {
-    const pending = progressRequests.get(id);
-    if (!pending) return;
-    progressRequests.delete(id);
-    if (ok) pending.resolve(value);
-    else pending.reject(new Error('Progress file operation failed.'));
-};
-
 async function exportProgressFile(text) {
-    if (window.chrome?.webview?.postMessage) return askProgressHost('export_progress', { Text: text });
+    if (window.chrome?.webview?.postMessage) return askNativeHost('export_progress', { Text: text });
     const url = URL.createObjectURL(new Blob([text], { type: 'application/json;charset=utf-8' }));
     const link = document.createElement('a');
     try {
@@ -38,7 +17,7 @@ async function exportProgressFile(text) {
 
 async function replaceProgressSave(save) {
     if (window.chrome?.webview?.postMessage) {
-        await askProgressHost('replace_progress', { Data: save, Current: GAME_STATE.saveData });
+        await askNativeHost('replace_progress', { Data: save, Current: GAME_STATE.saveData });
         return;
     }
     const storage = window.localStorage;
@@ -50,7 +29,7 @@ async function replaceProgressSave(save) {
 
 async function resetProgressSave(defaultSave) {
     if (window.chrome?.webview?.postMessage) {
-        await askProgressHost('reset_progress', { Data: defaultSave });
+        await askNativeHost('reset_progress', { Data: defaultSave });
         return;
     }
     const storage = window.localStorage;
@@ -60,7 +39,7 @@ async function resetProgressSave(defaultSave) {
 async function loadPreviousProgress() {
     let previous;
     if (window.chrome?.webview?.postMessage) {
-        previous = await askProgressHost('previous_progress');
+        previous = await askNativeHost('previous_progress');
     } else {
         const storage = window.localStorage;
         previous = parseBrowserSaveRecord(storage.getItem(SAVE_STORAGE_KEY)).previous;

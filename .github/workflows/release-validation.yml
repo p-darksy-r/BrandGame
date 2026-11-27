@@ -46,3 +46,4 @@ jobs:
           path: |
             artifacts/install-test-*/results.json
             artifacts/install-test-*/*.log
+            artifacts/install-test-*/test-profile/native-smoke-error.txt

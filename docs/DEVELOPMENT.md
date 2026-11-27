@@ -70,3 +70,9 @@ O workflow manual `Published Windows release` permite testar a distribuição pu
 O código, o README e as Releases ficam no mesmo repositório público `p-darksy-r/BrandGame`. Os pacotes e manifestos são anexados às Releases, sem adicionar binários ao histórico Git. Não é necessário um branch de downloads.
 
 Cada versão concluída recebe uma nova tag `vX.Y.Z` no commit correspondente do `main`, preservando as tags anteriores. Depois dos testes e do CI, cria a tag, envia-a e publica a Release com essa tag. A visibilidade pública permite ao atualizador descarregar os pacotes sem conta ou token GitHub.
+
+## Publicar apenas uma atualização do jogo
+
+A distribuição 3.9.0 usa o lançador oficial da 3.8.0. O SHA-256 desse `update.exe` é `f5e5f443d119f277a8c5f59d2d0fc88a3573fa2950e23d581b46e9a4518fc9b1`. O código do atualizador e o formato de distribuição continuam compatíveis.
+
+Para reproduzir esta distribuição num checkout limpo da tag, coloca o lançador da release 3.8.0 na raiz, compara o SHA-256 com o acima e instala as dependências de desenvolvimento. Compila o jogo com `scripts/update.ps1`, verifica a assinatura dos dois ficheiros com `scripts/verify-signatures.ps1` e cria os ZIPs com `scripts/package.ps1`. A compilação completa de `scripts/build.ps1` continua disponível para versões que também alterem o lançador.

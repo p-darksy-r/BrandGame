@@ -1,6 +1,12 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Validação
 
+## Versão 3.9.0
+
+- Passaram 149 verificações locais e 25 testes no Edge. As definições mostram a versão instalada sem ligação. Os testes verificaram consulta por ação do jogador, manifestos inválidos, partilha de pedidos simultâneos, nova tentativa e comparação numérica de versões.
+- Neste PC, o evento 3077 confirmou o bloqueio anterior do lançador 3.8.0. Posteriormente, o mesmo executável abriu e consultou a versão do GitHub com o Smart App Control ativo. O hash coincidiu com o do ficheiro da release 3.8.0.
+- O ensaio da distribuição instala o pacote publicado e pede ao jogo Windows que confirme a versão disponível através do WebView2. [Resultados e downloads da versão 3.9.0](https://github.com/p-darksy-r/BrandGame/releases/tag/v3.9.0).
+
 ## Versão 3.8.0
 
 - Passaram os 23 cenários no Edge. Uma sala sem pista permitiu revelar a única letra por dez pontos. Na ronda seguinte, pedir duas vezes a pista de texto descontou cinco pontos no total. O teste verificou a pontuação final, o foco e o anúncio da letra com acento.

@@ -19,6 +19,9 @@ function Invoke-Isolated {
     $info.CreateNoWindow = $true
     $info.RedirectStandardOutput = $true
     $info.RedirectStandardError = $true
+    if ($Online -and $Name -eq 'installed-game-full-level') {
+        $info.EnvironmentVariables['BRANDGAME_SMOKE_CHECK_UPDATES'] = '1'
+    }
     $info.EnvironmentVariables['PATH'] = "$env:SystemRoot\System32;$env:SystemRoot"
     $info.EnvironmentVariables['BRANDGAME_PROFILE_ROOT'] = Join-Path $fixture 'test-profile'
     [IO.Directory]::CreateDirectory($info.EnvironmentVariables['BRANDGAME_PROFILE_ROOT']) | Out-Null
@@ -53,6 +56,7 @@ if ($installed.version -ne $version) { throw 'Versao instalada inesperada.' }
 if (-not $ExpectedAppSha256) { $ExpectedAppSha256 = (Get-FileHash -LiteralPath (Join-Path $root 'app/BrandGame.exe')).Hash }
 if ((Get-FileHash -LiteralPath (Join-Path $fixture 'app/BrandGame.exe')).Hash -ne $ExpectedAppSha256) { throw 'O executavel instalado difere da distribuicao validada.' }
 Invoke-Isolated -File 'app/BrandGame.exe' -Arguments @('--smoke-test') -Name 'installed-game-full-level'
+if ($Online) { Write-Host 'PASS installed-game-checks-published-version' }
 @{ version = $version; online = [bool]$Online; result = 'passed'; noDevelopmentToolsOnPath = $true } |
     ConvertTo-Json | Set-Content -LiteralPath (Join-Path $fixture 'results.json') -Encoding UTF8
 Write-Host "Instalacao e partida validadas sem ferramentas de desenvolvimento no PATH: $fixture"

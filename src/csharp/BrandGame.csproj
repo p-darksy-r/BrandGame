@@ -15,6 +15,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="../updater/ReleaseClient.cs" Link="Services/ReleaseClient.cs" />
+    <Compile Include="../updater/ReleaseManifest.cs" Link="Services/ReleaseManifest.cs" />
+    <EmbeddedResource Include="../updater/release-public-key.xml" LogicalName="BrandGame.ReleasePublicKey" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2592.51" />
   </ItemGroup>
 

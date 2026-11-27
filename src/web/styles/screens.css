@@ -123,8 +123,14 @@
 @media(max-width:760px) { .home-layout { grid-template-columns:1fr; } .hero-art { height:150px; } .hero-copy h2 { font-size:42px; } .hero-actions { flex-direction:row; } .progress-panel { padding:26px; } .category-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .category-card { padding:20px; } .settings-grid { grid-template-columns:1fr; } }
 @media(max-width:560px) { .hero { padding:24px 22px 16px; } .hero-copy h2 { font-size:35px; } .hero-details { gap:14px; } .category-grid { grid-template-columns:1fr; } .category-card { min-height:200px; } .level-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; } .game-panel { padding:18px; } .game-toolbar { flex-wrap:wrap; } .game-toolbar>.button { font-size:14px; } .game-status .eyebrow { display:none; } .game-round { font-size:14px; } .guess-row { flex-direction:column; } .clue-actions { flex-wrap:wrap; gap:0; } .creator-options { grid-template-columns:1fr; padding:18px; } .creator-options .field:first-child { grid-column:auto; } .creator-brands { grid-template-columns:1fr; } .report-panel { padding:24px; } .result-details>div { flex-wrap:wrap; } .game-overlay { padding:22px; } .game-overlay h2 { font-size:28px!important; } }
 
-.progress-backup { grid-column:1 / -1; }
-.backup-actions { display:flex; flex-wrap:wrap; gap:10px; }
+.progress-backup, .update-settings { grid-column:1 / -1; }
+.update-versions { display:flex; flex-wrap:wrap; gap:12px 32px; }
+.update-versions dt { color:var(--muted); font-size:15px; }
+.update-versions dd { font-size:20px; font-weight:700; }
+#update-status:empty { margin-top:-18px; }
+#update-status[data-error], #update-link-error { color:var(--danger); }
+#update-link-error code { overflow-wrap:anywhere; user-select:all; }
+.settings-actions, .backup-actions { display:flex; flex-wrap:wrap; gap:10px; }
 .backup-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(92px,1fr)); gap:10px; margin:20px 0 24px; }
 .backup-stats div { min-width:0; padding:12px; background:var(--surface-raised); border:1px solid var(--line); border-radius:12px; }
 .backup-stats dt { color:var(--muted); font-size:15px; }

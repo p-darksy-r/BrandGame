@@ -17,7 +17,7 @@
 </head>
 <body>
     <header class="app-header">
-        <div class="brand-lockup"><img src="assets/brandgame.svg" width="44" height="44" alt=""><div><h1 data-i18n-skip>Brand<span>Game</span></h1><span class="brand-caption">THE LOGO CHALLENGE</span></div><span id="header-version-badge" class="version-badge">v3.8.0</span></div>
+        <div class="brand-lockup"><img src="assets/brandgame.svg" width="44" height="44" alt=""><div><h1 data-i18n-skip>Brand<span>Game</span></h1><span class="brand-caption">THE LOGO CHALLENGE</span></div><span id="header-version-badge" class="version-badge">v3.9.0</span></div>
         <div id="header-stats" class="header-stats hidden"><div class="stat-pill" title="Stars earned"><span data-icon="star" class="accent-lime"></span><span id="global-stars">0</span><span class="stat-label">stars</span></div><div class="stat-pill" title="Total score"><span data-icon="trophy" class="accent-blue"></span><span id="global-score">0</span><span class="stat-label">points</span></div></div>
     </header>
     <main id="main-content">
@@ -97,6 +97,21 @@
         </section>
 
         <section id="screen-settings" class="screen settings-panel hidden" aria-labelledby="settings-title"><div class="page-heading"><div><button id="btn-settings-back" class="button quiet" type="button"><span data-icon="back"></span><span>Main menu</span></button><p class="eyebrow">MAKE IT YOURS</p><h2 id="settings-title" tabindex="-1">Settings</h2><p>Find your pace. Fine-tune your experience.</p></div><span class="icon-tile" data-icon="settings"></span></div><div class="settings-grid"><section class="setting"><h3><span data-icon="language"></span>Language</h3><label for="settings-language" class="sr-only">Language</label><select id="settings-language" data-i18n-skip><option value="pt-PT">Português (Portugal)</option><option value="en">English</option><option value="es">Español</option></select><p class="helper">Choose the language for menus and built-in clues.</p></section><section class="setting"><h3><span data-icon="palette"></span>Appearance</h3><label for="settings-theme" class="sr-only">Colour theme</label><select id="settings-theme"><option value="midnight">Midnight</option><option value="light">Light</option><option value="forest">Forest</option><option value="amethyst">Amethyst</option></select><p class="helper">Your theme is saved on this device.</p></section><section class="setting"><h3><span data-icon="monitor"></span>Window size</h3><div class="segments" data-native-only><button id="btn-win-sm" class="button secondary" type="button"><span data-icon="monitor"></span><span>800 × 600</span></button><button id="btn-win-md" class="button secondary" type="button"><span data-icon="monitor"></span><span>1024 × 768</span></button><button id="btn-win-lg" class="button secondary" type="button"><span data-icon="monitor"></span><span>1280 × 960</span></button></div><p id="browser-window-note" class="helper hidden">Resize your browser window to change the layout.</p><p class="helper">The Windows app can also be resized or maximised.</p></section><section class="setting"><h3><span data-icon="palette"></span>Visual effects</h3><div class="segments"><button id="btn-qual-low" class="button secondary" type="button"><span data-icon="leaf"></span><span>Minimal</span></button><button id="btn-qual-high" class="button secondary" type="button"><span data-icon="bolt"></span><span>Rich</span></button></div><p class="helper">Minimal removes shadows and animation.</p></section><section class="setting"><h3><span data-icon="sun"></span>Interface brightness</h3><label for="settings-brightness" class="sr-only">Interface brightness</label><div class="range-row"><input type="range" id="settings-brightness" min="50" max="150" step="5" value="100"><output id="brightness-label" for="settings-brightness">100%</output></div></section><section class="setting"><h3><span data-icon="volume"></span>Sound volume</h3><label for="settings-volume" class="sr-only">Sound volume</label><div class="range-row"><input type="range" id="settings-volume" min="0" max="1" step="0.1" value="0.5"><output id="volume-label" for="settings-volume">50%</output></div></section><section class="setting"><h3><span data-icon="motion"></span>Motion</h3><label class="check-row" for="settings-reduced-motion"><input type="checkbox" id="settings-reduced-motion">Reduce animations and screen shake</label><p class="helper">Your system motion preference is also respected.</p></section><section class="setting"><h3><span data-icon="motion"></span>Screen shake</h3><button id="btn-vibrate-toggle" class="button secondary" type="button"><span data-icon="check"></span><span>Enabled</span></button><p class="helper">Visual feedback on an incorrect answer.</p></section><section class="setting"><h3><span data-icon="bolt"></span>Difficulty</h3><div class="segments"><button id="diff-easy" class="button secondary" type="button"><span data-icon="leaf"></span><span>Easy</span></button><button id="diff-medium" class="button secondary" type="button"><span data-icon="clock"></span><span>Medium</span></button><button id="diff-hard" class="button secondary" type="button"><span data-icon="bolt"></span><span>Hard</span></button></div><p class="helper">Easy: 30s · Medium: 15s · Hard: 8s per brand.</p></section>
+            <section class="setting update-settings" aria-labelledby="updates-title">
+                <h3 id="updates-title"><span data-icon="refresh"></span>Updates</h3>
+                <dl class="update-versions">
+                    <div><dt>Installed version</dt><dd id="settings-installed-version" data-i18n-skip></dd></div>
+                    <div id="update-available-row" class="hidden"><dt>Verified release</dt><dd id="update-available-version" data-i18n-skip></dd></div>
+                </dl>
+                <p class="helper hidden" data-native-only>If Windows blocks update.exe, close the game and extract the Windows ZIP from the official releases into a new folder. Your saved progress stays in your Windows profile.</p>
+                <p class="helper" id="update-browser-info">To update the browser edition, export your progress, extract the new web ZIP and import your backup in the new copy.</p>
+                <div class="settings-actions">
+                    <button id="btn-update-check" class="button secondary hidden" type="button" data-native-only><span data-icon="refresh"></span><span>Check for updates</span></button>
+                    <a id="update-releases-link" class="button secondary" href="https://github.com/p-darksy-r/BrandGame/releases" target="_blank" rel="noopener noreferrer"><span data-icon="download"></span><span>Official releases on GitHub</span></a>
+                </div>
+                <p id="update-status" class="helper" role="status" aria-live="polite" aria-atomic="true"></p>
+                <p id="update-link-error" class="helper hidden" tabindex="-1"><span>Could not open the browser. Copy this address into your browser:</span> <code></code></p>
+            </section>
             <section class="setting progress-backup" aria-labelledby="progress-backup-title">
                 <h3 id="progress-backup-title"><span data-icon="save"></span>Progress backup</h3>
                 <p class="helper">Import an exported backup or your Windows save.json to bring your progress to this device.</p>
@@ -145,7 +160,7 @@
             <button id="btn-progress-confirm" type="button" class="button primary"><span data-icon="check"></span><span>Replace progress</span></button>
         </div>
     </dialog>
-    <footer class="app-footer"><span><span data-icon="shield"></span>Made to play offline</span><span>BrandGame <span id="footer-version-text">3.8.0</span><span class="footer-dot">·</span>© 2026 p-darksy-r</span></footer>
+    <footer class="app-footer"><span><span data-icon="shield"></span>Made to play offline</span><span>BrandGame <span id="footer-version-text">3.9.0</span><span class="footer-dot">·</span>© 2026 p-darksy-r</span></footer>
     <script src="js/data/offline-catalog.js"></script>
     <script src="js/data/brands.js"></script>
     <script src="js/core/levels.js"></script>
@@ -162,9 +177,11 @@
     <script src="js/ui/i18n.js"></script>
     <script src="js/audio.js"></script>
     <script src="js/platform/storage.js"></script>
+    <script src="js/platform/native-requests.js"></script>
     <script src="js/platform/progress-files.js"></script>
     <script src="js/ui/icons.js"></script>
     <script src="js/ui/presentation.js"></script>
+    <script src="js/ui/updates.js"></script>
     <script src="js/ui/progress-backup.js"></script>
     <script src="js/ui/navigation.js"></script>
     <script src="js/ui/catalog.js"></script>

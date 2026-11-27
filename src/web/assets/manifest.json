@@ -1,5 +1,5 @@
 {
-  "version": "3.8.0",
+  "version": "3.9.0",
   "sources": {
     "simpleIcons": "9.21.0",
     "fontsource": "5.3.0",
@@ -8,7 +8,7 @@
   "sha256": {
     "assets/brandgame.svg": "1e87bf166f2f3db4232c38e19e2514f2012c3cff41153bb4bf1741f8cad689d4",
     "js/data/offline-catalog.js": "6e3eed58265aabfaf80b5f032c410bb3b146bdd39f9f5cd91274ed1e83b47c7f",
-    "js/core/version.js": "08e73d7cab8f8abfc7e150680607eea487130a81fe4dc068c3fe00ab862a2f5b",
+    "js/core/version.js": "a1fed3425a375bdb391110cc7d00dd15164318608fec61ddaf6d272b9e868286",
     "assets/logos/google.svg": "d8cf9fb2d5e234e03254f1d6400d8cc8160c309b010d031a64f37084b5a21d01",
     "assets/logos/apple.svg": "2a1509dccd25e6d2bc7a11a8e52941077e1a48555e192ce638699b9f083c2a7c",
     "assets/logos/microsoft.svg": "f0fdaef83e59660c4da6e3988ca41fbe907e420cb86b48a94746caefec015bf9",

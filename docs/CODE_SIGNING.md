@@ -53,6 +53,14 @@ Não exportar a chave privada para GitHub. O workflow de CI compila explicitamen
 
 Referências Microsoft: [assinatura para Smart App Control](https://learn.microsoft.com/en-us/windows/apps/develop/smart-app-control/code-signing-for-smart-app-control), [opções de assinatura](https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/code-signing-options), [reputação no SmartScreen](https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/smartscreen-reputation).
 
+## Diagnosticar um bloqueio neste PC
+
+Em PowerShell no repositório, `.\scripts\diagnose-windows.ps1` consulta a assinatura, o SHA-256 e os registos de bloqueio dos dois executáveis. Para examinar uma instalação extraída de um ZIP, usa `-InstallRoot` com a pasta que contém `update.exe` e `app`.
+
+O evento 3077 no registo de integridade do Windows identifica o ficheiro e a política que impediu a sua execução. Na distribuição 3.8.0, o hash integral registado para o atualizador neste PC coincidiu com o do ficheiro publicado, e a política identificada foi `VerifiedAndReputableDesktop`. O certificado de desenvolvimento do projeto era válido para a verificação Authenticode local. Para obter a confiança de editor reconhecida pelo Smart App Control, é necessário usar uma identidade emitida por um fornecedor reconhecido. [Assinatura para Smart App Control](https://learn.microsoft.com/en-us/windows/apps/develop/smart-app-control/code-signing-for-smart-app-control).
+
+Numa verificação posterior no mesmo PC, esse mesmo binário executou `--help` e `--check` com o Smart App Control ativo. O registo 3077 documenta a decisão no instante do bloqueio. O diagnóstico apresenta essa data para distinguir a ocorrência histórica do resultado de uma execução atual.
+
 ## Manifestos de atualização (3.3.0)
 
 Além de Authenticode, `scripts/sign-release.ps1` assina os bytes do manifesto de download com RSA/SHA-256 (PKCS#1). Usa a chave não exportável já existente e verifica a assinatura contra `src/updater/release-public-key.xml`; esse ficheiro contém **apenas a chave pública** e é embebido em `update.exe`. O manifest não instala certificados e não altera as decisões de execução do Windows.

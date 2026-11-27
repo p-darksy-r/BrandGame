@@ -1,6 +1,13 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Histórico de versões
 
+## 3.9.0 — 2026-11-27
+
+- As definições do jogo Windows permitem consultar a versão publicada no GitHub e comparar o manifesto assinado com a versão instalada. A consulta só usa a rede quando o jogador a pede.
+- As duas edições permitem abrir a página oficial de versões. O jogo Windows abre essa página no navegador predefinido.
+- A versão 3.9.0 distribui o lançador já publicado na versão 3.8.0, com a mesma assinatura e o mesmo SHA-256.
+- Novo diagnóstico de leitura do registo de integridade do Windows para identificar bloqueios do jogo ou do atualizador pelo hash do executável.
+
 ## 3.8.0 — 2026-11-27
 
 - Pistas com indicação de disponibilidade nas partidas. Uma sala sem pista de texto já não desconta cinco pontos. A revelação de letras indica o carácter e a posição e termina quando o nome está completo.

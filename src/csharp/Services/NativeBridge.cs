@@ -5,7 +5,7 @@ using Microsoft.Web.WebView2.WinForms;
 
 namespace BrandGame.Services;
 
-internal sealed class NativeBridge(MainWindow window, WebView2 webView, GameEngine engine, SaveStore saves)
+internal sealed class NativeBridge(MainWindow window, WebView2 webView, GameEngine engine, SaveStore saves, UpdateAvailability updates)
 {
     private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNameCaseInsensitive = true };
 
@@ -25,6 +25,9 @@ internal sealed class NativeBridge(MainWindow window, WebView2 webView, GameEngi
                 object? value;
                 switch (request.Action)
                 {
+                    case "check_updates":
+                        value = new { version = await updates.CheckAsync() };
+                        break;
                     case "previous_progress":
                         value = await saves.LoadPreviousAsync();
                         break;

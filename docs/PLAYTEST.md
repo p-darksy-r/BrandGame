@@ -1,9 +1,9 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
-# Jogar BrandGame 3.8.0
+# Jogar BrandGame 3.9.0
 
 ## Windows
 
-Extrai `BrandGame-3.8.0-win-x64.zip` e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET está incluído; é necessário o Microsoft Edge WebView2 Runtime. O jogo inclui interface, fontes e logótipos locais e funciona sem Internet depois de instalado o WebView2. Podes redimensionar ou maximizar a janela.
+Extrai `BrandGame-3.9.0-win-x64.zip` e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET está incluído; é necessário o Microsoft Edge WebView2 Runtime. O jogo inclui interface, fontes e logótipos locais e funciona sem Internet depois de instalado o WebView2. Podes redimensionar ou maximizar a janela.
 
 Os executáveis usam uma assinatura de desenvolvimento autoassinada. A assinatura identifica esta build, mas não garante aceitação pelo Windows noutros computadores. Se SmartScreen, Smart App Control ou uma política empresarial bloquearem a execução, podes abrir `app/web/index.html` no navegador a partir da própria instalação. Não é pedido aos jogadores que instalem certificados.
 
@@ -11,7 +11,11 @@ Se apenas o `update.exe` estiver bloqueado, fecha o jogo e extrai o ZIP Windows 
 
 ## Navegador
 
-Extrai `BrandGame-3.8.0-web.zip` e abre `web/index.html` no navegador. Não é necessário executar um EXE, instalar certificados ou ter o SDK .NET. Este modo usa o armazenamento local do navegador e tem progresso separado da aplicação Windows. Os recursos estão incluídos; podes jogar sem Internet. Mantém a pasta no mesmo local para continuar a usar o mesmo armazenamento do navegador.
+Extrai `BrandGame-3.9.0-web.zip` e abre `web/index.html` no navegador. Não é necessário executar um EXE, instalar certificados ou ter o SDK .NET. Este modo usa o armazenamento local do navegador e tem progresso separado da aplicação Windows. Os recursos estão incluídos; podes jogar sem Internet. Mantém a pasta no mesmo local para continuar a usar o mesmo armazenamento do navegador.
+
+## Consultar a versão no jogo
+
+Abre **Definições → Atualizações**. No Windows, pede uma verificação para comparar a versão instalada com a versão publicada no canal `preview`. Se estiveres sem rede, podes continuar a jogar e repetir a consulta mais tarde. A ligação às versões oficiais está disponível tanto no jogo Windows como no navegador.
 
 ## Atualizador
 
