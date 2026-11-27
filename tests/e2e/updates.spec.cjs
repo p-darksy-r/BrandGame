@@ -42,6 +42,8 @@ test('the Windows check runs on request, verifies numeric versions, and recovers
             if (m.Action === 'previous_progress') queueMicrotask(() => onProgressFileResult({ id: m.RequestId, ok: true, value: null }));
             if (m.Action === 'check_updates') window.updateRequests.push(m);
         };
+        // Headless Chromium may omit the vendor namespace that Edge supplies.
+        if (!window.chrome) Object.defineProperty(window, 'chrome', { configurable: true, value: {} });
         Object.defineProperty(window.chrome, 'webview', { configurable: true, value: host });
     });
     await openSettings(page);
