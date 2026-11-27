@@ -1,17 +1,17 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
-# Jogar BrandGame 3.7.0
+# Jogar BrandGame 3.8.0
 
 ## Windows
 
-Extrai `BrandGame-3.7.0-win-x64.zip` e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET está incluído; é necessário o Microsoft Edge WebView2 Runtime. O jogo inclui interface, fontes e logótipos locais e funciona sem Internet depois de instalado o WebView2. Podes redimensionar ou maximizar a janela.
+Extrai `BrandGame-3.8.0-win-x64.zip` e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET está incluído; é necessário o Microsoft Edge WebView2 Runtime. O jogo inclui interface, fontes e logótipos locais e funciona sem Internet depois de instalado o WebView2. Podes redimensionar ou maximizar a janela.
 
-Os executáveis usam uma assinatura de desenvolvimento autoassinada. A assinatura identifica esta build, mas não garante aceitação pelo Windows noutros computadores. Se SmartScreen, Smart App Control ou uma política empresarial bloquearem a execução, mantém a proteção e usa o pacote web. Não é pedido aos jogadores que instalem certificados.
+Os executáveis usam uma assinatura de desenvolvimento autoassinada. A assinatura identifica esta build, mas não garante aceitação pelo Windows noutros computadores. Se SmartScreen, Smart App Control ou uma política empresarial bloquearem a execução, podes abrir `app/web/index.html` no navegador a partir da própria instalação. Não é pedido aos jogadores que instalem certificados.
 
-Se apenas o `update.exe` estiver bloqueado, fecha o jogo e extrai o ZIP Windows oficial da nova versão **numa pasta nova**. Abre o `app/BrandGame.exe` dessa pasta. A gravação nativa pertence ao teu perfil Windows, por isso podes manter a pasta da versão anterior até confirmares o progresso na nova. Se o jogo também for bloqueado, usa o pacote web.
+Se apenas o `update.exe` estiver bloqueado, fecha o jogo e extrai o ZIP Windows oficial da nova versão **numa pasta nova**. Abre o `app/BrandGame.exe` dessa pasta. A gravação nativa pertence ao teu perfil Windows, por isso podes manter a pasta da versão anterior até confirmares o progresso na nova. O ZIP Windows já traz a cópia web em `app/web/index.html`.
 
 ## Navegador
 
-Extrai `BrandGame-3.7.0-web.zip` e abre `web/index.html` no navegador. Não é necessário executar um EXE, instalar certificados ou ter o SDK .NET. Este modo usa o armazenamento local do navegador e tem progresso separado da aplicação Windows. Os recursos estão incluídos; podes jogar sem Internet. Mantém a pasta no mesmo local para continuar a usar o mesmo armazenamento do navegador.
+Extrai `BrandGame-3.8.0-web.zip` e abre `web/index.html` no navegador. Não é necessário executar um EXE, instalar certificados ou ter o SDK .NET. Este modo usa o armazenamento local do navegador e tem progresso separado da aplicação Windows. Os recursos estão incluídos; podes jogar sem Internet. Mantém a pasta no mesmo local para continuar a usar o mesmo armazenamento do navegador.
 
 ## Atualizador
 
@@ -24,6 +24,8 @@ As releases anteriores à 3.3.0 não têm manifesto de atualização e são igno
 ## Partidas e catálogo
 
 O cronómetro começa quando o logótipo termina de carregar. Usa o botão de pausa ou **Esc** para pausar e o botão de continuar para retomar. **Enter** submete a resposta. Ao mudar de separador, a partida pausa automaticamente. Se faltar uma imagem, não perdes tempo nem vidas: podes tentar novamente ou sair do nível. A ajuda do menu reúne regras, custos das pistas e atalhos.
+
+Uma pista de texto custa cinco pontos e pode ser comprada uma vez por marca. Se o criador da sala não tiver escrito uma pista, o botão indica que está indisponível. Revelar uma letra custa dez pontos. O jogo indica a letra revelada e a posição que ocupa no nome. O custo das pistas aplica-se à ronda atual.
 
 Em **Definições**, escolhe português de Portugal, inglês ou espanhol e um dos quatro temas: Meia-noite, Claro, Floresta ou Ametista. As escolhas são guardadas no perfil e recuperadas ao reabrir o jogo. A língua altera os menus e as pistas do catálogo. Os nomes das marcas e o texto que escreveste nas salas permanecem iguais.
 
@@ -41,7 +43,7 @@ Olha para o logótipo, escreve o nome e submete a resposta. Podes consultar a pi
 
 Nas definições do jogo de origem, exporta uma cópia do progresso. Transfere o ficheiro JSON para o outro dispositivo. Abre as definições do jogo de destino, escolhe a importação e compara os pontos, estrelas e salas apresentados com o progresso esperado. Confirma para o usar. Se te enganares, recupera a gravação anterior nas definições.
 
-**Se vens do Windows 3.5.0**, também podes importar diretamente o ficheiro `%APPDATA%/BrandGame/save.json` no navegador. Basta selecioná-lo nas definições. Não é preciso abrir o executável anterior, e o ficheiro original permanece no disco.
+Para levar uma gravação Windows para o navegador, abre **Definições → Importar ficheiro** e seleciona `%APPDATA%\BrandGame\save.json`. A versão 3.8 reconhece as gravações das versões 3.5 a 3.8, mesmo depois de uma importação anterior no Windows. Confirma o resumo para usar o progresso no navegador. O ficheiro original fica no PC.
 
 ## Estrelas e recordes
 

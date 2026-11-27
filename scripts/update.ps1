@@ -78,11 +78,11 @@ try {
                 $lastNotice = $fingerprint
                 Write-Host "App atualizada: app/BrandGame.exe (versao $($info.version))."
             }
-            if ($Launch -and -not (Test-AppRunning -Root $projectRoot)) {
-                Start-Process -FilePath (Join-Path $projectRoot 'app/BrandGame.exe') -WorkingDirectory (Join-Path $projectRoot 'app')
-                $Launch = $false
-            }
             $exitCode = 0
+            if ($Launch -and -not (Test-AppRunning -Root $projectRoot)) {
+                $Launch = $false
+                $exitCode = Start-InstalledGame -Root $projectRoot
+            }
         } catch {
             $exitCode = 1
             if (-not $Watch) { throw }

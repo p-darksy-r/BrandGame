@@ -1,5 +1,6 @@
 // Copyright (c) 2026 p-darksy-r. BrandGame.
 using BrandGame.Updater;
+using System.ComponentModel;
 using System.IO.Compression;
 using System.Net;
 using System.Security.Cryptography;
@@ -66,6 +67,23 @@ try
     string save = Path.Combine(root, "save-fixture.json"); File.WriteAllText(save, "preserved");
     PackageInstaller.Install(root, first.Zip, first.Manifest, false);
     Check(PackageInstaller.InstalledVersion(root) == new Version(3, 3, 0), "first installation succeeds");
+    var launchError = new StringWriter();
+    var web = Path.Combine(root, "app", "web", "index.html");
+    int launchAttempts = 0;
+    int blocked = GameLauncher.Start(root, info => {
+        launchAttempts++;
+        Check(info.FileName == Path.Combine(root, "app", "BrandGame.exe"), "launch targets the installed game");
+        throw new Win32Exception(4551);
+    }, launchError);
+    Check(blocked == 2 && launchError.ToString().Contains("4551") && launchError.ToString().Contains(web) && launchAttempts == 1,
+        "blocked launch reports the local browser edition without starting it");
+    Check(PackageInstaller.InstalledVersion(root) == new Version(3, 3, 0), "blocked launch preserves the installed version");
+    launchError.GetStringBuilder().Clear();
+    int otherFailure = GameLauncher.Start(fixture, _ => throw new Win32Exception(2, "missing exe"), launchError);
+    Check(otherFailure == 2 && launchError.ToString().Contains("missing exe") && !launchError.ToString().Contains("index.html") &&
+        !launchError.ToString().Contains("4551"), "other launch errors keep their cause and omit a missing web path");
+    launchError.GetStringBuilder().Clear();
+    Check(GameLauncher.Start(root, _ => null, launchError) == 0 && launchError.ToString().Length == 0, "successful launch reports success");
     File.WriteAllText(Path.Combine(root, "app/stale.txt"), "old");
     Reject(() => PackageInstaller.Install(root, next.Zip, next.Manifest, false, () => throw new IOException("simulated move failure")), "failure after backup rolls back");
     Check(PackageInstaller.InstalledVersion(root) == new Version(3, 3, 0), "old app restored after failed replacement");

@@ -69,7 +69,7 @@
 .logo-tile { width:170px; height:170px; padding:30px; display:flex; align-items:center; justify-content:center; border:1px solid var(--border-strong); border-radius:28px; background:radial-gradient(circle,var(--panel-start),var(--surface)); box-shadow:0 14px 35px #0002; }
 .logo-image-fixed { width:100%; height:100%; max-width:140px; max-height:140px; object-fit:contain; pointer-events:none; }
 #logo-placeholder { color:var(--muted); font-size:68px; }
-#revealed-letters-hud { font:700 20px ui-monospace,monospace; letter-spacing:.22em; color:var(--blue); overflow-wrap:anywhere; text-align:center; }
+#revealed-letters-hud { max-width:100%; font:700 20px ui-monospace,monospace; letter-spacing:.22em; color:var(--blue); overflow-wrap:anywhere; text-align:center; }
 .timer-caption { display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:8px; }
 .timer-caption>span:first-child { display:flex; align-items:center; gap:6px; }
 .timer-caption .ui-icon { width:16px; height:16px; }
@@ -80,11 +80,15 @@
 .guess-row input { font-size:19px; }
 .clue-actions { display:flex; justify-content:space-between; gap:10px; margin:12px 0; font-size:14px; }
 .clue-actions .ui-icon { width:17px; height:17px; color:var(--blue); }
+#clue-text { font-size:1rem; overflow-wrap:anywhere; }
+.clue-actions .button[aria-disabled="true"] { cursor:default; color:var(--muted); background:transparent; transform:none; }
+.clue-actions .button[aria-disabled="true"] .ui-icon { color:currentColor; }
 .keyboard-tip { display:flex; align-items:center; justify-content:center; gap:8px; font-size:12px; color:var(--muted); margin-top:20px; }
 .game-overlay { position:absolute; inset:0; border-radius:23px; background:var(--overlay); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px; padding:30px; text-align:center; z-index:2; }
 .game-overlay h2 { font-size:34px!important; letter-spacing:-.025em!important; }
 .game-overlay>p { color:var(--muted); }
-#feedback-answer { font-size:30px; font-weight:700; margin-top:5px; }
+.game-overlay > div { max-width:100%; }
+#feedback-answer { overflow-wrap:anywhere; font-size:30px; font-weight:700; margin-top:5px; }
 .feedback-stats { display:flex; gap:50px; padding:16px 28px; border:1px solid var(--line); border-radius:16px; background:var(--surface); }
 .feedback-stats>div>span { display:flex; align-items:center; gap:6px; font-size:14px; color:var(--muted); }
 .feedback-stats strong { display:block; font-size:28px; color:var(--lime); margin-top:4px; }

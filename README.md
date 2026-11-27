@@ -3,17 +3,19 @@
 
 Reconhece o logótipo e escreve o nome da marca antes de o tempo acabar. Joga offline com 528 entradas de marcas em cinco categorias, conquista estrelas e cria salas para desafiar outros jogadores no mesmo dispositivo.
 
-**Versão 3.7.0 · 26 de novembro de 2026**
+**Versão 3.8.0 · 27 de novembro de 2026**
 
 ![Menu principal do BrandGame em português, com o botão Vamos jogar e o progresso por categoria](docs/images/brandgame.png)
 
 ## Jogar
 
-- **Windows x64.** Extrai o pacote [BrandGame-3.7.0-win-x64.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.7.0/BrandGame-3.7.0-win-x64.zip) e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET vem incluído. A janela usa o [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/).
-- **Navegador.** Extrai o pacote [BrandGame-3.7.0-web.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.7.0/BrandGame-3.7.0-web.zip) e abre `web/index.html`. O progresso fica nesse navegador.
-- **Quem tem a versão 3.3.0.** Fecha o jogo e o atualizador. Substitui o `update.exe` ao lado da tua pasta `app` pelo [lançador 3.7.0](https://github.com/p-darksy-r/BrandGame/releases/download/v3.7.0/update.exe) e abre-o. Esta troca é necessária uma vez porque o lançador antigo só reconhece o endereço anterior dos downloads.
+- **Windows x64.** Extrai o pacote [BrandGame-3.8.0-win-x64.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.8.0/BrandGame-3.8.0-win-x64.zip) e abre `app/BrandGame.exe`. Mantém `app/web` junto do executável. O runtime .NET vem incluído. A janela usa o [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/).
+- **Navegador.** Extrai o pacote [BrandGame-3.8.0-web.zip](https://github.com/p-darksy-r/BrandGame/releases/download/v3.8.0/BrandGame-3.8.0-web.zip) e abre `web/index.html`. O progresso fica nesse navegador.
+- **Quem tem a versão 3.3.0.** Fecha o jogo e o atualizador. Substitui o `update.exe` ao lado da tua pasta `app` pelo [lançador 3.8.0](https://github.com/p-darksy-r/BrandGame/releases/download/v3.8.0/update.exe) e abre-o. Esta troca é necessária uma vez porque o lançador antigo só reconhece o endereço anterior dos downloads.
 
-O jogo e o atualizador usam o certificado de desenvolvimento **BrandGame Development, O=p-darksy-r**. O Windows pode bloquear estes executáveis. Se apenas o lançador for bloqueado, extrai o ZIP Windows numa pasta nova e abre o jogo diretamente. Se o jogo também for bloqueado, podes jogar com o pacote web. Consulta as [instruções para jogar](docs/PLAYTEST.md) e a [validação Windows](docs/VALIDATION.md).
+O jogo e o atualizador usam o certificado de desenvolvimento **BrandGame Development, O=p-darksy-r**. O Windows pode bloquear estes executáveis. Se apenas o lançador for bloqueado, extrai o ZIP Windows numa pasta nova e abre o jogo diretamente. Se o Windows bloquear o jogo, abre `app/web/index.html` no navegador. Esta cópia offline já está no ZIP Windows. Consulta as [instruções para jogar](docs/PLAYTEST.md) e a [validação Windows](docs/VALIDATION.md).
+
+Durante uma partida, a pista de texto custa cinco pontos e cada letra revelada custa dez. Os botões indicam quando uma pista já foi usada, quando a sala não tem pista ou quando todas as letras estão visíveis.
 
 ## Treinar as que falhei
 
@@ -21,11 +23,11 @@ No fim de um nível ou de uma sala, escolhe **Treinar as que falhei** para rever
 
 ## Levar o progresso para outro dispositivo
 
-Em **Definições**, exporta o progresso para um ficheiro JSON. A cópia inclui pontos, estrelas, recordes, salas e preferências. Para mudar de PC ou alternar entre o jogo Windows e o navegador, abre o BrandGame 3.7.0 no destino e importa esse ficheiro.
+Em **Definições**, exporta o progresso para um ficheiro JSON. A cópia inclui pontos, estrelas, recordes, salas e preferências. Para mudar de PC ou alternar entre o jogo Windows e o navegador, abre o BrandGame 3.8.0 no destino e importa esse ficheiro.
 
 Antes de confirmares, o jogo mostra os pontos, as estrelas e o número de salas que vais importar. A importação substitui a gravação do destino. Podes recuperar o progresso que lá estava pelo mesmo ecrã. [Guia de progresso](docs/PROGRESS.md).
 
-**Se vens do Windows 3.5.0**, também podes importar diretamente o ficheiro `%APPDATA%/BrandGame/save.json` no navegador. Basta selecioná-lo nas definições. Não é preciso abrir o executável anterior, e o ficheiro original permanece no disco.
+Para levar uma gravação Windows para o navegador, abre **Definições → Importar ficheiro** e seleciona `%APPDATA%\BrandGame\save.json`. A versão 3.8 reconhece as gravações das versões 3.5 a 3.8, mesmo depois de uma importação anterior no Windows. Confirma o resumo para usar o progresso no navegador. O ficheiro original fica no PC.
 
 ## Mudança de nome
 

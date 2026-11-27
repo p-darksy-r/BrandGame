@@ -1,5 +1,4 @@
 // Copyright (c) 2026 p-darksy-r. BrandGame.
-using System.Diagnostics;
 using BrandGame.Updater;
 
 return await UpdaterProgram.RunAsync(args);
@@ -51,7 +50,7 @@ internal static class UpdaterProgram
                     var target = ReleaseManifest.ParseVersion(manifest.Version);
                     Console.WriteLine($"Instalada: {installed?.ToString() ?? "nenhuma"}. Disponivel: {manifest.Version} ({manifest.Channel}).");
                     if (installed != null && target < installed) { Console.WriteLine("A versao instalada e mais recente. Nao sera feito downgrade."); return 0; }
-                    if (installed == target && !options.Repair) { Console.WriteLine("A app ja esta atualizada."); Launch(root, options.Launch); return 0; }
+                    if (installed == target && !options.Repair) { Console.WriteLine("A app ja esta atualizada."); return options.Launch ? GameLauncher.Start(root) : 0; }
                     if (options.Check) return 0;
                     PackageInstaller.AssertGameClosed(root);
                     zipPath = PackageInstaller.SafePath(root, $".brandgame-updates/download-{Guid.NewGuid():N}.zip");
@@ -67,7 +66,7 @@ internal static class UpdaterProgram
                 }
                 cancellation.Token.ThrowIfCancellationRequested();
                 PackageInstaller.Install(root, zipPath, manifest, options.Repair);
-                Launch(root, options.Launch);
+                if (options.Launch) return GameLauncher.Start(root);
             }
             finally
             {
@@ -88,17 +87,13 @@ internal static class UpdaterProgram
         return code;
     }
 
-    private static void Launch(string root, bool enabled)
-    {
-        if (enabled) Process.Start(new ProcessStartInfo(PackageInstaller.SafePath(root, "app/BrandGame.exe")) { UseShellExecute = true });
-    }
-
     private const string Help = """
         BrandGame updater
         update.exe [--check] [--channel preview|stable] [--repair] [--launch] [--no-pause]
         Descarrega e verifica releases assinadas de p-darksy-r/BrandGame.
         O canal predefinido preview inclui versoes de desenvolvimento e estaveis.
         --check     Consulta sem instalar. --repair reinstala a mesma versao; nunca regride.
+        --launch    Abre o jogo instalado. Codigo de saida 2 se falhar apenas o arranque.
         --recover   Recupera uma instalacao interrompida, sem rede.
         --local     Compila fontes locais (requer scripts, .NET SDK, Node/npm e SignTool).
         --watch     Observa as fontes locais; implica --local.

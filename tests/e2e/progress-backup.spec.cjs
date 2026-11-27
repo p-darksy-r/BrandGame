@@ -75,11 +75,13 @@ test('an unrelated JSON file cannot replace the current save', async ({ page }) 
     expect(await page.evaluate(() => GAME_STATE.saveData.globalScore)).toBe(42);
 });
 
-test('native 3.5 save.json can recover a campaign directly in the browser', async ({ page }) => {
+test('a native save with a recovery pointer transfers a campaign while keeping browser recovery local', async ({ page }) => {
     await settings(page);
+    await seed(page, 42);
     const old = await page.evaluate(() => {
         const save = createDefaultSaveData();
-        save.gameVersion = '3.5.0';
+        save.gameVersion = '3.7.0';
+        save._brandGameRestoreSlot = 1;
         save.globalScore = 199;
         save.levelsUnlocked.food = 9;
         return JSON.stringify(save);
@@ -90,4 +92,6 @@ test('native 3.5 save.json can recover a campaign directly in the browser', asyn
     await expect.poll(() => page.evaluate(() => GAME_STATE.saveData.levelsUnlocked.food)).toBe(9);
     await settings(page);
     expect(await page.evaluate(() => GAME_STATE.saveData.globalScore)).toBe(199);
+    expect(await page.evaluate(() => loadPreviousProgress().then(save => save.globalScore))).toBe(42);
+    expect(await page.evaluate(() => localStorage.getItem('brandgame_savedata'))).not.toContain('_brandGameRestoreSlot');
 });

@@ -39,12 +39,6 @@ function loadNextBrand() {
     const inputField = document.getElementById("input-guess");
     if (inputField) inputField.value = "";
 
-    const clueText = document.getElementById("clue-text");
-    if (clueText) clueText.classList.add("hidden");
-
-    GAME_STATE.revealedIndices = [];
-    GAME_STATE.clueCost = 0;
-    GAME_STATE.hintUsed = false;
     GAME_STATE.roundStatus = "loading";
     const token = ++GAME_STATE.roundToken;
     document.getElementById("pause-overlay")?.classList.add("hidden");
@@ -60,7 +54,7 @@ function loadNextBrand() {
         lives.setAttribute('aria-label', t('{count} lives remaining', { count: GAME_STATE.lives }));
     }
 
-    renderRevealedLetters();
+    resetRoundClues();
 
     let timeLimit = 15;
     if (GAME_STATE.currentCategory === "custom") {

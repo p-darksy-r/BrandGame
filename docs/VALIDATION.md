@@ -1,6 +1,12 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Validação
 
+## Versão 3.8.0
+
+- Passaram os 23 cenários no Edge. Uma sala sem pista permitiu revelar a única letra por dez pontos. Na ronda seguinte, pedir duas vezes a pista de texto descontou cinco pontos no total. O teste verificou a pontuação final, o foco e o anúncio da letra com acento.
+- O navegador importou uma gravação Windows com o indicador de recuperação de outro dispositivo. Depois de reabrir o jogo, a gravação importada estava ativa e a opção de recuperação continuava a apontar para o progresso anterior do navegador.
+- Neste PC passaram 28 testes web, 46 verificações nativas, 21 testes do atualizador local e 5 verificações de assinatura. O Controlo de Aplicações bloqueou a execução local do conjunto de testes .NET do atualizador online. O GitHub Actions executa esse conjunto e a instalação dos binários publicados num segundo ambiente Windows. [Validação da distribuição](https://github.com/p-darksy-r/BrandGame/releases/tag/v3.8.0).
+
 ## Versão 3.7.0
 
 - Passaram 134 verificações locais e os 21 testes de navegador no Edge. Os casos do treino incluem resposta errada, tempo esgotado, repetição após novo erro, derrota antes da última ronda e nível perfeito.

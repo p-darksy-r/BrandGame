@@ -105,14 +105,17 @@ test('old and malformed saves recover defaults while preserving progress and com
 });
 
 test('clues hide accented letters until bought and reveal their original spelling', () => {
-    const hud = { textContent: '' };
-    const ctx = context(['js/core/state.js', 'js/core/matching.js', 'js/gameplay/clues.js'], {
-        document: { getElementById: () => hud }
+    const attributes = new Map();
+    const hud = { textContent: '', setAttribute: (name, value) => attributes.set(name, value) };
+    const ctx = context(['js/core/state.js', 'js/core/matching.js', 'js/ui/i18n.js', 'js/gameplay/clues.js'], {
+        document: { getElementById: id => id === 'revealed-letters-hud' ? hud : null }
     });
     vm.runInContext('GAME_STATE.currentBrand = { name: "Żabka" }; GAME_STATE.roundStatus = "playing"; renderRevealedLetters();', ctx);
     assert.equal(hud.textContent, '_ _ _ _ _');
+    assert.equal(attributes.get('aria-label'), 'Letters in the name: 5.');
     vm.runInContext('for (let i = 0; i < 6; i++) buyLetterClue();', ctx);
     assert.equal(hud.textContent, 'Ż A B K A');
+    assert.match(attributes.get('aria-label'), /1: Ż, 2: A, 3: B, 4: K, 5: A/);
     assert.equal(vm.runInContext('GAME_STATE.clueCost', ctx), 50);
 });
 

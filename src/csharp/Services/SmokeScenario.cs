@@ -30,7 +30,13 @@ internal static class SmokeScenario
                         await wait(() => GAME_STATE.roundStatus === 'playing');
                         const logo = document.getElementById('logo-image');
                         await wait(() => logo.complete && logo.naturalWidth > 0);
-                        if (round === 0) click('btn-gameplay-hint');
+                        if (GAME_STATE.clueCost !== 0) throw new Error('Clue cost carried into another round');
+                        if (round === 0) {
+                            click('btn-gameplay-hint');
+                            click('btn-gameplay-hint');
+                            if (!document.getElementById('clue-text').textContent || GAME_STATE.clueCost !== 5)
+                                throw new Error('Hint unavailable or charged more than once');
+                        }
                         const incorrect = missFirst && round === 0;
                         const name = GAME_STATE.currentBrand.name;
                         if (incorrect) missed = name;

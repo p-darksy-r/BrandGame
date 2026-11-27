@@ -87,6 +87,7 @@ for (const language of ['pt-PT', 'es']) {
         expect(clue.translated).not.toBe(clue.source);
         await page.locator('#btn-gameplay-hint').click();
         await expect(page.locator('#clue-text')).toHaveText(clue.translated);
+        await expect(page.locator('#clue-announcement')).toHaveText(clue.translated);
     });
 }
 

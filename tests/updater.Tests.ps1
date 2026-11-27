@@ -73,6 +73,31 @@ function New-TestStagePath {
 }
 
 try {
+    Test-Case 'Local launch reports the installed browser edition only when it is available' {
+        $root = New-TestWorkspace
+        $app = New-TestPayload -Path (Join-Path $root 'app')
+        $web = Join-Path $app 'web/index.html'
+        $script:testLaunchTargets = @()
+        function Start-Process {
+            param($FilePath, $WorkingDirectory, $ErrorAction)
+            $script:testLaunchTargets += $FilePath
+            throw [System.ComponentModel.Win32Exception]::new(4551)
+        }
+        $oldError = [Console]::Error
+        $message = New-Object IO.StringWriter
+        try {
+            [Console]::SetError($message)
+            Assert-True ((Start-InstalledGame -Root $root) -eq 2) 'Expected a distinct launch failure.'
+            Assert-True ($message.ToString().Contains($web)) 'Missing local browser entry point.'
+            Remove-Item -LiteralPath $web
+            $message.GetStringBuilder().Clear() | Out-Null
+            Assert-True ((Start-InstalledGame -Root $root) -eq 2) 'Missing HTML must not hide the launch failure.'
+            Assert-True (-not $message.ToString().Contains('index.html')) 'Suggested an unavailable file.'
+            $expectedTarget = Join-Path $app 'BrandGame.exe'
+            Assert-True (($script:testLaunchTargets -join '|') -eq ("$expectedTarget|$expectedTarget")) 'Unexpected launch target or fallback launch.'
+        } finally { [Console]::SetError($oldError); $message.Dispose() }
+    }
+
     Test-Case 'Workspace paths reject traversal, sibling-prefix paths and the workspace root' {
         $root = New-TestWorkspace
         Assert-Throws { Get-WorkspacePath -Root $root -RelativePath '../outside' } 'Traversal was accepted.'

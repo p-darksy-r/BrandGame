@@ -38,6 +38,11 @@
 
 - Treino sem cronómetro das marcas falhadas numa partida, com repetição das que ainda precisam de prática. Disponível também nas salas personalizadas.
 
+## Implementadas na versão 3.8.0
+
+- Pistas com indicação de disponibilidade e anúncio das letras reveladas, incluindo nas salas personalizadas.
+- Recuperação no navegador a partir da gravação Windows de uma partida recente, incluindo perfis com recuperação de uma importação anterior.
+
 ## Próximas prioridades
 
 1. **Facilitar a instalação Windows.** Distribuir com um certificado publicamente reconhecido ou pela Microsoft Store e testar a instalação num PC sem o certificado de desenvolvimento.

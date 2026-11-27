@@ -22,6 +22,6 @@ O ficheiro exportado nas definições inclui o conteúdo da gravação e identif
 
 A importação valida o ficheiro antes de mostrar um resumo. Cancelar deixa a gravação atual como estava. Confirmar substitui o progresso completo, incluindo as preferências de língua e tema. O jogo guarda o progresso anterior para o poderes recuperar no mesmo perfil. Para conservar várias versões, guarda os ficheiros exportados separadamente.
 
-**Se vens do Windows 3.5.0**, também podes importar diretamente o ficheiro `%APPDATA%/BrandGame/save.json` no navegador. Basta selecioná-lo nas definições. Não é preciso abrir o executável anterior, e o ficheiro original permanece no disco.
+Para levar uma gravação Windows para o navegador, abre **Definições → Importar ficheiro** e seleciona `%APPDATA%\BrandGame\save.json`. A versão 3.8 reconhece as gravações das versões 3.5 a 3.8, mesmo depois de uma importação anterior no Windows. Confirma o resumo para usar o progresso no navegador. O ficheiro original fica no PC.
 
 ![Pré-visualização de uma cópia antes de confirmar a importação](images/importar-progresso.png)

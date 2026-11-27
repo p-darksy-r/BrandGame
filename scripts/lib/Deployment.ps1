@@ -107,6 +107,22 @@ function Recover-PendingDeployment {
     Remove-Item -LiteralPath $journal -Force
 }
 
+function Start-InstalledGame {
+    param([string]$Root)
+    try {
+        $game = Get-WorkspacePath -Root $Root -RelativePath 'app/BrandGame.exe'
+        Start-Process -FilePath $game -WorkingDirectory ([IO.Path]::GetDirectoryName($game)) -ErrorAction Stop
+        return 0
+    } catch {
+        [Console]::Error.WriteLine("Falhou o arranque do jogo instalado. $($_.Exception.GetBaseException().Message)")
+        try {
+            $web = Get-WorkspacePath -Root $Root -RelativePath 'app/web/index.html'
+            if ([IO.File]::Exists($web)) { [Console]::Error.WriteLine("Para jogar no navegador, abra o ficheiro local $web") }
+        } catch { } # Do not suggest an unsafe or unavailable path.
+        return 2
+    }
+}
+
 function Test-AppRunning {
     param([string]$Root)
     $executable = Get-WorkspacePath -Root $Root -RelativePath 'app/BrandGame.exe'

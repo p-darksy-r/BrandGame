@@ -65,18 +65,7 @@ function setupEventHandlers() {
         });
     }
 
-    safeAddEventListener("btn-gameplay-hint", "click", () => {
-        if (GAME_STATE.roundStatus !== "playing" || GAME_STATE.hintUsed) return;
-        GAME_STATE.hintUsed = true;
-        const clueEl = document.getElementById("clue-text");
-        if (clueEl) {
-            const hint = GAME_STATE.currentBrand.hint;
-            clueEl.textContent = hint ? (GAME_STATE.currentCategory === 'custom' ? hint : t(hint)) : t('No clues available.');
-            clueEl.classList.remove("hidden");
-        }
-        GAME_STATE.clueCost += 5;
-    });
-
+    safeAddEventListener("btn-gameplay-hint", "click", buyTextClue);
     safeAddEventListener("btn-gameplay-reveal-char", "click", buyLetterClue);
 
     safeAddEventListener("btn-report-continue", "click", () => {

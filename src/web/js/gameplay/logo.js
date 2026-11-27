@@ -29,6 +29,7 @@ function loadRoundLogo(token) {
         status.textContent = '';
         input.disabled = false;
         startRoundClock();
+        updateClueControls();
         if (document.hidden) pauseRound();
         else input.focus();
     };

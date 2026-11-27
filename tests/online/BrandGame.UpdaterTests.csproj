@@ -8,6 +8,7 @@
     <Compile Include="../../src/updater/ReleaseManifest.cs" Link="ReleaseManifest.cs" />
     <Compile Include="../../src/updater/ReleaseClient.cs" Link="ReleaseClient.cs" />
     <Compile Include="../../src/updater/PackageInstaller.cs" Link="PackageInstaller.cs" />
+    <Compile Include="../../src/updater/GameLauncher.cs" Link="GameLauncher.cs" />
     <Compile Include="../../src/updater/UpdaterOptions.cs" Link="UpdaterOptions.cs" />
     <EmbeddedResource Include="../../src/updater/release-public-key.xml" LogicalName="BrandGame.ReleasePublicKey" />
   </ItemGroup>

@@ -68,9 +68,25 @@ test('invalid, incompatible or lossy imports are rejected before replacement', (
         change(b);
         assert.throws(() => c.readProgressBackup(JSON.stringify(b)));
     }
-    for (const invalid of ['{}', 'null', '[]', '{"truncated":', JSON.stringify(JSON.parse(json).save)]) {
+    for (const invalid of ['{}', 'null', '[]', '{"truncated":', JSON.stringify({ ...JSON.parse(json).save, extra: true })]) {
         assert.throws(() => c.readProgressBackup(invalid));
     }
+});
+
+test('raw Windows saves preserve progress, consume only valid disk recovery pointers and reject incompatible data', () => {
+    const c = fixture();
+    const save = populated(c);
+    for (const [version, slot] of [['3.5.0', undefined], ['3.6.0', 0], ['3.7.0', 1], [save.gameVersion, undefined]]) {
+        const record = { ...save, gameVersion: version, _brandGameRestoreSlot: slot };
+        assert.deepEqual(JSON.parse(JSON.stringify(c.readProgressBackup(JSON.stringify(record)))), JSON.parse(JSON.stringify(save)));
+    }
+    for (const changed of [{ _brandGameRestoreSlot: null }, { _brandGameRestoreSlot: 2 }, { _brandGameRestoreSlot: '1' },
+        { _brandGamePrevious: save }, { format: 'Other' }, { progressSchema: 3 }, { globalScore: -1 }]) {
+        assert.throws(() => c.readProgressBackup(JSON.stringify({ ...save, ...changed })));
+    }
+    const envelope = JSON.parse(c.makeProgressBackup(save));
+    envelope.save._brandGameRestoreSlot = 0;
+    assert.throws(() => c.readProgressBackup(JSON.stringify(envelope)));
 });
 
 test('backup size is bounded in UTF-8 bytes before decoding a potentially large file', () => {

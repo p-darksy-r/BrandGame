@@ -1,6 +1,12 @@
 <!-- Copyright (c) 2026 p-darksy-r. BrandGame. -->
 # Histórico de versões
 
+## 3.8.0 — 2026-11-27
+
+- Pistas com indicação de disponibilidade nas partidas. Uma sala sem pista de texto já não desconta cinco pontos. A revelação de letras indica o carácter e a posição e termina quando o nome está completo.
+- Importação direta de gravações Windows compatíveis nas definições do navegador, incluindo as de perfis que já importaram progresso. A confirmação mostra os dados antes de os substituir e conserva a gravação anterior do destino.
+- Ao pedir o arranque de um jogo instalado, o atualizador distingue os problemas de arranque dos erros de instalação e indica onde encontrar a cópia web local quando o controlo de aplicações do Windows bloqueia o jogo.
+
 ## 3.7.0 — 2026-11-26
 
 - Novo modo **Treinar as que falhei** no resultado dos níveis e das salas personalizadas. Permite rever, sem cronómetro, as marcas falhadas por resposta errada ou por tempo esgotado.

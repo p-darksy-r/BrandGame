@@ -12,6 +12,8 @@ Coloca `update.exe` ao lado da pasta `app`. O jogo é offline; o atualizador usa
 .\update.exe --recover --no-pause     # Recuperar interrupção, sem rede
 ```
 
+Com `--launch`, o código de saída `2` indica que o atualizador encontrou ou instalou o jogo, mas o Windows não conseguiu abri-lo. A mensagem mostra a causa e o caminho para a cópia web, se estiver disponível.
+
 As releases são obtidas do repositório público **p-darksy-r/BrandGame**, que também contém o código e o README no `main`. Cada versão tem uma tag `vX.Y.Z` nesse histórico, com os pacotes anexados à respetiva Release. Não é necessário outro branch nem são usados tokens dos jogadores.
 
 O canal predefinido `preview` inclui releases estáveis e de desenvolvimento. A seleção usa a maior versão numérica `X.Y.Z`, com tag `vX.Y.Z`, ZIP Windows e ambos os ficheiros de manifesto. Drafts e releases antigas sem manifesto são ignorados. Nunca se instala uma versão inferior à instalada, mesmo com `--repair`. Se não existir uma release elegível no canal, a app instalada permanece.
@@ -24,7 +26,7 @@ O lançador em execução não é substituído. Para atualizar o próprio `updat
 
 ## Atualizar quando o Windows bloqueia o lançador
 
-Descarrega o ZIP Windows da [release oficial](https://github.com/p-darksy-r/BrandGame/releases). Podes comparar o resultado de `Get-FileHash -Algorithm SHA256` com o ficheiro `.sha256` da mesma versão. Fecha o jogo, extrai o ZIP numa pasta nova e abre `app/BrandGame.exe`. O jogo continua a usar a gravação em `%APPDATA%/BrandGame`. Conserva a instalação anterior até confirmares o resultado. Se o Windows também bloquear o jogo, a release inclui um ZIP web para jogar no navegador.
+Descarrega o ZIP Windows da [release oficial](https://github.com/p-darksy-r/BrandGame/releases). Podes comparar o resultado de `Get-FileHash -Algorithm SHA256` com o ficheiro `.sha256` da mesma versão. Fecha o jogo, extrai o ZIP numa pasta nova e abre `app/BrandGame.exe`. O jogo continua a usar a gravação em `%APPDATA%/BrandGame`. Conserva a instalação anterior até confirmares o resultado. Se o Windows bloquear o jogo, abre `app/web/index.html` no navegador a partir da pasta instalada. Podes importar o `save.json` da aplicação nas definições.
 
 ## Desenvolvimento e pacote local
 
